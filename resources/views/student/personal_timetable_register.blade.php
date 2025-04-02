@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    個別時間割の作成(履修登録)画面
 </body>
 </html>

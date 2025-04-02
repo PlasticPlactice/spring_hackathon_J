@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    科目マスターページ一覧
 </body>
 </html>
