@@ -35,10 +35,32 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
+   'guards' => [
+        'student' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'students',
+        ],
+        'teacher' => [
+            'driver' => 'session',
+            'provider' => 'teachers',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+    ],
+    'providers' => [
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,  // Studentモデルを使う
+        ],
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Teacher::class,  // Teacherモデルを使う
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,  // Adminモデルを使う
         ],
     ],
 
@@ -59,18 +81,7 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
-
+  
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
