@@ -7,8 +7,5 @@ use Illuminate\Http\Request;
 
 class AdminAuthController extends Controller
 {
-    // パスワード変更ページ表示
-    public function passwordChange(Request $request){
-        return view('auth/password_change');
-    }
+    //
 }

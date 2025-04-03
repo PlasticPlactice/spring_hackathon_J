@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    教師データ削除
+    マスタマスタ編集・削除画面
 </body>
 </html>
