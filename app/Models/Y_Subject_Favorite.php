@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Teacher;
 use App\Models\Y_Subject;
 
-
-class T_Comment extends Model
+class Y_Subject_Favorite extends Model
 {
     use HasFactory;
-    // リレーション
-    public function Teacher(){  
+    public function Teacher(){
         return $this->belongsTo(Teacher::class);
     }
-    public function Y_Subject(){  
+    public function Y_Subject(){
         return $this->belongsTo(Y_Subject::class);
     }
+
 }
