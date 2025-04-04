@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('time_tables', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_list_id');
-            $table->foreign('course_list_id')->references('id')->on('course_lists');
-
-            $table->integer('day_of_week');
-            $table->integer('frames');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('time_tables');
+        Schema::dropIfExists('departments');
     }
 };

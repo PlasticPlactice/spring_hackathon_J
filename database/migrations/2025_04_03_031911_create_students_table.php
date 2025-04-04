@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('pw');
             $table->string('name');
             $table->boolean('del_flg')->default(false);
+            $table->string('img_path');
+            $table->integer('entrance_year');
+            $table->unsignedBigInteger('department_id');
+
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
         });
     }
