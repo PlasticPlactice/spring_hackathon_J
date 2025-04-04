@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('t_comments', function (Blueprint $table) {
             $table->id();
 
-            $table->int('y_subject_id');
-            $table->int('teacher_id');
-            $table->foreign('y_subject_id')->references('id')->on('y_subjects');
+            $table->unsignedBigInteger('y_subject_id');
+            $table->uuid('teacher_id');
+            $table->foreign('y_subject_id')->references('course_list_id')->on('y_subjects');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 
             $table->string('title');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('c_subjects', function (Blueprint $table) {
             $table->string('student_id');
-            $table->int('course_list_id');
+            $table->unsignedBigInteger('course_list_id');
 
             $table->primary(['student_id', 'course_list_id']);
 

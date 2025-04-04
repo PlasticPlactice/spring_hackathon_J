@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('course_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('teacher_id');
+            $table->uuid('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->string('title');
-            // デフォルト値を自動で帰る設定はモデルで実装する
-            $table->int('year');
+            $table->integer('year');
             $table->boolean('session_flg')->default(false);
             $table->timestamps();
         });

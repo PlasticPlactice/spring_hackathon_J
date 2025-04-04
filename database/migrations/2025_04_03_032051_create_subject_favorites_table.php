@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subject_favorites', function (Blueprint $table) {
-            $table->string('user_id');
-            $table->int('subject_id');
+            $table->uuid('student_id');
+            $table->unsignedBigInteger('subject_id');
 
-            $table->primary(['user_id' , 'subject_id']);
+            $table->primary(['student_id' , 'subject_id']);
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->timestamps();
         });
