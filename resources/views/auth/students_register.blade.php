@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    生徒情報登録
 </body>
 </html>
