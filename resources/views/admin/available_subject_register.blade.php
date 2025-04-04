@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    今季履修可能科目登録画面
 </body>
 </html>

@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    マスタ登録画面
 </body>
 </html>

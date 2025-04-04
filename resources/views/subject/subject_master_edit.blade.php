@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    マスタマスタ編集・削除画面
 </body>
 </html>

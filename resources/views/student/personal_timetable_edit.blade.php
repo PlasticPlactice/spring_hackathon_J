@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    ログインページです
+    個別時間割の編集画面
 </body>
 </html>
