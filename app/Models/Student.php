@@ -12,7 +12,6 @@ class Student extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
     public static $rules = [
         'id' => 'required',
         'pw' => 'required',
@@ -20,7 +19,7 @@ class Student extends Model
         'img_path' => 'required',
         'entrance_year' => 'required'
     ];
-=======
+
     // リレーション
     public function S_Comments(){
         return $this->hasMany(S_Comment::class);
@@ -34,5 +33,4 @@ class Student extends Model
     }
 
     
->>>>>>> 5dcba6d98274fc18e8c349f80c0e17a9cb4f438b
 }

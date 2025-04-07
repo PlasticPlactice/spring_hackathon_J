@@ -14,7 +14,6 @@ class Subject extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
     protected $guarded = ['id'];
 
     public static $rules = [
@@ -22,7 +21,7 @@ class Subject extends Model
         'detail' => '',
         'tech' => 'required'
     ];
-=======
+
     // リレーション
     public function Y_Subjects(){
         return $this->hasMany(Y_Subject::class);
@@ -33,5 +32,4 @@ class Subject extends Model
     public function Subject_Favorites(){
         return $this->hasMany(Subject_Favorite::class);
     }
->>>>>>> 5dcba6d98274fc18e8c349f80c0e17a9cb4f438b
 }

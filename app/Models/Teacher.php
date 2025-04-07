@@ -13,14 +13,13 @@ use App\Models\Y_Subject_Favorite;
 class Teacher extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
 
     public static $rules = [
         'id' => 'required',
         'pw' => 'required',
         'name' => 'required'
     ];
-=======
+
     // リレーション
     public function Course_list(){  
         return $this->belongsTo(Student::class);
@@ -33,5 +32,4 @@ class Teacher extends Model
     }
 
 
->>>>>>> 5dcba6d98274fc18e8c349f80c0e17a9cb4f438b
 }

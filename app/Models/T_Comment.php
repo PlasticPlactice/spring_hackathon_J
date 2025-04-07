@@ -11,7 +11,6 @@ use App\Models\Y_Subject;
 class T_Comment extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
 
     protected $guarded = ['id'];
 
@@ -19,7 +18,6 @@ class T_Comment extends Model
         'title' => 'required',
         'detail' => ''
     ];
-=======
     // リレーション
     public function Teacher(){  
         return $this->belongsTo(Teacher::class);
@@ -27,5 +25,4 @@ class T_Comment extends Model
     public function Y_Subject(){  
         return $this->belongsTo(Y_Subject::class);
     }
->>>>>>> 5dcba6d98274fc18e8c349f80c0e17a9cb4f438b
 }

@@ -13,7 +13,6 @@ use App\Models\Y_Subject;
 class Course_list extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
 
     protected $guarded = ['id'];
 
@@ -21,7 +20,7 @@ class Course_list extends Model
         'title' => 'required',
         'year' => ''
     ];
-=======
+
     // リレーション
     public function C_Subjects(){
         return $this->hasMany(C_Subject::class);
@@ -37,5 +36,4 @@ class Course_list extends Model
         return $this->hasOne(Y_Subject::class);
     }
 
->>>>>>> 5dcba6d98274fc18e8c349f80c0e17a9cb4f438b
 }
