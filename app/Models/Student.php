@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\C_Subject;
 use App\Models\S_Comment;
 use App\Models\Subject_Favorite;
+use App\Models\Department;
 
 class Student extends Model
 {
@@ -31,6 +32,10 @@ class Student extends Model
     public function Subject_Favorites(){
         return $this->hasMany(Subject_Favorite::class);
     }
+    public function Department(){
+        return $this->hasMany(Department::class);
+    }
+
 
     
 }
