@@ -3,16 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable; 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\C_Subject;
 use App\Models\S_Comment;
 use App\Models\Subject_Favorite;
 use App\Models\Department;
 
-class Student extends Model
+
+
+class Student extends  Authenticatable
 {
     use HasFactory;
 
+    // ユーザー認証に使うカラムの指定（必要に応じて追加）
+    protected $fillable = ['id', 'pw'];  // 'password' を 'pw' に変更
+    
     public static $rules = [
         'id' => 'required',
         'pw' => 'required',
@@ -36,6 +42,12 @@ class Student extends Model
         return $this->hasMany(Department::class);
     }
 
+
+     // パスワードを 'pw' カラムから取得する
+     public function getAuthPassword()
+     {
+         return $this->pw;  // pwカラムを認証のパスワードとして使用
+     }
 
     
 }

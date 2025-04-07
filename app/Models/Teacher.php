@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable; 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course_list;
 use App\Models\T_Comment;
@@ -10,7 +11,7 @@ use App\Models\Y_Subject_Favorite;
 
 
 
-class Teacher extends Model
+class Teacher extends Authenticatable
 {
     use HasFactory;
 
@@ -31,5 +32,11 @@ class Teacher extends Model
         return $this->hasMany(Y_Subject_Favorite::class);
     }
 
+    // パスワードを 'pw' カラムから取得する
+    public function getAuthPassword()
+    {
+        return $this->pw;  // pwカラムを認証のパスワードとして使用
+    }
+  
 
 }
