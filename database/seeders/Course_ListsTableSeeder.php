@@ -14,21 +14,21 @@ class Course_ListsTableSeeder extends Seeder
     public function run(): void
     {
         $param = [
-            'teacher_id' => '1',
+            'teacher_id' => 'teacher1@example.com',
             'title' => 'java基礎',
             'year' => '2025',
             'session_flg' => '0',
         ];
         DB::table('course_lists')->insert($param);
         $param = [
-            'teacher_id' => '2',
+            'teacher_id' => 'teacher2@example.com',
             'title' => 'php基礎',
             'year' => '2025',
             'session_flg' => '0',
         ];
         DB::table('course_lists')->insert($param);
         $param = [
-            'teacher_id' => '1',
+            'teacher_id' => 'teacher3@example.com',
             'title' => 'java応用',
             'year' => '2025',
             'session_flg' => '1',

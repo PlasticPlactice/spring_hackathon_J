@@ -14,6 +14,7 @@ class AdminsTableSeeder extends Seeder
     public function run(): void
     {
         $param = [
+            'id' => 'admin@example.com',
             'pw' => 'admin',
             'del_flg' => '0'
         ];
