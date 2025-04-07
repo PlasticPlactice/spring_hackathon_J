@@ -14,6 +14,14 @@ class Subject extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
+    public static $rules = [
+        'name' => 'required',
+        'detail' => '',
+        'tech' => 'required'
+    ];
+
     // リレーション
     public function Y_Subjects(){
         return $this->hasMany(Y_Subject::class);

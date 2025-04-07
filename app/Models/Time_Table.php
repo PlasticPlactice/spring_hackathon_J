@@ -11,6 +11,13 @@ class Time_Table extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
+    public static $rules = [
+        'day_of_week' => '',
+        'frames' => ''
+    ];
+
     // リレーション
     public function Course_list(){  
         return $this->belongsTo(Student::class);

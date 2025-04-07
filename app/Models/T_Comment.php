@@ -11,6 +11,13 @@ use App\Models\Y_Subject;
 class T_Comment extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public static $rules = [
+        'title' => 'required',
+        'detail' => ''
+    ];
     // リレーション
     public function Teacher(){  
         return $this->belongsTo(Teacher::class);

@@ -13,6 +13,14 @@ use App\Models\Y_Subject;
 class Course_list extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public static $rules = [
+        'title' => 'required',
+        'year' => ''
+    ];
+
     // リレーション
     public function C_Subjects(){
         return $this->hasMany(C_Subject::class);

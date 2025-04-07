@@ -14,6 +14,10 @@ class Y_Subject extends Model
 {
     use HasFactory;
 
+    public static $rules = [
+        'detail' => 'required',
+    ];
+
     // リレーション
     public function Course_list(){
         return $this->belongsTo(Course_list::class);

@@ -12,6 +12,11 @@ class S_Comment extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'title' => 'required',
+        'detail' => ''
+    ];
+
     // リレーション
     public function Student(){
         return $this->belongsTo(Student::class);
