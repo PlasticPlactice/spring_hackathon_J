@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class T_Comment extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public static $rules = [
+        'title' => 'required',
+        'detail' => ''
+    ];
 }

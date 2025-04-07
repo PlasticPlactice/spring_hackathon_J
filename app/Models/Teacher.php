@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
+
+    public static $rules = [
+        'id' => 'required',
+        'pw' => 'required',
+        'name' => 'required'
+    ];
 }

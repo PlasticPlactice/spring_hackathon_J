@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Y_Subject extends Model
 {
     use HasFactory;
+
+    public static $rules = [
+        'detail' => 'required',
+    ];
 }

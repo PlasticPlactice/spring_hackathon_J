@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class S_Comment extends Model
 {
     use HasFactory;
+
+    protected $guarded = [
+        'title' => 'required',
+        'detail' => ''
+    ];
 }
