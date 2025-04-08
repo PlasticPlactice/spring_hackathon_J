@@ -19,11 +19,15 @@ use App\Http\Controllers\TeacherController;
 
 
 // ログインページを表示
-Route::get('/',[LoginController::class,'index']);
+Route::get('/',[LoginController::class,'index'])->name('login');
 
+// 管理者のログイン処理
+Route::post('/admin_login',[AdminAuthController::class,'login']);
 // 管理者のパスワード変更画面の表示
 Route::get('/admin_password_change',[AdminAuthController::class,'passwordChange']);
 
+// 教師ログイン処理
+Route::post('/teacher_login',[TeacherAuthController::class,'login']);
 // 教師データ登録ページを表示
 Route::get('/teachers_register',[TeacherAuthController::class,'add']);
 // 教師データ編集・削除ページを表示
@@ -31,21 +35,23 @@ Route::get('/teachers_edit',[TeacherAuthController::class,'edit']);
 // 教師のパスワード変更画面の表示
 Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordChange']);
 
+// ユーザのログイン処理を実行
+Route::post('/student_login',[StudentAuthController::class,'login']);
 // 生徒データ編集・削除ページを表示
 Route::get('/students_edit',[StudentAuthController::class,'edit']);
 // 生徒のパスワード変更画面の表示
 Route::get('/student_password_change',[StudentAuthController::class,'passwordChange']);
 
 // 管理者トップページを表示
-Route::get('/admin_top',[AdminController::class,'index']);
+Route::get('/admin_top',[AdminController::class,'index'])->name('admin.top');
 // 教師データ一覧ページを表示
 Route::get('/teachers_list',[AdminController::class,'teachersList']);
 
 // 教師トップページを表示
-Route::get('/teacher_top',[TeacherController::class,'index']);
+Route::get('/teacher_top',[TeacherController::class,'index'])->name('teacher.top');
 
 // 生徒トップページを表示
-Route::get('/student_top',[StudentController::class,'index']);
+Route::get('/student_top',[StudentController::class,'index'])->name('student.top');
 // 個別時間割作成ページを表示
 Route::get('/personal_timetable_register',[StudentController::class,'addTimeTable']);
 // 個別時間割編集ページを表示
