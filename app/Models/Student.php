@@ -17,7 +17,9 @@ class Student extends  Authenticatable
     use HasFactory;
 
     // ユーザー認証に使うカラムの指定（必要に応じて追加）
-    protected $fillable = ['id', 'pw'];  // 'password' を 'pw' に変更
+    protected $fillable = [
+        'name', 'department_id', 'entrance_year', 'img_path', 'pw',
+    ];
     
     public static $rules = [
         'id' => 'required',
@@ -43,7 +45,7 @@ class Student extends  Authenticatable
         return $this->hasMany(Subject_Favorite::class);
     }
     public function Department(){
-        return $this->hasMany(Department::class);
+        return $this->belongsTo(Department::class);
     }
 
 

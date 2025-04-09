@@ -6,6 +6,40 @@
     <title>Document</title>
 </head>
 <body>
-    生徒データ編集・削除
+    <h2>生徒データ編集・削除</h2>
+    <form action="students_update" method="post" enctype="multipart/form-data">
+        @csrf
+        id: <sapn>{{$student->id}}</sapn>
+        パスワードリセット:<input type="checkbox" name="password_reset" value="1">
+        名前 <input type="text" name="name" value="{{$student->name}}">
+        画像 <input type="file" name="img_data">
+        <img  src="{{ asset($student->img_path) }}" alt="アイコン画像">
+        <br>
+        学科:
+        <select name="department" id="">
+         @foreach($department as $item)                       
+            <option value="{{ $item->id }}"  @if($item->id === $student->department->id)  selected  @endif>{{ $item->name }}</option>
+        @endforeach
+        </select>
+        入学年度:
+        <select name="entrance_year" id="">
+        @foreach($years as $year)
+            <option value="{{$year}}" @if($year === $student->entrance_year)  selected  @endif >{{$year}}</option>
+        @endforeach
+        </select>
+        <input type="submit" value="更新">
+    </form>
+
+     <!-- バリデーションエラーの一覧表示 -->
+     @if ($errors->any())
+        <div>
+            <h4>入力エラーがあります:</h4>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </body>
 </html>

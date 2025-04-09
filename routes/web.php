@@ -40,7 +40,9 @@ Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordCha
 // ユーザのログイン処理を実行
 Route::post('/student_login',[StudentAuthController::class,'login']);
 // 生徒データ編集・削除ページを表示
-Route::get('/students_edit',[StudentAuthController::class,'edit']);
+Route::get('/students_edit',[StudentAuthController::class,'edit'])->name('student.edit')->middleware('student');
+// 生徒データ編集処理
+Route::post('/students_update',[StudentAuthController::class,'update'])->middleware('student');
 // 生徒のパスワード変更画面の表示
 Route::get('/student_password_change',[StudentAuthController::class,'passwordChange']);
 
