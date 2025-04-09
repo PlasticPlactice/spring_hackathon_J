@@ -108,8 +108,10 @@ class StudentDataController extends Controller
          
          // バリデーション結果
          if ($validator->fails()) {
-             return redirect()->back()->withErrors($validator)->withInput();
-         }
+            $errors = $validator->errors()->all();
+            $uniqueErrors = array_unique($errors); // 重複を削除
+            return redirect()->back()->withErrors($uniqueErrors)->withInput();   
+        }
     
         // エラーがない場合、データベースに登録
         foreach ($csvData as $row) {
