@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CsvUploadRequest extends FormRequest
+class StudentCsvUploadRequest extends FormRequest
 {
     public function authorize(): bool
     {
