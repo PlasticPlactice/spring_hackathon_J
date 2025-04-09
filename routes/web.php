@@ -30,6 +30,8 @@ Route::get('/admin_password_change',[AdminAuthController::class,'passwordChange'
 Route::post('/teacher_login',[TeacherAuthController::class,'login']);
 // 教師データ登録ページを表示
 Route::get('/teachers_register',[TeacherAuthController::class,'add']);
+// 教師データ登録処理
+Route::post('/teachers_add',[TeacherAuthController::class,'insert']);
 // 教師データ編集・削除ページを表示
 Route::get('/teachers_edit',[TeacherAuthController::class,'edit']);
 // 教師のパスワード変更画面の表示

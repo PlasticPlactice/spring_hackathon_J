@@ -54,7 +54,7 @@ class StudentDataController extends Controller
 
          // csvデータを 配列にデータを格納
          $csvData = [];
-         $studentEmails = Student::pluck('id')->toArray(); // データベースからメールアドレスを取得
+         $studentData = Student::pluck('id')->toArray(); // データベースからメールアドレスを取得
          
          // CSVデータを配列に格納
          foreach ($csv as $row) {
@@ -68,15 +68,15 @@ class StudentDataController extends Controller
          
          // csvのルール
          $csvRules = [
-             'csv_array.*.メールアドレス' => ['required', function ($attribute, $value, $fail) use ($studentEmails, $csvData) {
+             'csv_array.*.メールアドレス' => ['required', function ($attribute, $value, $fail) use ($studentData, $csvData) {
                  // 入力されたメールアドレスがすでにデータベースに存在するかを確認
-                 if (in_array($value, $studentEmails)) {
+                 if (in_array($value, $studentData)) {
                      $fail('メールアドレス「' . $value . '」はすでに登録されています。');
                  }
                  
                  // CSV内で重複するメールアドレスがあるか確認
-                 $emailCount = collect($csvData)->where('メールアドレス', $value)->count();
-                 if ($emailCount > 1) {
+                 $idCount = collect($csvData)->where('メールアドレス', $value)->count();
+                 if ($idCount > 1) {
                      $fail('メールアドレス「' . $value . '」はCSVファイル内で重複しています。');
                  }
              }],
