@@ -90,8 +90,13 @@ Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeT
 // 今期履修可能科目編集処理
 Route::post('/available_subject_edit',[AdminTimeTableController::class,'updateOrdeleteTimeTable']);
 
-
-
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// 一時的
+Route::get('/kudou', function () {
+    return view('parts.kudou');
+});
+Route::get('/owada', function () {
+    return view('parts.owada');
+});
+Route::get('/shibuya', function () {
+    return view('parts.shibuya');
+});
