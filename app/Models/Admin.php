@@ -15,6 +15,10 @@ class Admin extends Authenticatable
         'id' => 'required',
         'pw' => 'required'
     ];
+    protected $casts = [
+        'id' => 'string',  // idを文字列としてキャスト
+    ];
+
 
      // パスワードを 'pw' カラムから取得する
      public function getAuthPassword()

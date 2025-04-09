@@ -26,6 +26,10 @@ class Student extends  Authenticatable
         'img_path' => 'required',
         'entrance_year' => 'required'
     ];
+    
+    protected $casts = [
+        'id' => 'string',  // idを文字列としてキャスト
+    ];
 
     // リレーション
     public function S_Comments(){
