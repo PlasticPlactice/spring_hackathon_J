@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    教師データ登録
+    <h2>教師データ登録</h2>
+    <form action="teachers_add" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="csv_file" accept=".csv" >
+        <input type="submit" value="送信">
+    </form>
+    <!-- エラー表示 -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 </body>
 </html>

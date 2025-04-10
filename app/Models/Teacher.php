@@ -20,6 +20,10 @@ class Teacher extends Authenticatable
         'pw' => 'required',
         'name' => 'required'
     ];
+    protected $casts = [
+        'id' => 'string',  // idを文字列としてキャスト
+    ];
+
 
     // リレーション
     public function Course_list(){  
