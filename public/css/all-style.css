@@ -1,0 +1,373 @@
+@charset "utf-8";
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: #53AC9C;
+    --sub-color: #C4EAE3;
+    --black: #1A1A1A;
+    --gray: #696969;
+    --light-gray: #E5E5E5;
+    --white: #FFFFFF;
+    --red: #F46363;
+}
+
+/* header {
+    background-color: var(--main-color);
+} */
+*,  *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
+    margin: 0;
+    padding: 0;
+}
+p{
+    font-size: 1.2rem;
+}
+p input{
+    width: 15rem;
+    height: 1.8rem;
+}
+select{
+    width: 15rem;
+    height: 1.8rem;
+}
+.check{
+    height: 1.5;
+}
+button{
+    font-size: 1rem;
+    width: 6rem;
+    height: 3rem;
+    color: var(--white);
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    border-radius: 10px;
+}
+li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9rem;
+    height: 4rem;
+    font-size: 1.2rem;
+    border: solid 1px var(--black);
+    background-color: var(--white);
+}
+li #subject{
+    width: 9rem;
+    height: 4rem;
+    font-size: 1rem;
+}
+#subject-side-menu{
+    position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  transition: right 0.3s ease;
+  z-index: 1001;
+}
+#subject-side-menu.active {
+    right: -80px;
+  }
+#subject-side-button {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 50;
+  font-size: 60px;
+  padding: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  right: 30px;
+  z-index: 1000;
+}
+#subject-side-button:hover{
+    color: var(--gray);
+}
+#subject-return:hover{
+    background-color: var(--sub-color);
+}
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    vertical-align: top;
+    line-height: 1.2;
+}
+.large{
+    width: 20rem;
+    height: 7rem;
+
+/* ----------ここからサイドバーのベースとアプリ名---------- */
+
+#side-bar {
+    height: 100%;
+    width: 250px;
+    background-color: var(--main-color);
+    color: var(--white);
+    text-align: center;
+
+    position: fixed;
+    top: 0;
+}
+
+#side-bar a {
+    text-decoration: none;
+    color: var(--black);
+}
+
+#side-bar a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#side-bar .text-red {
+    color: var(--red);
+}
+
+#app-name {
+    font-size: 32px;
+    margin: 20px 0 80px;
+}
+
+/* ----------ここからユーザーアイコンとユーザーメニュー---------- */
+#user-section {
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+}
+
+#user-icon {
+    background-color: var(--white);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+    cursor: pointer;
+    position: relative;
+}
+
+#user-menu {
+    display: none;
+    background-color: var(--white);
+    border-radius: 10px;
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    bottom: 120%;
+    transform: translateX(-50%);
+}
+
+#user-menu li {
+    list-style: none;
+    margin: 15px 0;
+}
+
+/* ----------ここからページメニュー---------- */
+.side-bar-item {
+    position: relative;
+    cursor: pointer;
+    margin: 40px 0;
+    list-style: none;
+}
+
+#side-bar .side-bar-item a {
+    color: var(--white);
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -20px;
+    width: 200px;
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+    border-left: none;
+    list-style-type: none;
+}
+
+.sub-menu li {
+    margin: 20px 40px;
+}
+
+.side-bar-item:hover > .sub-menu,
+.side-bar-item:focus-within > .sub-menu {
+    display: block;
+}
+
+.side-bar-item:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#side-bar .side-bar-item .sub-menu a {
+    color: var(--black);
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#side-bar .side-bar-item .sub-menu a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* ----------ここからコンテンツ---------- */
+#page-content {
+    margin-left: 250px;
+
+/* ヘッダー */
+header {
+    position: fixed;
+    display: flex;
+    background-color: var(--white);
+    width: 100%;
+    height: 20%;
+    max-width: 100%;
+    border-bottom: 1.5px solid var(--gray);
+}
+
+header h2 {
+    font-size: 32px;
+    padding: 20px;
+    margin-top: 30px;
+    margin-left: 30%;
+    border-bottom: 4px solid var(--gray);
+}
+
+/* ボタン系 */
+#insert-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#update-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#delete-button {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#accountdel-button {
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+    line-height: 0.9;
+}
+
+#edit-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#search-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#choose-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 194px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+#login-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+/* フォーム */
+input {
+    width: 410px;
+    height: 54px;
+    border-radius: 10px;
+    font-size: 24px;
+}
+
+/* コメント欄 */
+#comment-input {
+    width: 697px;
+    height: 53px;
+    font-size: 24px;
+    border-radius: 10px;
+    position: relative;
+    display: inline-block;
+    /* text-align: start; */
+}
+
+#comment-section {
+    width: 757px;
+    padding: 20px;
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+}
+
+.section-title {
+    width: 757px;
+    height: 63.51px;
+    background-color: var(--light-gray);
+    border: 1px solid var(--gray);
+}
+
+.section-title h2 {
+    text-align: center;
+}
+
+.comment-erea {
+    width: 757px;
+    height: 622.71px;
+    border: 1px solid var(--gray);
+}

@@ -98,9 +98,9 @@ Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeT
 Route::get('/kudou', function () {
     return view('parts.kudou');
 });
-Route::get('/owada', function () {
-    return view('parts.owada');
+Route::get('/kowada', function () {
+    return view('parts.kowada');
 });
-Route::get('/shibuya', function () {
-    return view('parts.shibuya');
+Route::get('/shibaya', function () {
+    return view('parts.shibaya');
 });
