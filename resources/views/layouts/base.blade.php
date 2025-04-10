@@ -11,31 +11,7 @@
         <h1 id="app-name">ABCDE</h1>
 
         <ul>
-            <!-- <li class="side-bar-item" id="content-1" tabindex="0">
-                サブメニュー
-                <ul class="sub-menu">
-                    <li><a href="#">AAAAA</a></li>
-                    <li><a href="#">BBBBB</a></li>
-                </ul>
-            </li>
-
-            <li class="side-bar-item" id="content-2" tabindex="0">
-                サブメニュー
-                <ul class="sub-menu">
-                    <li><a href="#">CCCCC</a></li>
-                    <li><a href="#">DDDDD</a></li>
-                </ul>
-            </li>
-
-            <li class="side-bar-item" id="content-3" tabindex="0">
-                サブメニュー
-                <ul class="sub-menu">
-                    <li><a href="#">EEEEE</a></li>
-                    <li><a href="#">FFFFF</a></li>
-                </ul>
-            </li> -->
-            @yield('sideer')
-            
+            @yield('side_bar_content')
         </ul>
 
         <div id="user-section">
@@ -50,8 +26,8 @@
             </div>
         </div>
     </nav>
-    <div class="content">
-    @yield('content')
+    <div id="page-content">
+        @yield('content')
     </div>
 
     <script>

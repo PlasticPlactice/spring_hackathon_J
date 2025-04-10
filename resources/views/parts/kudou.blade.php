@@ -11,7 +11,7 @@
         <h1 id="app-name">ABCDE</h1>
 
         <ul>
-            <li class="side-bar-menu-item" id="content-1" tabindex="0">
+            <li class="side-bar-item" id="content-1" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">AAAAA</a></li>
@@ -19,7 +19,7 @@
                 </ul>
             </li>
 
-            <li class="side-bar-menu-item" id="content-2" tabindex="0">
+            <li class="side-bar-item" id="content-2" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">CCCCC</a></li>
@@ -27,7 +27,7 @@
                 </ul>
             </li>
 
-            <li class="side-bar-menu-item" id="content-3" tabindex="0">
+            <li class="side-bar-item" id="content-3" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">EEEEE</a></li>
@@ -116,17 +116,51 @@
 </html> -->
 
 @extends('layouts.base')
-@section('title','トップページです')
-@section('sideer')
-<li class="side-bar-menu-item" id="content-3" tabindex="0">
-    サブメニュー
-    <ul class="sub-menu">
-        <li><a href="#">EEEEE</a></li>
-        <li><a href="#">FFFFF</a></li>
-    </ul>
-</li> 
+
+@section('title','テストページ　工藤')
+
+@section('side_bar_content')
+    @component('components.side_bar_menu')
+        @slot('content_id')
+            1
+        @endslot
+
+        @slot('side_bar_menu')
+            サブメニューあり
+        @endslot
+
+        @slot('register_link')
+            https://www.google.co.jp/
+        @endslot
+
+        @slot('edit_link')
+            https://www.yahoo.co.jp/
+        @endslot
+    @endcomponent
+
+    <li class="side-bar-item" id="content-2" tabindex="0">
+        <a href="https://www.yahoo.co.jp/">サブメニュー無し<br>直接リンク</a>    
+    </li>
+
+    @component('components.side_bar_menu')
+        @slot('content_id')
+            3
+        @endslot
+
+        @slot('side_bar_menu')
+            サブメニューあり(2)
+        @endslot
+
+        @slot('register_link')
+            https://www.google.co.jp/
+        @endslot
+
+        @slot('edit_link')
+            https://www.yahoo.co.jp/
+        @endslot
+    @endcomponent
 @endsection
 
 @section('content')
-<h1>aaaaaaaaaaaaaaaaaaa      Contentです</h1>
+    <h1>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</h1>
 @endsection

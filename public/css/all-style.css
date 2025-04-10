@@ -19,7 +19,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     --red: #F46363;
 }
 
-/* -------------------- */
+/* ----------ここからサイドバーのベースとアプリ名---------- */
 
 #side-bar {
     height: 100%;
@@ -32,11 +32,26 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     top: 0;
 }
 
+#side-bar a {
+    text-decoration: none;
+    color: var(--black);
+}
+
+#side-bar a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#side-bar .text-red {
+    color: var(--red);
+}
+
 #app-name {
     font-size: 32px;
     margin: 20px 0 80px;
 }
 
+/* ----------ここからユーザーアイコンとユーザーメニュー---------- */
 #user-section {
     position: absolute;
     width: 100%;
@@ -69,20 +84,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin: 15px 0;
 }
 
-#side-bar a {
-    text-decoration: none;
-    color: var(--black);
-}
-
-#side-bar a:hover {
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-#side-bar .text-red {
-    color: var(--red);
-}
-
+/* ----------ここからページメニュー---------- */
 .side-bar-item {
     position: relative;
     cursor: pointer;
@@ -90,12 +92,16 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     list-style: none;
 }
 
+#side-bar .side-bar-item a {
+    color: var(--white);
+}
+
 .sub-menu {
     display: none;
     position: absolute;
     left: 100%;
     top: -20px;
-    width: 150px;
+    width: 200px;
     background-color: var(--white);
     border: 1px solid var(--gray);
     border-left: none;
@@ -116,12 +122,18 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     font-weight: bold;
 }
 
-.sub-menu a {
+#side-bar .side-bar-item .sub-menu a {
+    color: var(--black);
     text-decoration: none;
     font-weight: normal;
 }
 
-.sub-menu a:hover {
+#side-bar .side-bar-item .sub-menu a:hover {
     text-decoration: underline;
     font-weight: bold;
+}
+
+/* ----------ここからコンテンツ---------- */
+#page-content {
+    margin-left: 250px;
 }
