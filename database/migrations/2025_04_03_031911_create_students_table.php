@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('pw');
+            $table->string('email')->unique();
             $table->string('name');
             $table->boolean('del_flg')->default(false);
             $table->string('img_path');

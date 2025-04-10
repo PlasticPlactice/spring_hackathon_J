@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\TeacherCsvUploadRequest;
+use App\Http\Requests\TeacherEditRequest;
 use App\Models\Teacher;
 use League\Csv\Reader;
 use Illuminate\Support\Facades\Validator;
@@ -101,7 +102,7 @@ class TeacherAuthController extends Controller
              // Teacherの新しいインスタンスを作成
              $teacher = new Teacher();
  
-             $teacher->id = $row['メールアドレス'];
+             $teacher->email = $row['メールアドレス'];
              $teacher->pw = Hash::make('morijyobi'); // パスワードをハッシュ化
              $teacher->name = $row['名前'];
 
@@ -112,8 +113,31 @@ class TeacherAuthController extends Controller
     }
 
     // 教師データ編集・削除ページ表示
-    public function edit(Request $request){
-        return view('auth/teachers_edit');
+    public function edit(Request $request,$id){
+        // データベースから教師情報を取得
+        $teacher = Teacher::find($id);
+        return view('auth/teachers_edit',['teacher' => $teacher]);
+    }
+    // 教師データ編集処理
+    public function update(TeacherEditRequest $request,$id){
+        // データベースから教師情報を取得
+        $teacher = Teacher::find($id);
+
+        // 送信されたデータを格納
+        $teacher->name = $request->input('name');
+
+        
+         // パスワードリセットの場合
+         if ($request->has('password_reset')) {
+            $teacher->pw =  Hash::make('morijyobi');
+        } 
+
+        // データベースに保存
+        $teacher->save();
+
+        return redirect('/teacher_edit/'.$id);  // 認証成功時のリダイレクト先
+
+
     }
 
     // パスワード変更ページ表示
@@ -124,10 +148,12 @@ class TeacherAuthController extends Controller
     // ログイン処理
     public function login(LoginRequest $request){
 
-        // idとパスワードを取得
+        // id(メールアドレス)とパスワードを取得
         $userData = $request->only('id', 'pw');
         $userData['password'] = $userData['pw'];
+        $userData['email'] = $userData['id'];
         unset($userData['pw']);
+        unset($userData['email']);
 
          
         // Authによる認証を行う

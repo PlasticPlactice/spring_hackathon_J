@@ -19,11 +19,9 @@ class Teacher extends Authenticatable
 
     public static $rules = [
         'id' => 'required',
+        'email' => 'required',
         'pw' => 'required',
         'name' => 'required'
-    ];
-    protected $casts = [
-        'id' => 'string',  // idを文字列としてキャスト
     ];
 
 
