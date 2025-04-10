@@ -97,6 +97,6 @@ Route::get('/kudou', function () {
 Route::get('/owada', function () {
     return view('parts.owada');
 });
-Route::get('/shibuya', function () {
-    return view('parts.shibuya');
+Route::get('/shibaya', function () {
+    return view('parts.shibaya');
 });
