@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Subject;
 
 class MainSubjectController extends Controller
 {
     // 科目マスタページ一覧表示
     public function index(Request $request){
-        return view('subject/subjects_master_list');
+        $items = Subject::all();
+
+        return view('subject/subjects_master_list', ['items' => $items]);
     }
 
     // 科目マスターページ表示
     public function show(Request $request){
-        return view('subject/subject_master');
+        $item = DB::table('subjects')
+        ->where('id', $request->id)
+        ->first();
+        return view('subject/subject_master' , ['item' => $item]);
     }
     
     // 科目マスターページ登録表示
@@ -23,6 +29,7 @@ class MainSubjectController extends Controller
     }
 
     // 科目ページ登録処理
+    // Subjectsが作成されるとマスタ科目の詳細が作成されて
     public function create(Request $request) {
 
         $params = [
@@ -41,7 +48,7 @@ class MainSubjectController extends Controller
         $item = DB::table('subjects')
         ->where('id', $request->id)
         ->first();
-        
+
         return view('subject/subject_master_edit', ['form' => $item]);
     }
 

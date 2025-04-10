@@ -42,9 +42,16 @@ class SubjectsTableSeeder extends Seeder
         DB::table('subjects')->insert($param);
 
         $param = [
-            'name' => 'スマホアプリ開発(Flutter)',
-            'detail' => 'プログラミング言語「Dart」とUIフレームワーク「Flutter」を用いて、マルチプラットフォーム対応のスマホアプリ開発技術を学習します。',
-            'tech' => 'Flutter'
+            'name' => 'Java応用(JavaFX)',
+            'detail' => 'データベースと連携したアプリケーション開発ができるようになる',
+            'tech' => 'Java'
+        ];
+        DB::table('subjects')->insert($param);
+        
+        $param = [
+            'name' => 'php基礎',
+            'detail' => 'PHPの基礎を理解し、簡易的なアプリケーションが作成できる。',
+            'tech' => 'PHP'
         ];
         DB::table('subjects')->insert($param);
     }
