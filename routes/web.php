@@ -33,16 +33,18 @@ Route::get('/teachers_register',[TeacherAuthController::class,'add']);
 // 教師データ登録処理
 Route::post('/teachers_add',[TeacherAuthController::class,'insert']);
 // 教師データ編集・削除ページを表示
-Route::get('/teachers_edit/{id}',[TeacherAuthController::class,'edit']);
+Route::get('/teacher_edit/{id}',[TeacherAuthController::class,'edit']);
+// 教師データ編集処理
+Route::post('/teacher_update/{id}',[TeacherAuthController::class,'update']);
 // 教師のパスワード変更画面の表示
 Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordChange']);
 
 // ユーザのログイン処理を実行
 Route::post('/student_login',[StudentAuthController::class,'login']);
 // 生徒データ編集・削除ページを表示
-Route::get('/students_edit/{id}',[StudentAuthController::class,'edit'])->name('student.edit');
+Route::get('/student_edit/{id}',[StudentAuthController::class,'edit'])->name('student.edit');
 // 生徒データ編集処理
-Route::post('/students_update/{id}',[StudentAuthController::class,'update']);
+Route::post('/student_update/{id}',[StudentAuthController::class,'update']);
 // 生徒のパスワード変更画面の表示
 Route::get('/student_password_change',[StudentAuthController::class,'passwordChange']);
 

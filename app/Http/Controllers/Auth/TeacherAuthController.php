@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\TeacherCsvUploadRequest;
+use App\Http\Requests\TeacherEditRequest;
 use App\Models\Teacher;
 use League\Csv\Reader;
 use Illuminate\Support\Facades\Validator;
@@ -113,7 +114,30 @@ class TeacherAuthController extends Controller
 
     // 教師データ編集・削除ページ表示
     public function edit(Request $request,$id){
-        return view('auth/teachers_edit');
+        // データベースから教師情報を取得
+        $teacher = Teacher::find($id);
+        return view('auth/teachers_edit',['teacher' => $teacher]);
+    }
+    // 教師データ編集処理
+    public function update(TeacherEditRequest $request,$id){
+        // データベースから教師情報を取得
+        $teacher = Teacher::find($id);
+
+        // 送信されたデータを格納
+        $teacher->name = $request->input('name');
+
+        
+         // パスワードリセットの場合
+         if ($request->has('password_reset')) {
+            $teacher->pw =  Hash::make('morijyobi');
+        } 
+
+        // データベースに保存
+        $teacher->save();
+
+        return redirect('/teacher_edit/'.$id);  // 認証成功時のリダイレクト先
+
+
     }
 
     // パスワード変更ページ表示

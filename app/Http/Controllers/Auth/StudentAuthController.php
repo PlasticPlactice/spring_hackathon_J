@@ -76,7 +76,7 @@ class StudentAuthController extends Controller
         // データベースに保存
         $student->save();
 
-        return redirect('/students_edit/'.$id);  // 認証成功時のリダイレクト先
+        return redirect('/student_edit/'.$id);  // 認証成功時のリダイレクト先
 
         
 
