@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    科目マスターページ一覧
+    @foreach ($items as $item)
+    <p>{{$item->id}}</p>
+    <p>{{$item->name}}</p>
+    <p>{{$item->detail}}</p>
+    <p>{{$item->tech}}</p>
+    @endforeach
 </body>
 </html>

@@ -12,8 +12,10 @@ class C_Subject extends Model
 {
     use HasFactory;
 
+    protected $table = 'CSubject';
+
     // リレーション
-    public function student(){  
+    public function student(){
         return $this->belongsTo(Student::class);
     }
 

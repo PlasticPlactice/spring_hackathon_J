@@ -7,5 +7,7 @@
 </head>
 <body>
     科目サブページ
+    <p>{{$subjectName}}</p>
+    <p>{{$teacherName}}</p>
 </body>
 </html>
