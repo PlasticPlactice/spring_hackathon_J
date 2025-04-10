@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="/css/all-style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
         <h1 id="app-name">ABCDE</h1>
 
         <ul>
-            <li class="side-bar-menu-item" id="content-1" tabindex="0">
+            <!-- <li class="side-bar-item" id="content-1" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">AAAAA</a></li>
@@ -19,7 +19,7 @@
                 </ul>
             </li>
 
-            <li class="side-bar-menu-item" id="content-2" tabindex="0">
+            <li class="side-bar-item" id="content-2" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">CCCCC</a></li>
@@ -27,13 +27,15 @@
                 </ul>
             </li>
 
-            <li class="side-bar-menu-item" id="content-3" tabindex="0">
+            <li class="side-bar-item" id="content-3" tabindex="0">
                 サブメニュー
                 <ul class="sub-menu">
                     <li><a href="#">EEEEE</a></li>
                     <li><a href="#">FFFFF</a></li>
                 </ul>
-            </li>
+            </li> -->
+            @yield('sideer')
+            
         </ul>
 
         <div id="user-section">
@@ -48,6 +50,9 @@
             </div>
         </div>
     </nav>
+    <div class="content">
+    @yield('content')
+    </div>
 
     <script>
         var userIcon = document.getElementById("user-icon");
@@ -113,20 +118,4 @@
         // });
     </script>
 </body>
-</html> -->
-
-@extends('layouts.base')
-@section('title','トップページです')
-@section('sideer')
-<li class="side-bar-menu-item" id="content-3" tabindex="0">
-    サブメニュー
-    <ul class="sub-menu">
-        <li><a href="#">EEEEE</a></li>
-        <li><a href="#">FFFFF</a></li>
-    </ul>
-</li> 
-@endsection
-
-@section('content')
-<h1>aaaaaaaaaaaaaaaaaaa      Contentです</h1>
-@endsection
+</html>
