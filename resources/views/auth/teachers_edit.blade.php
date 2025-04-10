@@ -15,5 +15,17 @@
 
         <input type="submit" value="更新">
     </form>
+
+      <!-- バリデーションエラーの一覧表示 -->
+      @if ($errors->any())
+        <div>
+            <h4>入力エラーがあります:</h4>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </body>
 </html>
