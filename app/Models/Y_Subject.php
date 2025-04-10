@@ -14,9 +14,34 @@ class Y_Subject extends Model
 {
     use HasFactory;
 
+    protected $table = 'y_subjects';
+
+    protected $fillable = [
+        'course_list_id',
+        'subject_id',
+        'detail'
+    ];
+
     public static $rules = [
         'detail' => 'required',
     ];
+
+    // データ格納処理
+    public static function createYSubject($course_list_id, $subject_id, $detail) {
+        return self::create([
+            'course_list_id' => $course_list_id,
+            'subject_id' => $subject_id,
+            'detail' => $detail,
+        ]);
+    }
+
+    /**
+     * @param int $course_list_id
+     * @return bool
+     */
+    public static function deleteYSubject($id) {
+        return self::where('course_list_id', $id)->delete();
+    }
 
     // リレーション
     public function Course_list(){

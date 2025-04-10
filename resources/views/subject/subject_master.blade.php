@@ -7,5 +7,9 @@
 </head>
 <body>
     科目マスターページ
+    <p>{{$item->id}}</p>
+    <p>{{$item->name}}</p>
+    <p>{{$item->detail}}</p>
+    <p>{{$item->tech}}</p>
 </body>
 </html>
