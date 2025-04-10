@@ -122,7 +122,7 @@ class StudentDataController extends Controller
             $student = new Student();
 
             // 学生データを$studentオブジェクトにセット
-            $student->id = $row['メールアドレス'];
+            $student->email = $row['メールアドレス'];
             $student->pw = Hash::make('morijyobi'); // パスワードをハッシュ化
             $student->name = $row['名前'];
             $student->img_path = ''; // 画像のパス（必要に応じて変更）

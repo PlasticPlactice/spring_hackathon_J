@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subject_favorites', function (Blueprint $table) {
-            $table->uuid('student_id');
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('subject_id');
 
             $table->primary(['student_id' , 'subject_id']);

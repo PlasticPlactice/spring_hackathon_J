@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('y_subject_id');
-            $table->uuid('teacher_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->foreign('y_subject_id')->references('course_list_id')->on('y_subjects');
             $table->foreign('teacher_id')->references('id')->on('teachers');
 

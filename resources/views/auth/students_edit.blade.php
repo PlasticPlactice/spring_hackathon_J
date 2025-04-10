@@ -7,9 +7,9 @@
 </head>
 <body>
     <h2>生徒データ編集・削除</h2>
-    <form action="students_update" method="post" enctype="multipart/form-data">
+    <form action="/students_update/{{$student->id}}" method="post" enctype="multipart/form-data">
         @csrf
-        id: <sapn>{{$student->id}}</sapn>
+        id: <sapn>{{$student->email}}</sapn>
         パスワードリセット:<input type="checkbox" name="password_reset" value="1">
         名前 <input type="text" name="name" value="{{$student->name}}">
         画像 <input type="file" name="img_data">

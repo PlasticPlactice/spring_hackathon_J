@@ -17,8 +17,8 @@ class TeachersTableSeeder extends Seeder
     {
         // 1件目の教師データ
         $param = [
-            'id' => 'teacher1@example.com',
             'pw' => Hash::make('teacher1'),  // パスワードをハッシュ化
+            'email' => 'teacher1@example.com',
             'name' => '金野本戸',
             'del_flg' => '0',
             'created_at' => Carbon::now(),  // 現在の日時を設定
@@ -28,8 +28,8 @@ class TeachersTableSeeder extends Seeder
         
         // 2件目の教師データ
         $param = [
-            'id' => 'teacher2@example.com',
             'pw' => Hash::make('teacher2'),  // パスワードをハッシュ化
+            'email' => 'teacher2@example.com',
             'name' => '高田舞',
             'del_flg' => '0',
             'created_at' => Carbon::now(),  // 現在の日時を設定
@@ -39,8 +39,8 @@ class TeachersTableSeeder extends Seeder
         
         // 3件目の教師データ
         $param = [
-            'id' => 'teacher3@example.com',
             'pw' => Hash::make('teacher3'),  // パスワードをハッシュ化
+            'email' => 'teacher3@example.com',
             'name' => '高橋博人',
             'del_flg' => '0',
             'created_at' => Carbon::now(),  // 現在の日時を設定

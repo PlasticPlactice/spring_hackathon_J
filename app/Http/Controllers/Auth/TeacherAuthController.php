@@ -101,7 +101,7 @@ class TeacherAuthController extends Controller
              // Teacherの新しいインスタンスを作成
              $teacher = new Teacher();
  
-             $teacher->id = $row['メールアドレス'];
+             $teacher->email = $row['メールアドレス'];
              $teacher->pw = Hash::make('morijyobi'); // パスワードをハッシュ化
              $teacher->name = $row['名前'];
 
@@ -112,7 +112,7 @@ class TeacherAuthController extends Controller
     }
 
     // 教師データ編集・削除ページ表示
-    public function edit(Request $request){
+    public function edit(Request $request,$id){
         return view('auth/teachers_edit');
     }
 
@@ -124,10 +124,12 @@ class TeacherAuthController extends Controller
     // ログイン処理
     public function login(LoginRequest $request){
 
-        // idとパスワードを取得
+        // id(メールアドレス)とパスワードを取得
         $userData = $request->only('id', 'pw');
         $userData['password'] = $userData['pw'];
+        $userData['email'] = $userData['id'];
         unset($userData['pw']);
+        unset($userData['email']);
 
          
         // Authによる認証を行う

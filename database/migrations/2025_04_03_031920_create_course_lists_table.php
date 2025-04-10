@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('course_lists', function (Blueprint $table) {
             $table->id();
-            $table->uuid('teacher_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('teachers');
             $table->string('title');
             $table->integer('year');

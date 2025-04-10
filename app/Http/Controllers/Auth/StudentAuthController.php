@@ -17,9 +17,8 @@ use Carbon\Carbon;
 class StudentAuthController extends Controller
 {
     // 生徒データ編集・削除ページ表示
-    public function edit(Request $request){
+    public function edit(Request $request,$id){
         // データベースから生徒情報を取得
-        $id = Auth::guard('student')->id();
         $student = Student::with(['department'])
         ->where('id', $id)  
         ->first(); 
@@ -38,9 +37,8 @@ class StudentAuthController extends Controller
     }
 
     // 生徒データ編集処理
-    public function update(StudentEditRequest $request){
+    public function update(StudentEditRequest $request,$id){
         // idを取得
-        $id = Auth::guard('student')->id();
 
         // 更新する学生データの取得
         $student = Student::find($id);
@@ -78,7 +76,8 @@ class StudentAuthController extends Controller
         // データベースに保存
         $student->save();
 
-        return redirect()->route('student.edit');
+        return redirect('/students_edit/'.$id);  // 認証成功時のリダイレクト先
+
         
 
     }
@@ -95,10 +94,12 @@ class StudentAuthController extends Controller
     // ログイン処理
     public function login(LoginRequest $request){
 
-        // idとパスワードを取得
+        // id(email)とパスワードを取得
         $userData = $request->only('id', 'pw');
         $userData['password'] = $userData['pw'];
+        $userData['email'] = $userData['id'];
         unset($userData['pw']);
+        unset($userData['id']);
 
          
         // Authによる認証を行う
