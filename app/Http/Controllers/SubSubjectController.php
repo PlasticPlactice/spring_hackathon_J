@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Y_Subject;
-use App\Models\Course_list;
 
 class SubSubjectController extends Controller
 {
@@ -23,18 +21,5 @@ class SubSubjectController extends Controller
         $teacherName = $ySubject->Course_list->teacher->name;
 
         return view('subject/subject_sub', ['subjectName' => $subjectName, 'teacherName' => $teacherName]);
-    }
-
-    // 科目サブページの作成
-    public function create(Request $request) {
-        $params = [
-            'course_list_id' => $request->course_list_id,
-            'subject_id' => $request->subject_id,
-            'detail' => $request->detail
-        ];
-
-        DB::table('y_subjects')->insert($params);
-
-        return view('subject/');
     }
 }

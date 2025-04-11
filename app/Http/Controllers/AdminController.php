@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
 
 class AdminController extends Controller
 {
@@ -13,6 +14,8 @@ class AdminController extends Controller
 
     // 教師データ一覧ページ表示
     public function teachersList(Request $request){
-        return view('admin/teachers_list');
+        $teachers = Teacher::all();
+
+        return view('/admin/teachers_list', ['teachers' => $teachers]);
     }
 }

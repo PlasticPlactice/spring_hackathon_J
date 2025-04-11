@@ -47,7 +47,7 @@ class AdminTimeTableController extends Controller
             $request->detail
         );
 
-        return redirect('/available_subject_register');
+        return redirect('/admin_top');
     }
 
     // 今期履修可能科目編集・削除ページを表示
@@ -69,7 +69,7 @@ class AdminTimeTableController extends Controller
                 'year' => $request->year,
                 'session_flg' => $request->session_flg,
             ];
-    
+
             // モデルのメソッドを使ってデータを更新
             Course_list::updateCourseList($request->id, $data);
         } elseif($request->action === 'delete') {
