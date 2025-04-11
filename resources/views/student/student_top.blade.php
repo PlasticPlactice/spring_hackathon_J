@@ -7,5 +7,6 @@
 </head>
 <body>
     生徒トップ
+    <p>{{dd($cSubject)}}</p>
 </body>
 </html>

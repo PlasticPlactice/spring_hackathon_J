@@ -16,7 +16,9 @@ class StudentDataController extends Controller
     // 生徒データ一覧ページ表示
     public function index(Request $request)
     {
-        return view('admin/students_list');
+        $students = Student::with('Department')->get();
+
+        return view('admin/students_list', ['students' => $students]);
     }
     
     // 生徒データ登録ページ表示

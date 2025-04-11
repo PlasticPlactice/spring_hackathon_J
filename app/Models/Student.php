@@ -18,7 +18,12 @@ class Student extends  Authenticatable
 
     // ユーザー認証に使うカラムの指定（必要に応じて追加）
     protected $fillable = [
-        'name', 'email'.'department_id', 'entrance_year', 'img_path', 'pw',
+        'name',
+        'email',
+        'department_id',
+        'entrance_year',
+        'img_path',
+        'pw',
     ];
     
     public static $rules = [

@@ -25,22 +25,20 @@ class MainSubjectController extends Controller
     
     // 科目マスターページ登録表示
     public function add(Request $request){
-        return view('subject/subject_master_register');
+        return view('/subject/subject_master_register');
     }
 
     // 科目ページ登録処理
-    // Subjectsが作成されるとマスタ科目の詳細が作成されて
     public function create(Request $request) {
 
-        $params = [
-            'name' => $request->name,
-            'detail' => $request->detail,
-            'tech' => $request->tech
-        ];
+        // Subjectsに登録
+        Subject::CreateSubject(
+            $request->name,
+            $request->detail,
+            $request->tech
+        );
 
-        DB::table('subjects')->insert($params);
-
-        return view('subject/subject_master_register');
+        return redirect('/admin_top');
     }
 
     // 科目マスターページ編集・削除表示
@@ -52,22 +50,17 @@ class MainSubjectController extends Controller
         return view('subject/subject_master_edit', ['form' => $item]);
     }
 
-    // 更新または削除の処理
+    // 更新の処理
+    // ※削除はなし
     public function updateOrDelete(Request $request) {
-        if($request->action === 'update') {
-            DB::table('subjects')
-            ->where('id', $request->id)
-            ->update([
-                'name' => $request->name,
-                'detail' => $request->detail,
-                'tech' => $request->tech,
-            ]);
-        } else if($request->action === 'delete') {
-            DB::table('subjects')
-            ->where('id', $request->id)
-            ->delete();
-        }
-        
-        return view('subject/subject_master');
+        // 更新
+        $data = [
+            'name' => $request->name,
+            'detail' => $request->detail,
+            'tech' => $request->tech,
+        ];
+        Subject::updateSubject($request->id, $data);
+
+        return redirect('/admin_top');
     }
 }

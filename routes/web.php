@@ -74,6 +74,7 @@ Route::get('/teacher_top',[TeacherController::class,'index'])->name('teacher.top
 Route::get('/student_top',[StudentController::class,'index'])->name('student.top');
 // 個別時間割作成ページを表示
 Route::get('/personal_timetable_register',[StudentController::class,'addTimeTable']);
+Route::post('/personal_timetable_register',[StudentController::class,'createTimeTable']);
 // 個別時間割編集ページを表示
 Route::get('/personal_timetable_edit',[StudentController::class,'editTimeTable']);
 
@@ -90,8 +91,10 @@ Route::get('/subjects_master_list',[MainSubjectController::class,'index']);
 Route::get('/subject_master',[MainSubjectController::class,'show']);
 // 科目マスタページ登録ページを表示
 Route::get('/subject_master_register',[MainSubjectController::class,'add']);
+Route::post('/subject_master_register',[MainSubjectController::class,'create']);
 // 科目マスタページ編集・削除ページを表示
 Route::get('/subject_master_edit',[MainSubjectController::class,'edit']);
+Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete']);
 
 // 科目サブページを表示
 Route::get('/subject_sub',[SubSubjectController::class,'index']);
