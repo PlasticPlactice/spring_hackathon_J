@@ -227,9 +227,13 @@ label {
 /* ----------ここからコンテンツ---------- */
 #page-content {
     margin-left: 250px;
+}
+
+
+/* ----shibaya ----*/
 
 /* ヘッダー */
-header {
+#page-tab {
     position: fixed;
     display: flex;
     background-color: var(--white);
@@ -239,11 +243,18 @@ header {
     border-bottom: 1.5px solid var(--gray);
 }
 
-header h2 {
+#page-tab h2 {
     font-size: 32px;
     padding: 20px;
-    margin-top: 30px;
+    margin-top: 60px;
     margin-left: 30%;
+}
+
+#page-tab h2:hover {
+    background-color: var(--light-gray);
+}
+
+#page-tab h2.active {
     border-bottom: 4px solid var(--gray);
 }
 
@@ -342,17 +353,35 @@ input {
     width: 697px;
     height: 53px;
     font-size: 24px;
-    border-radius: 10px;
+    border: none;
     position: relative;
     display: inline-block;
     /* text-align: start; */
 }
 
-#comment-section {
-    width: 757px;
-    padding: 20px;
-    background-color: var(--white);
-    border: 1px solid var(--gray);
+#submit-button {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+.send-button {
+    font-size: 50px;
+    cursor: default;
+    color: var(--light-gray);
+    background: none;
+    border: none;
+}
+
+.send-button.active {
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.send-button.active:hover {
+    color: var(--sub-color);
 }
 
 .section-title {
@@ -364,10 +393,61 @@ input {
 
 .section-title h2 {
     text-align: center;
+    margin-top: 10px;
 }
 
-.comment-erea {
+.comment-container {
+    display: flex;
+    margin-top: 72%;
+    width: 700px;
+    height: 60px;
+    margin-left: 30px;
+    padding: 3px 0px 0px 5px;
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+}
+
+.comments {
     width: 757px;
     height: 622.71px;
     border: 1px solid var(--gray);
 }
+
+/* コメント */
+.comment-box {
+    margin-left: 30%;
+    width: 713px;
+    height: 86.61px;
+    overflow-y: auto; /* 縦スクロールを可能に */
+    padding: 10px;
+  }
+  
+.comment {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+  
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+  
+.comment-content {
+    display: flex;
+    flex-direction: column;
+}
+  
+.username {
+    font-weight: bold;
+}
+  
+.date {
+    font-size: 12px;
+    color: gray;
+}
+
+/*---- shibaya ----*/
