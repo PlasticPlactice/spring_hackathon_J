@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
@@ -106,7 +107,7 @@ class TeacherAuthController extends Controller
              $teacher->pw = Hash::make('morijyobi'); // パスワードをハッシュ化
              $teacher->name = $row['名前'];
 
-             // 学生データを保存
+             // 教師データを保存
              $teacher->save();
          }
              return redirect()->route('admin.top')->with('success', '生徒データが正常に登録されました。');
@@ -116,29 +117,40 @@ class TeacherAuthController extends Controller
     public function edit(Request $request,$id){
         // データベースから教師情報を取得
         $teacher = Teacher::find($id);
-        return view('auth/teachers_edit',['teacher' => $teacher]);
+        if($teacher){
+            return view('auth/teachers_edit',['teacher' => $teacher]);
+        }else{
+            abort(Response::HTTP_NOT_FOUND, '教師データが見つかりません');      
+        }
     }
     // 教師データ編集処理
     public function update(TeacherEditRequest $request,$id){
         // データベースから教師情報を取得
         $teacher = Teacher::find($id);
 
-        // 送信されたデータを格納
-        $teacher->name = $request->input('name');
+        if($teacher){
 
-        
-         // パスワードリセットの場合
-         if ($request->has('password_reset')) {
-            $teacher->pw =  Hash::make('morijyobi');
-        } 
+            // 送信されたデータを格納
+            $teacher->name = $request->input('name');
 
-        // データベースに保存
-        $teacher->save();
+            
+            // パスワードリセットの場合
+            if ($request->has('password_reset')) {
+                $teacher->pw =  Hash::make('morijyobi');
+            } 
 
-        return redirect('/teacher_edit/'.$id);  // 認証成功時のリダイレクト先
+            // データベースに保存
+            $teacher->save();
+
+            return redirect('/teacher_edit/'.$id);  // 認証成功時のリダイレクト先
+        }else{
+            return back()->withErrors(['id' => '存在しない教師情報です'])->withInput();
+        }
 
 
     }
+
+    
 
     // パスワード変更ページ表示
     public function passwordChange(Request $request){
@@ -153,7 +165,7 @@ class TeacherAuthController extends Controller
         $userData['password'] = $userData['pw'];
         $userData['email'] = $userData['id'];
         unset($userData['pw']);
-        unset($userData['email']);
+        unset($userData['id']);
 
          
         // Authによる認証を行う
@@ -163,4 +175,23 @@ class TeacherAuthController extends Controller
 
         return back()->withErrors(['id' => 'idとパスワードが一致しません'])->withInput();
     }
+    
+    // 教師情報削除処理
+    public function delete(Request $request,$id){
+        // 削除する教師データの取得
+        $teacher = Teacher::find($id);
+
+        if ($teacher) {
+            // del_flgを更新
+            $teacher->del_flg = true; // または 1; // 論理削除を示す値
+            $teacher->save(); // 変更を保存
+
+            return redirect()->route('admin.top');
+        } else {
+            // 教師が見つからない場合の処理（例: エラーメッセージを表示）
+            abort(Response::HTTP_NOT_FOUND, '存在しない生徒情報です');      
+        }
+    }
+    
+    
 }

@@ -22,6 +22,7 @@ class AdminAuthController extends Controller
         $userData = $request->only('id', 'pw');
         $userData['password'] = $userData['pw'];
         unset($userData['pw']);
+        // dd($userData);
 
          
         // Authによる認証を行う
