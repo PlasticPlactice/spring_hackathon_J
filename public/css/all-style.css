@@ -30,21 +30,19 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin: 0;
     padding: 0;
 }
-p{
-    font-size: 1.2rem;
-}
-p input{
+/* ---kowada--- */
+.input-with-label{
     width: 15rem;
     height: 1.8rem;
 }
-select{
+.select{
     width: 15rem;
     height: 1.8rem;
 }
-.check{
+.checkbox{
     height: 1.5;
 }
-button{
+.button{
     font-size: 1rem;
     width: 6rem;
     height: 3rem;
@@ -53,7 +51,7 @@ button{
     border-color: var(--main-color);
     border-radius: 10px;
 }
-li{
+.subject-list li{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +61,7 @@ li{
     border: solid 1px var(--black);
     background-color: var(--white);
 }
-li #subject{
+.subject-list #subject-search{
     width: 9rem;
     height: 4rem;
     font-size: 1rem;
@@ -100,16 +98,24 @@ li #subject{
 #subject-return:hover{
     background-color: var(--sub-color);
 }
-label {
+.large-textarea label{
     display: inline-block;
     margin-bottom: 5px;
     vertical-align: top;
     line-height: 1.2;
 }
-.large{
+.large-textarea{
     width: 20rem;
     height: 7rem;
-
+}
+/* フォーム */
+.input-with-label {
+    width: 410px;
+    height: 54px;
+    border-radius: 10px;
+    font-size: 24px;
+}
+/* ---kowada--- */
 /* ----------ここからサイドバーのベースとアプリ名---------- */
 
 #side-bar {
@@ -229,9 +235,7 @@ label {
     margin-left: 250px;
 }
 
-
-/* ----shibaya ----*/
-
+/* ----shibaya ---
 /* ヘッダー */
 #page-tab {
     position: fixed;
@@ -338,14 +342,6 @@ label {
     height: 57px;
     font-size: 24px;
     border-radius: 10px;
-}
-
-/* フォーム */
-input {
-    width: 410px;
-    height: 54px;
-    border-radius: 10px;
-    font-size: 24px;
 }
 
 /* コメント欄 */
