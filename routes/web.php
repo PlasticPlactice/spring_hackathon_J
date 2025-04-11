@@ -27,7 +27,9 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 // 管理者のログイン処理
 Route::post('/admin_login',[AdminAuthController::class,'login']);
 // 管理者のパスワード変更画面の表示
-Route::get('/admin_password_change',[AdminAuthController::class,'passwordChange']);
+Route::get('/admin_password_change',[AdminAuthController::class,'passwordChangeShow']);
+// 管理者パスワード変更処理
+Route::post('/admin_password_change',[AdminAuthController::class,'passwordChange']);
 
 // 教師ログイン処理
 Route::post('/teacher_login',[TeacherAuthController::class,'login']);
@@ -39,9 +41,12 @@ Route::post('/teachers_add',[TeacherAuthController::class,'insert']);
 Route::get('/teacher_edit/{id}',[TeacherAuthController::class,'edit']);
 // 教師データ編集処理
 Route::post('/teacher_update/{id}',[TeacherAuthController::class,'update']);
+// 教師データ削除処理
 Route::post('/teacher_delete/{id}',[TeacherAuthController::class,'delete']);
 // 教師のパスワード変更画面の表示
-Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordChange']);
+Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordChangeShow']);
+// 教師パスワード変更処理
+Route::post('/teacher_password_change',[TeacherAuthController::class,'passwordChange']);
 
 // ユーザのログイン処理を実行
 Route::post('/student_login',[StudentAuthController::class,'login']);
@@ -53,7 +58,9 @@ Route::post('/student_update/{id}',[StudentAuthController::class,'update']);
 Route::get('/student_delete/{id}',[StudentAuthController::class,'delete']);
 
 // 生徒のパスワード変更画面の表示
-Route::get('/student_password_change',[StudentAuthController::class,'passwordChange']);
+Route::get('/student_password_change',[StudentAuthController::class,'passwordChangeShow']);
+// 生徒のパスワード変更処理
+Route::post('/student_password_change',[StudentAuthController::class,'passwordChange']);
 
 // 管理者トップページを表示
 Route::get('/admin_top',[AdminController::class,'index'])->name('admin.top');

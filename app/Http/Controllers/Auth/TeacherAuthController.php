@@ -11,6 +11,7 @@ use App\Http\Requests\TeacherCsvUploadRequest;
 use App\Http\Requests\TeacherEditRequest;
 use App\Models\Teacher;
 use League\Csv\Reader;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -150,12 +151,29 @@ class TeacherAuthController extends Controller
 
     }
 
-    
-
-    // パスワード変更ページ表示
-    public function passwordChange(Request $request){
-        return view('auth/password_change');
+     // パスワード変更ページ表示
+     public function passwordChangeShow(Request $request){
+        return view('auth/password_change',['url'=>'teacher_password_change']);
     }
+    // パスワード変更ページ表示
+    public function passwordChange(ChangePasswordRequest $request){
+         // 現在認証されている学生の情報を取得
+        $teacher = Auth::guard('teacher')->user();
+
+        // 送られてきた現在のパスワードと現在のパスワードが一致するかをチェック
+        if (!Hash::check($request->current_password, $teacher->pw)) {
+            return back()->withErrors(['current_password' => '現在のパスワードが正しくありません。']);
+        }
+
+          // ここで新しいパスワードの変更処理を実行
+        $teacher->pw = Hash::make($request->new_password);
+        $teacher->save();
+
+        return redirect()->route('login');
+
+    }
+
+    
 
     // ログイン処理
     public function login(LoginRequest $request){

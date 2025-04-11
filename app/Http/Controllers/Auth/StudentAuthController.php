@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StudentEditRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\Student;
 use App\Models\department;
 use Illuminate\Support\Facades\Hash;
@@ -94,8 +95,25 @@ class StudentAuthController extends Controller
     
 
     // パスワード変更ページ表示
-    public function passwordChange(Request $request){
-        return view('auth/password_change');
+    public function passwordChangeShow(Request $request){
+        return view('auth/password_change',['url'=>'student_password_change']);
+    }
+    // パスワード変更ページ表示
+    public function passwordChange(ChangePasswordRequest $request){
+         // 現在認証されている学生の情報を取得
+        $student = Auth::guard('student')->user();
+
+        // 送られてきた現在のパスワードと現在のパスワードが一致するかをチェック
+        if (!Hash::check($request->current_password, $student->pw)) {
+            return back()->withErrors(['current_password' => '現在のパスワードが正しくありません。']);
+        }
+
+          // ここで新しいパスワードの変更処理を実行
+        $student->pw = Hash::make($request->new_password);
+        $student->save();
+
+        return redirect()->route('login');
+
     }
 
 
@@ -141,5 +159,6 @@ class StudentAuthController extends Controller
             abort(Response::HTTP_NOT_FOUND, '存在しない生徒情報です');      
         }
     }
-    
+
+ 
 }
