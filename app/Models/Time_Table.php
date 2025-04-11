@@ -13,6 +13,8 @@ class Time_Table extends Model
 
     protected $guarded = ['id'];
 
+    protected $table = 'time_tables';
+
     public static $rules = [
         'day_of_week' => '',
         'frames' => ''
