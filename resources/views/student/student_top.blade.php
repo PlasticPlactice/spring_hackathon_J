@@ -29,7 +29,7 @@
     <div>
         <table class="table subject-table">
             <tr>
-                <td>　</td>
+                <td></td>
                 @foreach($days as $day)
                     <th class="th-horizontal">{{ $day }}</th>
                 @endforeach

@@ -249,7 +249,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin-left: 250px;
 }
 
-#student-top-container {
+#student-top-container,
+#teacher-top-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -257,7 +258,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     width: 80%;
 }
 
-#student-top-container div {
+#student-top-container div,
+#teacher-top-container div {
     width: 100%;
 }
 
@@ -294,6 +296,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .favorite-page-section {
     margin-top: 50px;
+    width: 100%;
 }
 
 .favorite-td-star,
