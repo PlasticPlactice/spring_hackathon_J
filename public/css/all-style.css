@@ -51,6 +51,9 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-color: var(--main-color);
     border-radius: 10px;
 }
+.subject-list{
+    overflow-y: auto;
+}
 .subject-list li{
     display: flex;
     justify-content: center;
@@ -114,6 +117,19 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     height: 54px;
     border-radius: 10px;
     font-size: 24px;
+}
+/* ---password_change--- */
+#pw-change-content{
+    text-align: center;
+}
+#pw-change-h1{
+    padding: 50px;
+}
+.pw-change-form{
+    margin: 20px;
+}
+#pw-change-button{
+    padding-left: 180px;
 }
 /* ---kowada--- */
 /* ----------ここからサイドバーのベースとアプリ名---------- */
