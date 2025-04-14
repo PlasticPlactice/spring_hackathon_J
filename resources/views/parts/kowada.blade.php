@@ -2,6 +2,10 @@
 
 @section('title','test')
 
+@section('external_css')
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+@endsection
+
 @section('side_bar_content')
     @component('components.side_bar_menu')
         @slot('content_id')
@@ -63,4 +67,8 @@
             <li>C#基礎基礎</li>
         @endslot
     @endcomponent
+@endsection
+
+@section('js')
+    <script src="/js/subject-side-menu.js"></script>
 @endsection
