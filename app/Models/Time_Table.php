@@ -22,7 +22,7 @@ class Time_Table extends Model
 
     // リレーション
     public function Course_list(){  
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Course_list::class);
     }
 
 }
