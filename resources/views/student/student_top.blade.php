@@ -29,49 +29,26 @@
     <div>
         <table class="table subject-table">
             <tr>
-                <td></td>
-                <th class="th-horizontal">月</th>
-                <th class="th-horizontal">火</th>
-                <th class="th-horizontal">水</th>
-                <th class="th-horizontal">木</th>
-                <th class="th-horizontal">金</th>
+                <td>　</td>
+                @foreach($days as $day)
+                    <th class="th-horizontal">{{ $day }}</th>
+                @endforeach
             </tr>
 
-            <tr>
-                <th class="th-vertical">1限</th>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-            </tr>
-            
-            <tr>
-                <th class="th-vertical">2限</th>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-            </tr>
-            
-            <tr>
-                <th class="th-vertical">3限</th>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-            </tr>
-            
-            <tr>
-                <th class="th-vertical">4限</th>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-                <td class="subject-td">ダミー科目</td>
-            </tr>
+            @for ($frames = 0; $frames < 4; $frames++)
+                <tr>
+                <th class="th-vertical">{{ $frames + 1 }}限</th>
+                    @for ($day = 0; $day < 5; $day++)
+                        <td class="subject-td">
+                            @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
+                                {{ $timeTables[$day + 1][$frames + 1]['title'] }}<br>
+                            @else
+                                -
+                            @endif
+                        </td>
+                    @endfor
+                </tr>
+            @endfor
         </table>
 
         <div class="favorite-page-section">
