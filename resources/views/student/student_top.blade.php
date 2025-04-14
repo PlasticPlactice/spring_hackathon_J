@@ -7,6 +7,29 @@
 </head>
 <body>
     生徒トップ
-    <p>{{dd($cSubject)}}</p>
+
+    <table>
+        <tr>
+            <td>　</td>
+            @foreach($days as $day)
+                <td>{{ $day }}</td>
+            @endforeach
+        </tr>
+
+        @for ($frames = 0; $frames < 4; $frames++)
+            <tr>
+                <td>{{ $frames + 1 }}限</td>
+                @for ($day = 0; $day < 5; $day++)
+                    <td>
+                        @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
+                            {{ $timeTables[$day + 1][$frames + 1]['title'] }}<br>
+                        @else
+                            -
+                        @endif
+                    </td>
+                @endfor
+            </tr>
+        @endfor
+    </table>
 </body>
 </html>
