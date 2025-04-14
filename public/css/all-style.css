@@ -411,39 +411,83 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 /* コメント */
 .comment-box {
-    margin-left: 30%;
+    /* margin-left: 30%; */
     width: 713px;
     height: 86.61px;
-    overflow-y: auto; /* 縦スクロールを可能に */
     padding: 10px;
+    text-align: left;
   }
   
 .comment {
     display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
+    font-size: 24px;
     padding: 10px 0;
+    flex-direction: column;
+}
+
+.comment-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
 }
   
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 10px;
 }
   
-.comment-content {
+.name-date {
     display: flex;
-    flex-direction: column;
 }
-  
+
 .username {
-    font-weight: bold;
+    font-size: 32px;
+    margin-right: 15px;
 }
   
 .date {
-    font-size: 12px;
-    color: gray;
+    font-size: 20px;
+    margin-top: 13px;
+    color: var(--gray);
+}
+
+.text {
+    margin-top: 10px;
+}
+
+/* コメントの削除 */
+.comment-delete {
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: var(--gray);
+    cursor: pointer;
+    margin-left: 100%;
+}
+
+.delete-menu {
+    display: none;
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    padding: 5px 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+}
+
+.delete-option {
+    background: none;
+    border: none;
+    color: var(--red);
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 100%;
+}
+
+.delete-option:hover {
+    color: var(--light-gray);
 }
 
 /*---- shibaya ----*/
