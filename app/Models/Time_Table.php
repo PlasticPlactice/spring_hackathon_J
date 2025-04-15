@@ -13,6 +13,8 @@ class Time_Table extends Model
 
     protected $guarded = ['id'];
 
+    protected $table = 'time_tables';
+
     public static $rules = [
         'day_of_week' => '',
         'frames' => ''
@@ -20,7 +22,7 @@ class Time_Table extends Model
 
     // リレーション
     public function Course_list(){  
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Course_list::class);
     }
 
 }

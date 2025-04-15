@@ -12,8 +12,22 @@ class C_Subject extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'student_id',
+        'course_list_id'
+    ];
+
+    protected $table = 'c_subjects';
+
+    public static function createCSubject($student_id, $course_list_id) {
+        return self::create([
+            'student_id' => $student_id,
+            'course_list_id' => $course_list_id
+        ]);
+    }
+
     // リレーション
-    public function student(){  
+    public function student(){
         return $this->belongsTo(Student::class);
     }
 

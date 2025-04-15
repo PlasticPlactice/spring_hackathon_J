@@ -16,8 +16,8 @@ class StudentsTableSeeder extends Seeder
     public function run(): void
     {
         $param = [
-            'id' => 'student1@example.com',
             'pw' => Hash::make('student1'),
+            'email' => 'student1@example.com',
             'name' => '田中太郎',
             'del_flg' => '0',
             'img_path' => '',
@@ -29,8 +29,8 @@ class StudentsTableSeeder extends Seeder
         ];
         DB::table('students')->insert($param);
         $param = [
-            'id' => 'student2@example.com',
             'pw' => Hash::make('student3'),
+            'email' => 'student2@example.com',
             'name' => '今野拓郎',
             'del_flg' => '0',
             'img_path' => '',
@@ -41,8 +41,8 @@ class StudentsTableSeeder extends Seeder
         ];
         DB::table('students')->insert($param);
         $param = [
-            'id' => 'student3@example.com',
             'pw' => Hash::make('student3'),
+            'email' => 'student3@example.com',
             'name' => '高橋花子',
             'del_flg' => '0',
             'img_path' => '',

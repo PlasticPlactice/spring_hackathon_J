@@ -16,11 +16,42 @@ class Subject extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'name',
+        'detail',
+        'tech'
+    ];
+
     public static $rules = [
         'name' => 'required',
         'detail' => '',
         'tech' => 'required'
     ];
+
+    public static function CreateSubject($name, $detail, $tech) {
+        return self::create([
+            'name' => $name,
+            'detail' => $detail,
+            'tech' => $tech
+        ]);
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public static function updateSubject($id, $data) {
+        return self::where('id', $id)->update($data);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public static function deleteSubject($id) {
+        return self::where('id', $id)->delete();
+    }
 
     // リレーション
     public function Y_Subjects(){

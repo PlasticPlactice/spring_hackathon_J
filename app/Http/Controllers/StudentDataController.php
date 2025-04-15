@@ -16,7 +16,9 @@ class StudentDataController extends Controller
     // 生徒データ一覧ページ表示
     public function index(Request $request)
     {
-        return view('admin/students_list');
+        $students = Student::with('Department')->get();
+
+        return view('admin/students_list', ['students' => $students]);
     }
     
     // 生徒データ登録ページ表示
@@ -122,7 +124,7 @@ class StudentDataController extends Controller
             $student = new Student();
 
             // 学生データを$studentオブジェクトにセット
-            $student->id = $row['メールアドレス'];
+            $student->email = $row['メールアドレス'];
             $student->pw = Hash::make('morijyobi'); // パスワードをハッシュ化
             $student->name = $row['名前'];
             $student->img_path = ''; // 画像のパス（必要に応じて変更）

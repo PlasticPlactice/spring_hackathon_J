@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use HasFactory;
-    
+    protected $fillable = ['id', 'pw'];
     public static $rules = [
         'id' => 'required',
         'pw' => 'required'

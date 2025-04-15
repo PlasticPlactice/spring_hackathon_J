@@ -15,19 +15,19 @@ class Teacher extends Authenticatable
 {
     use HasFactory;
 
+    protected $keyType = 'string';
+
     public static $rules = [
         'id' => 'required',
+        'email' => 'required',
         'pw' => 'required',
         'name' => 'required'
-    ];
-    protected $casts = [
-        'id' => 'string',  // idを文字列としてキャスト
     ];
 
 
     // リレーション
-    public function Course_list(){  
-        return $this->belongsTo(Student::class);
+    public function Course_lists(){
+        return $this->hasMany(Student::class);
     }
     public function T_Comments(){
         return $this->hasMany(T_Comments::class);

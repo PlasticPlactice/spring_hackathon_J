@@ -14,12 +14,52 @@ class Course_list extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = 'course_lists';
+
+    protected $fillable = [
+        'teacher_id',
+        'title',
+        'year',
+        'session_flg'
+    ];
+
+    // protected $guarded = ['id'];
 
     public static $rules = [
         'title' => 'required',
         'year' => ''
     ];
+
+    // データ格納処理
+    public static function createCourseList($teacher_id, $title, $year, $session_flg) {
+        return self::create([
+            'teacher_id' => $teacher_id,
+            'title' => $title,
+            'year' => $year,
+            'session_flg' => $session_flg,
+        ]);
+    }
+
+    /**
+     * 指定されたIDのCourse_listを更新する
+     *
+     * @param int $id
+     * @param array $data
+     * @return bool
+     */
+    public static function updateCourseList($id, $data)
+    {
+        // 指定されたIDのレコードを取得し、更新する
+        return self::where('id', $id)->update($data);
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public static function deleteCourseList($id) {
+        return self::where('id', $id)->delete();
+    }
 
     // リレーション
     public function C_Subjects(){
@@ -29,9 +69,9 @@ class Course_list extends Model
     public function Time_Tables(){
         return $this->hasMany(Time_Table::class);
     }
-    public function Teachers(){
-        return $this->hasMany(Teacher::class);
-    }
+    public function Teacher(){
+        return $this->belongsTo(Teacher::class);
+    }   
     public function Y_Subjects(){
         return $this->hasOne(Y_Subject::class);
     }
