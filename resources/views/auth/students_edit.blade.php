@@ -9,11 +9,12 @@
     <h2>生徒データ編集・削除</h2>
     <form action="/student_update/{{$student->id}}" method="post" enctype="multipart/form-data">
         @csrf
-        id: <sapn>{{$student->email}}</sapn>
+
+        <span>id</span><span>{{$student->email}}</span>
         パスワードリセット:<input type="checkbox" name="password_reset" value="1">
         名前 <input type="text" name="name" value="{{$student->name}}">
         画像 <input type="file" name="img_data">
-        <img  src="{{ asset($student->img_path) }}" alt="アイコン画像">
+        <img src="{{ asset($student->img_path) !== url('/').'/' ? asset($student->img_path) : '' }}" alt="アイコン画像">
         <br>
         学科:
         <select name="department" id="">
@@ -22,6 +23,7 @@
         @endforeach
         </select>
         入学年度:
+        
         <select name="entrance_year" id="">
         @foreach($years as $year)
             <option value="{{$year}}" @if($year === $student->entrance_year)  selected  @endif >{{$year}}</option>
