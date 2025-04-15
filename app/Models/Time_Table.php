@@ -21,8 +21,8 @@ class Time_Table extends Model
     ];
 
     // リレーション
-    public function courseList(){  
-        return $this->belongsTo(Course_list::class,'course_list_id');
+    public function Course_list(){  
+        return $this->belongsTo(Course_list::class);
     }
 
 }

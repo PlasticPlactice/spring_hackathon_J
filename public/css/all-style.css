@@ -17,6 +17,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     --light-gray: #E5E5E5;
     --white: #FFFFFF;
     --red: #F46363;
+    --yellow: #FFDE5B;
 }
 
 /* header {
@@ -30,21 +31,19 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin: 0;
     padding: 0;
 }
-p{
-    font-size: 1.2rem;
-}
-p input{
+/* ---kowada--- */
+.input-with-label{
     width: 15rem;
     height: 1.8rem;
 }
-select{
+.select{
     width: 15rem;
     height: 1.8rem;
 }
-.check{
+.checkbox{
     height: 1.5;
 }
-button{
+.button{
     font-size: 1rem;
     width: 6rem;
     height: 3rem;
@@ -53,7 +52,10 @@ button{
     border-color: var(--main-color);
     border-radius: 10px;
 }
-li{
+.subject-list{
+    overflow-y: auto;
+}
+.subject-list li{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +65,7 @@ li{
     border: solid 1px var(--black);
     background-color: var(--white);
 }
-li #subject{
+.subject-list #subject-search{
     width: 9rem;
     height: 4rem;
     font-size: 1rem;
@@ -100,17 +102,38 @@ li #subject{
 #subject-return:hover{
     background-color: var(--sub-color);
 }
-label {
+.large-textarea label{
     display: inline-block;
     margin-bottom: 5px;
     vertical-align: top;
     line-height: 1.2;
 }
-.large{
+.large-textarea{
     width: 20rem;
     height: 7rem;
-
-/* ----------ここからサイドバーのベースとアプリ名---------- */
+}
+/* フォーム */
+.input-with-label {
+    width: 410px;
+    height: 54px;
+    border-radius: 10px;
+    font-size: 24px;
+}
+/* ---password_change--- */
+#pw-change-content{
+    text-align: center;
+}
+#pw-change-h1{
+    padding: 50px;
+}
+.pw-change-form{
+    margin: 20px;
+}
+#pw-change-button{
+    padding-left: 180px;
+}
+/* ---kowada--- */
+/* ---kudou--- */
 
 #side-bar {
     height: 100%;
@@ -142,7 +165,6 @@ label {
     margin: 20px 0 80px;
 }
 
-/* ----------ここからユーザーアイコンとユーザーメニュー---------- */
 #user-section {
     position: absolute;
     width: 100%;
@@ -175,7 +197,6 @@ label {
     margin: 15px 0;
 }
 
-/* ----------ここからページメニュー---------- */
 .side-bar-item {
     position: relative;
     cursor: pointer;
@@ -224,12 +245,87 @@ label {
     font-weight: bold;
 }
 
-/* ----------ここからコンテンツ---------- */
 #page-content {
     margin-left: 250px;
+}
 
+#student-top-container,
+#teacher-top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    width: 80%;
+}
+
+#student-top-container div,
+#teacher-top-container div {
+    width: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    /* width: 80%; */
+}
+
+.subject-table,
+.favorite-page-table {
+    width: 100%;
+}
+
+.th-horizontal,
+.th-vertical {
+    border: 1px solid var(--gray);
+    text-align: center;
+    background-color: var(--light-gray);
+}
+
+.th-horizontal {
+    height: 2rem;
+}
+
+.th-vertical {
+    width: 15%;
+}
+
+.subject-td {
+    height: 100px;
+    border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.favorite-page-section {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.favorite-td-star,
+.favorite-td-name,
+.favorite-td-category {
+    border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.favorite-td-star {
+    width: 10%;
+}
+
+.favorite-td-category {
+    width: 20%;
+}
+
+.favorite-star-icon {
+    font-variation-settings: 'FILL' 1; /* 0:線のみ 1:中塗りつぶし */
+    text-decoration: none;
+    color: var(--yellow);
+    font-size: 2rem;
+}
+
+/* ---kudou--- */
+
+/* ----shibaya ---
 /* ヘッダー */
-header {
+#page-tab {
     position: fixed;
     display: flex;
     background-color: var(--white);
@@ -239,11 +335,18 @@ header {
     border-bottom: 1.5px solid var(--gray);
 }
 
-header h2 {
+#page-tab h2 {
     font-size: 32px;
     padding: 20px;
-    margin-top: 30px;
+    margin-top: 60px;
     margin-left: 30%;
+}
+
+#page-tab h2:hover {
+    background-color: var(--light-gray);
+}
+
+#page-tab h2.active {
     border-bottom: 4px solid var(--gray);
 }
 
@@ -329,30 +432,40 @@ header h2 {
     border-radius: 10px;
 }
 
-/* フォーム */
-input {
-    width: 410px;
-    height: 54px;
-    border-radius: 10px;
-    font-size: 24px;
-}
-
 /* コメント欄 */
 #comment-input {
     width: 697px;
     height: 53px;
     font-size: 24px;
-    border-radius: 10px;
+    border: none;
     position: relative;
     display: inline-block;
     /* text-align: start; */
 }
 
-#comment-section {
-    width: 757px;
-    padding: 20px;
-    background-color: var(--white);
-    border: 1px solid var(--gray);
+#submit-button {
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+.send-button {
+    font-size: 50px;
+    cursor: default;
+    color: var(--light-gray);
+    background: none;
+    border: none;
+}
+
+.send-button.active {
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.send-button.active:hover {
+    color: var(--sub-color);
 }
 
 .section-title {
@@ -364,10 +477,105 @@ input {
 
 .section-title h2 {
     text-align: center;
+    margin-top: 10px;
 }
 
-.comment-erea {
+.comment-container {
+    display: flex;
+    margin-top: 72%;
+    width: 700px;
+    height: 60px;
+    margin-left: 30px;
+    padding: 3px 0px 0px 5px;
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+}
+
+.comments {
     width: 757px;
     height: 622.71px;
     border: 1px solid var(--gray);
 }
+
+/* コメント */
+.comment-box {
+    /* margin-left: 30%; */
+    width: 713px;
+    height: 86.61px;
+    padding: 10px;
+    text-align: left;
+  }
+  
+.comment {
+    display: flex;
+    font-size: 24px;
+    padding: 10px 0;
+    flex-direction: column;
+}
+
+.comment-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+  
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+  
+.name-date {
+    display: flex;
+}
+
+.username {
+    font-size: 32px;
+    margin-right: 15px;
+}
+  
+.date {
+    font-size: 20px;
+    margin-top: 13px;
+    color: var(--gray);
+}
+
+.text {
+    margin-top: 10px;
+}
+
+/* コメントの削除 */
+.comment-delete {
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: var(--gray);
+    cursor: pointer;
+    margin-left: 100%;
+}
+
+.delete-menu {
+    display: none;
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    padding: 5px 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+}
+
+.delete-option {
+    background: none;
+    border: none;
+    color: var(--red);
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 100%;
+}
+
+.delete-option:hover {
+    color: var(--light-gray);
+}
+
+/*---- shibaya ----*/
