@@ -17,6 +17,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     --light-gray: #E5E5E5;
     --white: #FFFFFF;
     --red: #F46363;
+    --yellow: #FFDE5B;
 }
 
 /* header {
@@ -132,7 +133,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     padding-left: 180px;
 }
 /* ---kowada--- */
-/* ----------ここからサイドバーのベースとアプリ名---------- */
+/* ---kudou--- */
 
 #side-bar {
     height: 100%;
@@ -164,7 +165,6 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin: 20px 0 80px;
 }
 
-/* ----------ここからユーザーアイコンとユーザーメニュー---------- */
 #user-section {
     position: absolute;
     width: 100%;
@@ -197,7 +197,6 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin: 15px 0;
 }
 
-/* ----------ここからページメニュー---------- */
 .side-bar-item {
     position: relative;
     cursor: pointer;
@@ -246,10 +245,83 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     font-weight: bold;
 }
 
-/* ----------ここからコンテンツ---------- */
 #page-content {
     margin-left: 250px;
 }
+
+#student-top-container,
+#teacher-top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    width: 80%;
+}
+
+#student-top-container div,
+#teacher-top-container div {
+    width: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    /* width: 80%; */
+}
+
+.subject-table,
+.favorite-page-table {
+    width: 100%;
+}
+
+.th-horizontal,
+.th-vertical {
+    border: 1px solid var(--gray);
+    text-align: center;
+    background-color: var(--light-gray);
+}
+
+.th-horizontal {
+    height: 2rem;
+}
+
+.th-vertical {
+    width: 15%;
+}
+
+.subject-td {
+    height: 100px;
+    border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.favorite-page-section {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.favorite-td-star,
+.favorite-td-name,
+.favorite-td-category {
+    border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.favorite-td-star {
+    width: 10%;
+}
+
+.favorite-td-category {
+    width: 20%;
+}
+
+.favorite-star-icon {
+    font-variation-settings: 'FILL' 1; /* 0:線のみ 1:中塗りつぶし */
+    text-decoration: none;
+    color: var(--yellow);
+    font-size: 2rem;
+}
+
+/* ---kudou--- */
 
 /* ----shibaya ---
 /* ヘッダー */
