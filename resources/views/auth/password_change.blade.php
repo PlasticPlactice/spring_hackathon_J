@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('title','パスワード変更')
-@section('external_css','')
+@section('external_css')
+<link rel="stylesheet" href="/css/kowada-style.css">
+@endsection
 @section('side_bar_content')
     <li class="side-bar-item" id="content-1" tabindex="0">
         <a href="#">ページ名</a>
@@ -41,4 +43,3 @@
     </form>
 </div>
 @endsection
-@section('js','')
