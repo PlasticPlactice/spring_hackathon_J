@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Subject;
+use App\Models\S_Comment;
+use Illuminate\Support\Facades\Auth;
 
 class MainSubjectController extends Controller
 {
@@ -20,7 +22,12 @@ class MainSubjectController extends Controller
         $item = DB::table('subjects')
         ->where('id', $request->id)
         ->first();
-        return view('subject/subject_master' , ['item' => $item]);
+
+        $subject_id = $request->id;
+
+        $Comments = S_Comment::with('Student')->where('subject_id', $item->id)->get();
+
+        return view('subject/subject_master' , ['item' => $item, 'comments' => $Comments, 'subject_id' => $subject_id]);
     }
     
     // 科目マスターページ登録表示
@@ -62,5 +69,15 @@ class MainSubjectController extends Controller
         Subject::updateSubject($request->id, $data);
 
         return redirect('/admin_top');
+    }
+
+    public function createComment(Request $request) {
+        $subject_id = $request->subject_id;
+        $student_id = Auth::guard('student')->id();
+        $title = $request->title;
+        $detail = $request->detail;
+        S_Comment::CreateSComment($subject_id, $student_id, $title, $detail);
+
+        return redirect('/subject_master?id='.$subject_id);
     }
 }
