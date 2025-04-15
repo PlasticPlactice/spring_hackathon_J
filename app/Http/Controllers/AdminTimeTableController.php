@@ -155,6 +155,7 @@ class AdminTimeTableController extends Controller
         ->where('id', $request->id)
         ->first();
 
+        
         return view('admin/available_subject_edit', ['form' => $form]);
     }
 

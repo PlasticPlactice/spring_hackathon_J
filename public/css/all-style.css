@@ -52,23 +52,14 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-color: var(--main-color);
     border-radius: 10px;
 }
-.subject-list{
-    overflow-y: auto;
-}
-.subject-list li{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 9rem;
-    height: 4rem;
-    font-size: 1.2rem;
-    border: solid 1px var(--black);
-    background-color: var(--white);
-}
-.subject-list #subject-search{
-    width: 9rem;
-    height: 4rem;
+.delete-button{
     font-size: 1rem;
+    width: 6rem;
+    height: 3rem;
+    color: var(--white);
+    background-color: var(--red);
+    border-color: var(--red);
+    border-radius: 10px;
 }
 #subject-side-menu{
     position: fixed;
@@ -114,11 +105,10 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 }
 /* フォーム */
 .input-with-label,
-.select-with-label {
+.select-with-label{
     width: 410px;
     height: 54px;
     border-radius: 10px;
-    font-size: 24px;
 }
 /* ---password_change--- */
 #pw-change-content{
@@ -134,7 +124,6 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     padding-left: 180px;
 }
 /* ---kowada--- */
-/* ---kudou--- */
 
 #side-bar {
     height: 100%;

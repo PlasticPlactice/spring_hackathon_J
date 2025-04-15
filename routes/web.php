@@ -109,7 +109,7 @@ Route::post('/timetable_add',[AdminTimeTableController::class,'insert']);
 // 今季履修科の科目登録ページを表示
 Route::get('/available_subject_register',[AdminTimeTableController::class,'addTimeTable']);
 // 今季履修科の科目編集・削除ページを表示
-Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeTable']);
+Route::get('/available_subject_edit/{id}',[AdminTimeTableController::class,'editTimeTable']);
 
 
 
