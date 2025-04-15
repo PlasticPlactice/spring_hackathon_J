@@ -71,7 +71,7 @@ class Course_list extends Model
     }
     public function Teacher(){
         return $this->belongsTo(Teacher::class);
-    }
+    }   
     public function Y_Subjects(){
         return $this->hasOne(Y_Subject::class);
     }

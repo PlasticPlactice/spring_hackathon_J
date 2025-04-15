@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'storage/app/public/*',  // 画像や静的ファイルが格納されているディレクトリを追加
     ];
 }

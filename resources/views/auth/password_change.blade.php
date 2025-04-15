@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+{{ dd(session()->get('key')) }}
+
       <!-- バリデーションエラーの一覧表示 -->
       @if ($errors->any())
         <div>
