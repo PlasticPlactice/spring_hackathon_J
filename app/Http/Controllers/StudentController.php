@@ -55,8 +55,27 @@ class StudentController extends Controller
     
     // 個別時間割作成ページ表示
     public function addTimeTable(Request $request){
-        $CourseLists = Course_list::with('Time_Tables')->get();
-        return view('student/personal_timetable_register', ['CourseLists' => $CourseLists]);
+        // 現在管理者時間割に登録されている最新のデータを取得
+        // ① 最大の year を取得
+        $maxYear = Course_list::max('year');
+
+        // ② その year における最大の session_flg を取得
+        $maxSessionFlg = Course_list::where('year', $maxYear)->max('session_flg');
+
+        // ③ 条件に合致する Course_list と関連する Time_Table を取得
+        $courseLists = Course_list::where('year', $maxYear)
+            ->where('session_flg', $maxSessionFlg)
+            ->with(['Time_Tables' => function($query) use ($maxYear, $maxSessionFlg) {
+                // Time_Table に対して追加条件を設定
+                $query->whereHas('course_list', function($query) use ($maxYear, $maxSessionFlg) {
+                    $query->where('year', $maxYear)
+                        ->where('session_flg', $maxSessionFlg);
+                });
+            }])->get();
+            $days = ['月', '火', '水', '木', '金'];
+
+
+        return view('student/personal_timetable_register', ['courseLists' => $courseLists,'days' => $days]);
     }
 
     public function createTimeTable(Request $request) {
@@ -68,9 +87,29 @@ class StudentController extends Controller
         return view('student/student_top');
     }
     
+    // 個人時間割登録処理
+    public function insertTimeTable(Request $request){
+        // ログイン中の生徒idを取得する
+        $student_id = Auth::guard('student')->id();
+        $items = $request->input('items');
+        if ($items) {
+            foreach ($items as $item) {
+                $cSubject = new C_Subject;
+                $cSubject->student_id = $student_id;
+                $cSubject->course_list_id = $item;
+                $cSubject->save();
+            }
+        }
+
+        // 生徒トップにリダイレクト
+        return redirect()->route('student.top');  
+        
+    }
     // 個別時間割編集ページ表示
     public function editTimeTable(Request $request){
         return view('student/personal_timetable_edit');
     }
     
 }
+
+
