@@ -1,6 +1,20 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{{ dd(session()->get('key')) }}
+
+=======
 @extends('layouts.base')
 @section('title','パスワード変更')
-@section('external_css','')
+@section('external_css')
+<link rel="stylesheet" href="/css/kowada-style.css">
+@endsection
 @section('side_bar_content')
     <li class="side-bar-item" id="content-1" tabindex="0">
         <a href="#">ページ名</a>
@@ -8,6 +22,7 @@
 @endsection
 @section('content')
 <div id="pw-change-content">
+>>>>>>> main
       <!-- バリデーションエラーの一覧表示 -->
       @if ($errors->any())
         <div>
@@ -41,4 +56,3 @@
     </form>
 </div>
 @endsection
-@section('js','')

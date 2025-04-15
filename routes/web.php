@@ -15,7 +15,9 @@ use App\Http\Controllers\StudentDataController;
 use App\Http\Controllers\SubSubjectController;
 use App\Http\Controllers\TeacherController;
 
+Route::middleware(['web'])->group(function () {
 
+    
 
 
 // ログインページを表示
@@ -105,6 +107,9 @@ Route::post('/subject_sub',[SubSubjectController::class,'createTComment']);
 
 // 管理者時間割ページを表示
 Route::get('/timetable_register',[AdminTimeTableController::class,'index']);
+// 今季の時間割を登録する処理
+Route::post('/timetable_add',[AdminTimeTableController::class,'insert']);
+
 // 今季履修科の科目登録ページを表示
 Route::get('/available_subject_register',[AdminTimeTableController::class,'addTimeTable']);
 Route::post('/available_subject_register',[AdminTimeTableController::class,'createTimeTable']);
@@ -127,3 +132,7 @@ Route::get('/kowada', function () {
 Route::get('/shibaya', function () {
     return view('parts.shibaya');
 });
+
+
+});
+
