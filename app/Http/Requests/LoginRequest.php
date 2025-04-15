@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.required' => 'メールアドレスは必須です。',
+            'id.required' => 'ユーザIDは必須です。',
             'pw.required' => 'パスワードは必須です。',
         ];
     }

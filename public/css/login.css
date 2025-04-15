@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: #53AC9C;
+    --sub-color: #C4EAE3;
+    --black: #1A1A1A;
+    --gray: #696969;
+    --light-gray: #E5E5E5;
+    --white: #FFFFFF;
+    --red: #F46363;
+}
+
+body {
+    background-color: var(--main-color);
+    display: flex;
+}
+
+
+/* 入力フォーム */
+.app-name {
+    color: var(--white);
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+#role {
+    width: 410px;
+    height: 54px;
+    border-radius: 10px;
+    font-size: 24px;
+    margin-left: 16%;
+    margin-bottom: 50px;
+    border: 1px solid var(--gray);
+}
+
+.text-input {
+    width: 410px;
+    height: 54px;
+    border-radius: 10px;
+    font-size: 24px;
+    border: 1px solid var(--gray);
+}
+
+
+#loginform {
+    background-color: var(--white);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 930px;
+    height: 609px;
+    margin: 10%;    
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    
+}
+
+label {
+    width: 150px;
+    text-align: right;
+    font-size: 24px;
+}
+
+/* エラーメッセージ */
+.alert {
+    color: var(--red);
+    font-size: 20px;
+    margin-bottom: 10px;
+}

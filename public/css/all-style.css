@@ -367,7 +367,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 /* ---kudou--- */
 
-/* ----shibaya ---
+/* ----shibaya --- */
 /* ヘッダー */
 #page-tab {
     position: fixed;
@@ -395,7 +395,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 }
 
 /* ボタン系 */
-#insert-button {
+
+.main-button {
     background-color: var(--main-color);
     color: var(--white);
     border: none;
@@ -405,62 +406,11 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-radius: 10px;
 }
 
-#update-button {
-    background-color: var(--main-color);
-    color: var(--white);
-    border: none;
-    width: 153px;
-    height: 57px;
-    font-size: 24px;
-    border-radius: 10px;
-}
-
-#delete-button {
+.red-button{
     background-color: var(--red);
     color: var(--white);
     border: none;
     width: 153px;
-    height: 57px;
-    font-size: 24px;
-    border-radius: 10px;
-}
-
-#accountdel-button {
-    background-color: var(--red);
-    color: var(--white);
-    border: none;
-    width: 153px;
-    height: 57px;
-    font-size: 24px;
-    border-radius: 10px;
-    line-height: 0.9;
-}
-
-#edit-button {
-    background-color: var(--main-color);
-    color: var(--white);
-    border: none;
-    width: 153px;
-    height: 57px;
-    font-size: 24px;
-    border-radius: 10px;
-}
-
-#search-button {
-    background-color: var(--main-color);
-    color: var(--white);
-    border: none;
-    width: 153px;
-    height: 57px;
-    font-size: 24px;
-    border-radius: 10px;
-}
-
-#choose-button {
-    background-color: var(--main-color);
-    color: var(--white);
-    border: none;
-    width: 194px;
     height: 57px;
     font-size: 24px;
     border-radius: 10px;
