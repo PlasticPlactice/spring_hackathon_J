@@ -17,14 +17,25 @@ class StudentController extends Controller
 
         // ログイン中の生徒idを取得する
         $student_id = Auth::guard('student')->id();
+          // ① 最大の year を取得
+          $maxYear = Course_list::max('year');
 
-        // course_listのデータを取得
-        // 年度指定と前期後期のwhereはお好みで
-        $course_list = Course_list::where('year', '>', Carbon::now()->year)
-        ->where('session_flg', 0)
-        ->get();
+          // ② その year における最大の session_flg を取得
+          $maxSessionFlg = Course_list::where('year', $maxYear)->max('session_flg');
 
-        $timeTables = Time_Table::with(['Course_list'])->get();
+        // 現在生徒が履修している情報を取得
+        $studentCourseList = Course_list::where('year', $maxYear)
+        ->where('session_flg', $maxSessionFlg)
+        ->whereHas('C_Subjects', function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        })
+        ->with(['C_Subjects' => function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        }])
+        ->get()->pluck('id')->toArray();
+ 
+        //生徒が履修している科目の時間割を取得 
+        $timeTables = Time_Table::whereIn('course_list_id',$studentCourseList)->with(['Course_list'])->get();
 
         // 連想配列を用意
         $timeTableGrid = [];
