@@ -76,7 +76,8 @@ Route::get('/teacher_top',[TeacherController::class,'index'])->name('teacher.top
 Route::get('/student_top',[StudentController::class,'index'])->name('student.top');
 // 個別時間割作成ページを表示
 Route::get('/personal_timetable_register',[StudentController::class,'addTimeTable']);
-Route::post('/personal_timetable_register',[StudentController::class,'createTimeTable']);
+// 個人時間割登録処理
+Route::post('/personal_timetable_register',[StudentController::class,'insertTimeTable']);
 // 個別時間割編集ページを表示
 Route::get('/personal_timetable_edit',[StudentController::class,'editTimeTable']);
 
