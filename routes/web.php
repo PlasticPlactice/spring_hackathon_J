@@ -92,6 +92,7 @@ Route::post('/students_add',[StudentDataController::class,'insert']);
 
 // 科目マスタページ一覧を表示
 Route::get('/subjects_master_list',[MainSubjectController::class,'index']);
+Route::get('/subjects_master_list_search',[MainSubjectController::class,'search']);
 // 科目マスタページを表示
 Route::get('/subject_master/{id}',[MainSubjectController::class,'show']);
 // コメント登録処理

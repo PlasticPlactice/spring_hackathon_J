@@ -23,23 +23,24 @@
 <div id="subjects-master-list-container">
     <div>
         <h1 class="page-title-h1">科目一覧</h1>
-        <div class="search-section">
-            @component('components.input_with_label')
-                @slot('label')
-                    科目検索 : 
-                @endslot
-                @slot('input_type')
-                    text
-                @endslot
-                @slot('input_name')
-                    subject_seatch
-                @endslot
-                @slot('input_placeholder')
-                    科目名を入力　例:Python
-                @endslot
-            @endcomponent
-            <button class="button">検索</button>
-        </div>
+            <form action="/subjects_master_list_search" method="get" class="search-section">
+                @component('components.input_with_label')
+                    @slot('label')
+                        科目検索 :
+                    @endslot
+                    @slot('input_type')
+                        text
+                    @endslot
+                    @slot('input_name')
+                        text
+                    @endslot
+                    @slot('input_placeholder')
+                        科目名を入力　例:Python
+                    @endslot
+                @endcomponent
+                <button type="submit" class="button">検索</button>
+            </form>
+        
 
         <table class="table subject-master-table">
             <tr>
@@ -52,7 +53,7 @@
             <tr>
                 <td>{{$item->id}}</td>
                 <td>
-                    <a href="#">{{$item->name}}</a>
+                    <a href="/subject_master/{{ $item->id }}">{{$item->name}}</a>
                 </td>
                 <td>{{$item->detail}}</td>
                 <td>{{$item->tech}}</td>

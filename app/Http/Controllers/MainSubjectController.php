@@ -78,6 +78,13 @@ class MainSubjectController extends Controller
         $detail = $request->detail;
         S_Comment::CreateSComment($subject_id, $student_id, $title, $detail);
 
-        return redirect('/subject_master?id='.$subject_id);
+        return redirect('/subject_master/'.$subject_id);
+    }
+
+    // 科目名の曖昧検索
+    public function search(Request $request){
+        $text = $request->input('text');
+        $items = Subject::where('name', 'like', '%'.$text.'%')->get();
+        return view('subject/subjects_master_list', ['items' => $items]);
     }
 }
