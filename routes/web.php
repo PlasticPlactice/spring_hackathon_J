@@ -92,6 +92,8 @@ Route::post('/students_add',[StudentDataController::class,'insert']);
 Route::get('/subjects_master_list',[MainSubjectController::class,'index']);
 // 科目マスタページを表示
 Route::get('/subject_master',[MainSubjectController::class,'show']);
+// コメント登録処理
+Route::post('/subject_master',[MainSubjectController::class, 'createComment']);
 // 科目マスタページ登録ページを表示
 Route::get('/subject_master_register',[MainSubjectController::class,'add']);
 Route::post('/subject_master_register',[MainSubjectController::class,'create']);
@@ -101,6 +103,8 @@ Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete
 
 // 科目サブページを表示
 Route::get('/subject_sub',[SubSubjectController::class,'index']);
+// 教師のコメントを投稿
+Route::post('/subject_sub',[SubSubjectController::class,'createTComment']);
 
 // 管理者時間割ページを表示
 Route::get('/timetable_register',[AdminTimeTableController::class,'index']);
@@ -109,8 +113,10 @@ Route::post('/timetable_add',[AdminTimeTableController::class,'insert']);
 
 // 今季履修科の科目登録ページを表示
 Route::get('/available_subject_register',[AdminTimeTableController::class,'addTimeTable']);
+Route::post('/available_subject_register',[AdminTimeTableController::class,'createTimeTable']);
 // 今季履修科の科目編集・削除ページを表示
 Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeTable']);
+Route::post('/available_subject_edit',[AdminTimeTableController::class,'updateOrdeleteTimeTable']);
 
 
 

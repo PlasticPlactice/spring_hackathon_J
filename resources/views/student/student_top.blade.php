@@ -15,11 +15,9 @@
         @slot('side_bar_menu')
             時間割
         @endslot
-        @slot('register_link')
-            https://www.google.co.jp/
-        @endslot
-        @slot('edit_link')
-            https://www.yahoo.co.jp/
+        @slot('sub_menu')
+            <li><a href="https://www.google.co.jp/">登録</a></li>
+            <li><a href="https://www.yahoo.co.jp/">編集</a></li>
         @endslot
     @endcomponent
 @endsection
@@ -43,7 +41,7 @@
                             @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
                                 {{ $timeTables[$day + 1][$frames + 1]['title'] }}<br>
                             @else
-                                -
+                                &mdash;
                             @endif
                         </td>
                     @endfor

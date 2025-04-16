@@ -129,12 +129,9 @@
             サブメニューあり
         @endslot
 
-        @slot('register_link')
-            https://www.google.co.jp/
-        @endslot
-
-        @slot('edit_link')
-            https://www.yahoo.co.jp/
+        @slot('sub_menu')
+            <li><a href="https://www.google.co.jp/">登録</a></li>
+            <li><a href="https://www.yahoo.co.jp/">編集・削除</a></li>
         @endslot
     @endcomponent
 
