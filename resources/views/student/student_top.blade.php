@@ -39,7 +39,7 @@
                     @for ($day = 0; $day < 5; $day++)
                         <td class="subject-td">
                             @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
-                                {{ $timeTables[$day + 1][$frames + 1]['title'] }}<br>
+                                <a href="http://127.0.0.1:8000/subject_sub/{{$timeTables[$day + 1][$frames + 1]['id']}}">{{ $timeTables[$day + 1][$frames + 1]['title'] }}</a><br>
                             @else
                                 &mdash;
                             @endif
