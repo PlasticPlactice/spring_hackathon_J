@@ -80,6 +80,8 @@ Route::get('/personal_timetable_register',[StudentController::class,'addTimeTabl
 Route::post('/personal_timetable_register',[StudentController::class,'insertTimeTable']);
 // 個別時間割編集ページを表示
 Route::get('/personal_timetable_edit',[StudentController::class,'editTimeTable']);
+// 個別時間割編集処理
+Route::post('/personal_timetable_edit',[StudentController::class,'updateTimeTable']);
 
 // 生徒データ一覧ページを表示
 Route::get('/students_list',[StudentDataController::class,'index']);
