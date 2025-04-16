@@ -13,11 +13,11 @@ class Time_TableTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $params = [
-            'course_list_id' => '',
-            'day_of_week' => '',
-            'frames' => ''
-        ];
-        DB::table('Time_Tables')->insert($params);
+        // $params = [
+        //     'course_list_id' => '',
+        //     'day_of_week' => '',
+        //     'frames' => ''
+        // ];
+        // DB::table('Time_Tables')->insert($params);
     }
 }
