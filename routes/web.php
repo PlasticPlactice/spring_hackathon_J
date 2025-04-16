@@ -93,7 +93,7 @@ Route::post('/students_add',[StudentDataController::class,'insert']);
 // 科目マスタページ一覧を表示
 Route::get('/subjects_master_list',[MainSubjectController::class,'index']);
 // 科目マスタページを表示
-Route::get('/subject_master',[MainSubjectController::class,'show']);
+Route::get('/subject_master/{id}',[MainSubjectController::class,'show']);
 // コメント登録処理
 Route::post('/subject_master',[MainSubjectController::class, 'createComment']);
 // 科目マスタページ登録ページを表示
@@ -104,7 +104,7 @@ Route::get('/subject_master_edit',[MainSubjectController::class,'edit']);
 Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete']);
 
 // 科目サブページを表示
-Route::get('/subject_sub',[SubSubjectController::class,'index']);
+Route::get('/subject_sub/{course_list_id}',[SubSubjectController::class,'index']);
 // 教師のコメントを投稿
 Route::post('/subject_sub',[SubSubjectController::class,'createTComment']);
 
