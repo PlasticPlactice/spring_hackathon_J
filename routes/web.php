@@ -106,7 +106,7 @@ Route::post('/subject_master',[MainSubjectController::class, 'createComment'])->
 Route::get('/subject_master_register',[MainSubjectController::class,'add'])->middleware('admin');
 Route::post('/subject_master_register',[MainSubjectController::class,'create'])->middleware('admin');
 // 科目マスタページ編集・削除ページを表示
-Route::get('/subject_master_edit/{id}',[MainSubjectController::class,'edit'])->middleware('admin');
+Route::get('/subject_master_edit/{id}',[MainSubjectController::class,'edit'])->middleware('admin')->name('sbuject_masatar_edit_view');
 Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete'])->middleware('admin');
 
 // 科目サブページを表示
@@ -125,7 +125,7 @@ Route::post('/timetable_add',[AdminTimeTableController::class,'insert'])->middle
 Route::get('/available_subject_register',[AdminTimeTableController::class,'addTimeTable'])->middleware('admin');
 Route::post('/available_subject_register',[AdminTimeTableController::class,'createTimeTable'])->middleware('admin');
 // 今季履修科の科目編集・削除ページを表示
-Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeTable'])->middleware('admin');
+Route::get('/available_subject_edit/{id}',[AdminTimeTableController::class,'editTimeTable'])->middleware('admin');
 Route::post('/available_subject_edit',[AdminTimeTableController::class,'updateOrdeleteTimeTable'])->middleware('admin');
 
 

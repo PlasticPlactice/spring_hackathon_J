@@ -129,7 +129,7 @@ class StudentController extends Controller
         }
 
         // 生徒トップにリダイレクト
-        return redirect()->route('student.top');  
+        return redirect()->route('sbuject_masatar_edit_view');  
         
     }
     // 個別時間割編集ページ表示

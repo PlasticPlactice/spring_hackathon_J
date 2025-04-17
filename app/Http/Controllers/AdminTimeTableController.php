@@ -138,11 +138,13 @@ class AdminTimeTableController extends Controller
         // 現時点で最新のCourse_list_idを取得
         $latestId = Course_list::orderBy('created_at', 'desc')->value('id');
 
+        
+
         // y_subjects登録処理
         Y_Subject::createYSubject(
             $latestId,
             $request->subject_id,
-            $request->detail
+            ""
         );
 
         return redirect('/admin_top');
@@ -153,29 +155,41 @@ class AdminTimeTableController extends Controller
         $form = DB::table('course_lists')
         ->where('id', $request->id)
         ->first();
+        // dd($form);
+        $teachers = Teacher::all();
+        $subjects = Subject::all();
+        $selectSubject = Y_Subject::where('course_list_id',$request->id)->first();
 
+        // dd($selectSubject);
         
-        return view('admin/available_subject_edit', ['form' => $form]);
+        return view('admin/available_subject_edit', ['form' => $form, 'teachers'=>$teachers,"subjects" => $subjects,'selectSubject'=>$selectSubject]);
     }
 
     // 今期履修科目登録の編集処理
     public function updateOrdeleteTimeTable(Request $request) {
 
-        if($request->action === 'update') {
+        // if($request->action === 'post') {
             $data = [
                 'teacher_id' => $request->teacher_id,
                 'title' => $request->title,
                 'year' => $request->year,
                 'session_flg' => $request->session_flg,
             ];
+            // dd($data);
 
             // モデルのメソッドを使ってデータを更新
             Course_list::updateCourseList($request->id, $data);
-        } elseif($request->action === 'delete') {
-            Y_Subject::deleteYSubject($request->id);
-            Course_list::deleteCourseList($request->id);
-        }
+            // 現時点で最新のCourse_list_idを取得
+         $latestId = Course_list::orderBy('created_at', 'desc')->value('id');
 
+            $ySubject = Y_Subject::where('course_list_id',$request->id)->first(); // IDでレコード取得
+        if ($ySubject) {
+            $ySubject->subject_id = $request->subject_id;
+            // dd($request->subject_id);
+            $ySubject->detail = "";
+            $ySubject->save(); // 保存
+        }
+       
         return view('admin/admin_top');
     }
 }

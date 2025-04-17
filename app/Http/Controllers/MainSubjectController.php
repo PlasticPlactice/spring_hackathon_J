@@ -68,7 +68,7 @@ class MainSubjectController extends Controller
         ];
         Subject::updateSubject($request->id, $data);
 
-        return redirect('/admin_top');
+        return redirect()->route('student.top');  
     }
 
     public function createComment(Request $request) {
