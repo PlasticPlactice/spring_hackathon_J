@@ -116,20 +116,16 @@
 }
 .timetable{
     border: solid 1px var(--black);
-    margin-left: 180px;
+    margin-left: 20px;
 }
 .timetable-item th{
-    padding-top: 20px;
-    padding-bottom: 20px;
     padding-left: 40px;
     padding-right: 40px;
     border: solid 1px var(--black);
 }
 .timetable-item td{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+    /* padding-left: 40px;
+    padding-right: 40px; */
     border: solid 1px var(--black);
 }
 #subject-side-button {
@@ -187,6 +183,12 @@
 .course-lists{
     visibility: hidden;
 }
+.add-check{
+    visibility: hidden;
+}
+.add-check :checked{
+    background-color: var(--gray);
+}
 #personal-timetable-register{
     transform:scale(.9);
 }
@@ -197,3 +199,16 @@
 .subject-schedule th,td{
     padding: -200px;
 }
+.subject-items{
+    width: 150px;
+}
+.timetable-select{
+    width: 150px;
+    height: 30px;
+}
+.timetable-item td{
+    width: 200px;
+}
+.active-color{
+    background-color: var(--gray);
+  }
