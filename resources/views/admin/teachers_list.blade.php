@@ -76,6 +76,7 @@
                 @slot('input_placeholder')
                     検索したいIDを入力
                 @endslot
+                @slot('input_value')
             @endcomponent
             @component('components.input_with_label')
                 @slot('label')
@@ -90,6 +91,7 @@
                 @slot('input_placeholder')
                     検索したい名前を入力
                 @endslot
+                @slot('input_value')
             @endcomponent
             <button class="button">検索</button>
         </div>

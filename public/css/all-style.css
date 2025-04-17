@@ -366,6 +366,24 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     width: 32%;
 }
 
+#sub-page-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--gray);
+    text-align: center;
+}
+
+.page-subtitle {
+    font-size:medium;
+    margin-left: 10px;
+}
+
+#sub-page-header div {
+    padding-top: 20px;
+    font-size: large;
+    display: flex;
+    justify-content: space-around;
+}
+
 
 /* ---kudou--- */
 
@@ -494,19 +512,33 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 }
 
 /* コメント */
-.comment-box {
+.comment-item {
     /* margin-left: 30%; */
-    width: 713px;
-    height: 86.61px;
-    padding: 10px;
-    text-align: left;
-  }
-  
-.comment {
+    /* width: 713px; */
+    /* height: 86.61px; */
+    /* padding: 10px; */
+    /* text-align: left; */
+}
+
+.comment-info {
     display: flex;
-    font-size: 24px;
-    padding: 10px 0;
-    flex-direction: column;
+    justify-content: space-between;
+}
+
+.comment-info h2 {
+    display: inline;
+}
+
+.comment-info-date {
+    font-size: medium;
+    color: gray;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.comment-more {
+    background-color: transparent;
+    border: none;
 }
 
 .comment-content {
@@ -515,30 +547,20 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     justify-content: flex-start;
     gap: 10px;
 }
-  
+
+.comment-value {
+    margin-left: 25px;
+}
+
 .avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 10px;
 }
-  
-.name-date {
-    display: flex;
-}
 
-.username {
-    font-size: 32px;
-    margin-right: 15px;
-}
-  
-.date {
-    font-size: 20px;
-    margin-top: 13px;
-    color: var(--gray);
-}
-
-.text {
+.comment-title,
+.comment-text {
     margin-top: 10px;
 }
 
