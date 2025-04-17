@@ -126,6 +126,9 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-radius: 10px;
     font-size: 24px;
 }
+.input-with-label-div {
+    width: auto;
+}
 /* ---password_change--- */
 #pw-change-content{
     text-align: center;
@@ -268,11 +271,11 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     width: 80%;
 }
 
-#student-top-container div,
-#teacher-top-container div,
-#admin-top-container div,
-#students-list-container div,
-#subjects-master-list-container div {
+#student-top-container > div,
+#teacher-top-container > div,
+#admin-top-container > div,
+#students-list-container > div,
+#subjects-master-list-container > div {
     width: 100%;
 }
 
@@ -342,9 +345,10 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .search-section {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 20px;
     margin-top: 20px;
+    align-items: flex-end;
 }
 
 .text-gray {
