@@ -114,7 +114,7 @@
     width: 170px;
     height: 25px;
 }
-.timetable{
+/* .timetable{
     border: solid 1px var(--black);
     margin-left: 20px;
 }
@@ -123,11 +123,11 @@
     padding-right: 40px;
     border: solid 1px var(--black);
 }
-.timetable-item td{
+.timetable-item td{ */
     /* padding-left: 40px;
     padding-right: 40px; */
-    border: solid 1px var(--black);
-}
+    /* border: solid 1px var(--black);
+} */
 #subject-side-button {
     font-variation-settings:
     'FILL' 0,
@@ -201,6 +201,8 @@
 }
 .subject-items{
     width: 150px;
+    background-color: transparent;
+    border: none;
 }
 .timetable-select{
     width: 150px;
@@ -212,3 +214,8 @@
 .active-color{
     background-color: var(--gray);
   }
+#timetable-register-filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}

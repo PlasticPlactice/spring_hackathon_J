@@ -59,7 +59,7 @@
 @endsection
 
 @section('content')
-<div id="students-list-container">
+<div id="page-container">
     <div>
         <h1 class="page-title-h1">教師一覧</h1>
         <div class="search-section">
@@ -77,6 +77,7 @@
                     検索したいIDを入力
                 @endslot
                 @slot('input_value')
+                @endslot
             @endcomponent
             @component('components.input_with_label')
                 @slot('label')
@@ -92,6 +93,7 @@
                     検索したい名前を入力
                 @endslot
                 @slot('input_value')
+                @endslot
             @endcomponent
             <button class="button">検索</button>
         </div>
@@ -121,8 +123,3 @@
     </div>
 </div>
 @endsection
-
-
-    </table>
-</body>
-</html>
