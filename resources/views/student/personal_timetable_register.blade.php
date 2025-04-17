@@ -21,9 +21,9 @@
                 <th>科目</th>
                 <td>
                     <select name="course_list_id" class="select-subject">
-                        @foreach ($CourseLists as $CourseList)
-                            <option value="{{$CourseList->id}}">
-                                {{$CourseList->title}}
+                        @foreach ($courseLists as $CourseList)
+                            <option value="{{$courseList->id}}">
+                                {{$courseList->title}}
                             </option>
                         @endforeach
                     </select>
