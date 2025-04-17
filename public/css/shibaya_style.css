@@ -38,6 +38,16 @@
     border-radius: 10px;
 }
 
+.red-button{
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    width: 153px;
+    height: 57px;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
 #delete-button {
     background-color: var(--red);
 }
@@ -60,40 +70,71 @@ input {
     font-size: 24px;
 }
 
-/* コメント欄 */
-#comment-input {
-    width: 697px;
-    height: 53px;
+/* 概要テーブル */
+.page-info {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    display: block;
+    justify-content: center;
+    margin-left: 17%;
+}
+
+.page-info table{
+    border-collapse: collapse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-size: 24px;
-    border: none;
-    position: relative;
-    display: inline-block;
-    /* text-align: start; */
 }
 
-#submit-button {
-    width: 48px;
-    height: 48px;
-    margin-right: 10px;
-    background-color: transparent;
-    border: none;
+.page-info p{
+    font-size: 48px;
 }
 
-.send-button {
-    font-size: 50px;
-    cursor: default;
-    color: var(--light-gray);
-    background: none;
-    border: none;
+.subject-page {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    display: block;
+    justify-content: center;
+    margin-left: 17%;
 }
 
-.send-button.active {
+.subject-info {
+    margin-bottom: 7%;
+}
+
+.overview-table {
+    border-collapse: collapse;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+}
+
+.overview-table td a {
+    color: black;
+    text-decoration: none;
+}
+
+.overview-table td a:hover {
     color: var(--main-color);
-    cursor: pointer;
+    text-decoration: underline;
 }
 
-.send-button.active:hover {
-    color: var(--sub-color);
+th, td {
+    border: 1px solid var(--gray);
+    height: 36.01px;
+}
+
+th {
+    background-color: var(--light-gray);
+    width: 222px;
+}
+
+td {
+    background-color: var(--white);
+    width: 535px;
 }
 
 .section-title {
@@ -101,107 +142,41 @@ input {
     height: 63.51px;
     background-color: var(--light-gray);
     border: 1px solid var(--gray);
+    border-collapse: collapse;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .section-title h2 {
-    text-align: center;
-    margin-top: 10px;
+    font-size: 24px;
+    margin: 0;
 }
 
-.comment-container {
-    display: flex;
-    margin-top: 72%;
-    width: 700px;
-    height: 60px;
-    margin-left: 30px;
-    padding: 3px 0px 0px 5px;
-    border: 1px solid var(--gray);
-    border-radius: 10px;
-}
-
+/* コメント欄 */
 .comments {
     width: 757px;
-    height: 622.71px;
-    border: 1px solid var(--gray);
+    height: 686px;
+    /* margin-left: 17%; */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-/* コメント */
 .comment-box {
-    /* margin-left: 30%; */
-    width: 713px;
-    height: 86.61px;
-    padding: 10px;
-    text-align: left;
-  }
-  
-.comment {
+    background-color: var(--white);
+    border: 1px solid var(--gray);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
     display: flex;
-    font-size: 24px;
-    padding: 10px 0;
     flex-direction: column;
 }
 
-.comment-content {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-}
-  
-.avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-  
-.name-date {
-    display: flex;
-}
-
-.username {
-    font-size: 32px;
-    margin-right: 15px;
-}
-  
-.date {
-    font-size: 20px;
-    margin-top: 13px;
-    color: var(--gray);
-}
-
-.text {
-    margin-top: 10px;
-}
-
-/* コメントの削除 */
-.comment-delete {
-    background: none;
-    border: none;
-    font-size: 15px;
-    color: var(--gray);
-    cursor: pointer;
-    margin-left: 100%;
-}
-
-.delete-menu {
-    display: none;
-    position: absolute;
-    background: var(--white);
-    border: 1px solid var(--light-gray);
-    padding: 5px 10px;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-}
-
-.delete-option {
-    background: none;
-    border: none;
-    color: var(--red);
-    font-size: 16px;
-    cursor: pointer;
-    margin-left: 100%;
-}
-
-.delete-option:hover {
-    color: var(--light-gray);
+.comment-section {
+    border: 1px solid var(--gray);
+    width: 757px;
+    height: 622.71px;
 }

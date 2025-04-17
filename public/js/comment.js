@@ -1,3 +1,4 @@
+// ---投稿ボタンの色変化---
 document.getElementById("comment-input").addEventListener("input", function() {
     const commentInput = document.getElementById("comment-input");
     const sendButton = document.querySelector(".send-button");

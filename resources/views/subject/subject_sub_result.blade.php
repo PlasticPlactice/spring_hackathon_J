@@ -1,71 +1,135 @@
 @extends('layouts.base')
-@section('title','まとめサブページ')
+@section('title','科目サブページ')
 @section('external_css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=more_horiz" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=send" />
     <link rel="stylesheet" href="{{asset('css/shibaya_style.css')}}">
 @endsection
-    
+
 @section('side_bar_content')
-    <li class=side-bar-item id="content-1" tabindex="0">
-        <a href="#">科目マスターページ一覧</a>
+    <li class="side-bar-item" id="content-1" tabindex="0">
+        <a href="#">科目ページ一覧</a>
     </li>
-    <li class=side-bar-item id="content-1" tabindex="0">
+    <li class="side-bar-item" id="content-2" tabindex="0">
         <a href="#">科目ページ</a>
     </li>
-    <li class=side-bar-item id="content-1" tabindex="0">
+    <li class="side-bar-item" id="content-3" tabindex="0">
         <a href="#">サブページ</a>
     </li>
 @endsection
+
 @section('content')
-<main class="subject-page">
-    <section class="subject-info">
-        <table class="overview-table">
-            <tr><th>科目名</th><td>Java基礎</td></tr>
-            <tr><th>授業概要</th><td>Javaの基礎構文を学習</td></tr>
-            <tr><th>使用する技術・言語</th><td>Java</td></tr>
-            <tr><th>リンク</th><td><a href="#">Java基礎科目サブページへ</a><br>
-            <a href="#">まとめページへ</a></td></tr>
-        </table>
-    </section>
+    <div id="subject-sub-container">
+        <div>
+            <div id="sub-page-header">
+                <h1 class="page-title-h1">{{$subjectName}}<span class="page-subtitle">({{$teacherName}})</span></h1>
+                <div>
+                    <a href="subject_sub_result_info">概要</a>
+                    <p>授業記録</p>
+                </div>
+            </div>
 
-    <section class="comments">
-        <h2 class="section-title">生徒からのコメント</h2>
-        <div class="comment-box">
-            <div class="comment-content">
-                <img src="https://picsum.photos/400/400" alt="satoアイコン" class="avatar">
-                <div class="name-date">
-                    <p class="username">sato</p>
-                    <p class="date">2025/1/13</p>
-                    <button class="material-symbols-outlined delete-button">more_horiz</button>
+            <!-- コメント表示 -->
+            <div class="comment-item">
+                <div class="comment-info">
+                    <div>
+                        <img src="https://picsum.photos/400/400" alt="アイコン" class="avatar">
+                        <h2>
+                            <span class="comment-info-username">sato</span>
+                            <span class="comment-info-date">2025/1/13 12:00</span>
+                        </h2>
+                    </div>
+                    <button class="material-symbols-outlined comment-more">more_horiz</button>
                     <div class="delete-menu">
                         <button class="confirm-delete">コメントを削除</button>
                     </div>
                 </div>
-            </div>
-            <p class="text">授業の内容が分かりやすい</p>
-        </div>
-        
-        <div class="comment-box">
-            <div class="comment-content">
-                <img src="https://picsum.photos/400/400" alt="satoアイコン" class="avatar">
-                <div class="name-date">
-                    <p class="username">tanaka</p>
-                    <p class="date">2025/1/1</p>
-                    <button class="material-symbols-outlined delete-button">more_horiz</button>
 
-                    <div class="delete-menu">
-                        <button class="confirm-delete">コメントを削除</button>
-                    </div>
+                <div class="comment-value">
+                    <h3 class="comment-title">ダミーコメント</h3>
+                    <p class="comment-text">授業の内容が分かりやすい</p>
                 </div>
             </div>
-            <p class="text">資料が見やすく復習がしやすかった</p>
-        </div>
-        @include('components.comment')
-    </section>
-</main>
-@endsection
 
-@section('js')
-    <script src="js/comment.js"></script>
-@endsection
+            @foreach($tComment as $comment)
+                <div class="comment-item">
+                    <div class="comment-info">
+                        <div>
+                            <img src="https://picsum.photos/400/400" alt="アイコン" class="avatar">
+                            <h2>
+                                <span class="comment-info-username">{{ optional($comment->Teacher)->name }}</span>
+                                <span class="comment-info-date">{{ $comment->created_at->format('Y-m-d') }}</span>
+                            </h2>
+                        </div>
+                        <button class="material-symbols-outlined comment-more">more_horiz</button>
+                        <div class="delete-menu">
+                            <button class="confirm-delete">コメントを削除</button>
+                        </div>
+                    </div>
+
+                    <div class="comment-value">
+                        <h3 class="comment-title">{{ $comment->title }}</h3>
+                        <p class="comment-text">
+                            @if($comment->link_flg === 0)
+                                <!-- link_flg = 0 なら通常のテキスト -->
+                                {{ $comment->detail }}
+                            @else
+                                <!-- link_flg = 1 ならaタグ -->
+                                <a href="{{ $comment->detail }}">{{ $comment->detail }}</a>
+                            @endif
+                        </p>
+                    </div>
+                </div>
+                <!-- 教師なら削除ボタンを表示 -->
+                @if($teacher_id)
+                <tr>
+                    <td>
+                        <form action="{{ route('comment.delete', ['id' => $comment->id]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <!-- 必要なデータの受け渡し -->
+                        <input type="hidden" value="{{$y_subject_id}}" name="y_subject_id">
+                        <input type="hidden" value="{{$comment->id}}" name="comment_id">
+                        <!-- 削除ボタン -->
+                        <input type="submit" value="削除">
+                        </form>
+                    </td>
+                </tr>
+                @endif
+            @endforeach
+
+        <!-- コメント登録フォーム -->
+        <form action="/subject_sub" method="post">
+            <table>
+            @csrf
+            <!-- ほかの処理に必要なidを渡してます -->
+            <tr>
+                <td><input type="hidden" name="teacher_id" value="{{$teacher_id}}"></td>
+                <td><input type="hidden" name="y_subject_id" value="{{$y_subject_id}}"></td>
+            </tr>
+            <!-- 投稿フォーム -->
+            <tr>
+                <td>タイトル</td>
+                <td><input type="text" name="title"></td>
+            </tr>
+            <tr>
+                <td>内容</td>
+                <td><input type="text" name="detail"></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="link_flg" value="0" checked></td>
+                <td><label for="link_flg">テキストにする</label></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="link_flg" value="1"></td>
+                <td><label for="link_flg">リンクにする</label></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="送信"></td>
+            </tr>
+            </table>
+        </form>
+        <!-- ここまで -->
+    </table>
+</body>
+<script src="/js/subject_sub.js"></script>
+</html>
