@@ -10,27 +10,34 @@ class SetAuthGuard
 {
     public function handle(Request $request, Closure $next)
     {
-        // セッションに保存されている guard を使用
+        // ログインページにアクセスしている場合はミドルウェアをスキップ
+        if ($request->is('/') || $request->is('admin_login') || $request->is('/teacher_login') || $request->is('/student_login') ) {
+            return $next($request);
+        }
+
+        // セッションに保存されている guard を取得
         $guard = Session::get('guard', null);
-        dd($guard);
-        
+    
+
+        // guard がセッションに保存されていて、認証が通っている場合
         if ($guard && Auth::guard($guard)->check()) {
-            // 保存されている guard が認証されていれば、そのまま処理を進める
+            // セッションに保存された guard を使用
             Auth::shouldUse($guard);
-        } else {
-            // 新しくログインしているユーザーを検出し、guardを設定
-            foreach (['admin', 'teacher', 'student'] as $guard) {
-                if (Auth::guard($guard)->check()) {
-                    // guard をセッションに保存
-                    Session::put('guard', $guard);
-                    dd("Guard '{$guard}' is authenticated.");
-                    Auth::shouldUse($guard);
-                    break;
-                }
+            return $next($request);
+        }
+
+          // 新しくログインしているユーザーを検出してガードを設定
+          foreach (['admin', 'teacher', 'student'] as $guard) {
+            if (Auth::guard($guard)->check()) {
+                // guard をセッションに保存
+                Session::put('guard', $guard);
+                Session::save();  // セッションを明示的に保存
+                Auth::shouldUse($guard);
+                return $next($request);
             }
         }
 
-        return $next($request);
+        // 認証されていない場合、ログインページにリダイレクト
+        return redirect()->route('login');
     }
-
 }

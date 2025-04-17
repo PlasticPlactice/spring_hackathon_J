@@ -25,6 +25,11 @@ Route::get('/',[LoginController::class,'index'])->name('login');
 // ログアウト処理
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
+// 画像専用のルート
+// Route::get('images/{filename}', [ImageController::class, 'show'])
+//     ->name('images.show')
+//     ->withoutMiddleware('auth'); // 認証ミドルウェアを無効化
+
 
 // 管理者のログイン処理
 Route::post('/admin_login',[AdminAuthController::class,'login']);
