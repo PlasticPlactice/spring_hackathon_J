@@ -2,17 +2,18 @@
 @section('title','科目サブページ')
 @section('external_css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=more_horiz" />
+    <link rel="stylesheet" href="{{asset('css/shibaya_style.css')}}">
 @endsection
 
 @section('side_bar_content')
     <li class="side-bar-item" id="content-1" tabindex="0">
-        <a href="#">ページ名</a>
+        <a href="#">科目ページ一覧</a>
     </li>
     <li class="side-bar-item" id="content-2" tabindex="0">
-        <a href="#">ページ名</a>
+        <a href="#">科目ページ</a>
     </li>
     <li class="side-bar-item" id="content-3" tabindex="0">
-        <a href="#">ページ名</a>
+        <a href="#">サブページ</a>
     </li>
 @endsection
 
@@ -22,7 +23,7 @@
             <div id="sub-page-header">
                 <h1 class="page-title-h1">{{$subjectName}}<span class="page-subtitle">({{$teacherName}})</span></h1>
                 <div>
-                    <a href="subject_sub_result">概要</a>
+                    <a href="subject_sub_result_info">概要</a>
                     <p>授業記録</p>
                 </div>
             </div>
@@ -130,4 +131,5 @@
         <!-- ここまで -->
     </table>
 </body>
+<script src="/js/subject_sub.js"></script>
 </html>

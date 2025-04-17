@@ -490,17 +490,6 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     color: var(--sub-color);
 }
 
-.section-title {
-    width: 757px;
-    height: 63.51px;
-    background-color: var(--light-gray);
-    border: 1px solid var(--gray);
-}
-
-.section-title h2 {
-    text-align: center;
-    margin-top: 10px;
-}
 /* コメント */
 .comment-container {
     display: flex;
