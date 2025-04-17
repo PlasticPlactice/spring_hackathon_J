@@ -33,10 +33,10 @@ class AdminTimeTableController extends Controller
         $timeTables = null;  // 変数の初期化
         if ($year && ($sessionFlg === 1 || $sessionFlg === 0)) {
             \DB::enableQueryLog();  // 
-            $timeTables = Time_Table::whereHas('courseList' ,function($query) use ($year, $sessionFlg) {
+            $timeTables = Time_Table::whereHas('course_list' ,function($query) use ($year, $sessionFlg) {
                 $query->where('year','=' , $year)  // yearを指定
                     ->where('session_flg', '=' ,$sessionFlg);  // session_flgを指定
-                })->with('courseList')->get();
+                })->with('course_list')->get();
             
             $jsonData = [
                 'year' => $year,
@@ -48,12 +48,11 @@ class AdminTimeTableController extends Controller
                     $jsonData['table'][$i][$j] = [];
                 }
             }
-            
             // json配列に現在登録されている情報を格納
             foreach ($timeTables as  $value) {
                 $dayOfWeek = $value->day_of_week;
                 $frames = $value->frames;
-                $jsonData['table'][$frames][$dayOfWeek][] = ['id' => $value->courseList->id,'title' => $value->courseList->title];
+                $jsonData['table'][$frames][$dayOfWeek][] = ['id' => $value->course_list->id,'title' => $value->course_list->title];
             }
             
             // データベースから履修科目情報を取得

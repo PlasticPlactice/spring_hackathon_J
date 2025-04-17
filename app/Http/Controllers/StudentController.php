@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Course_list;
 use App\Models\C_Subject;
@@ -16,14 +17,25 @@ class StudentController extends Controller
 
         // ログイン中の生徒idを取得する
         $student_id = Auth::guard('student')->id();
+          // ① 最大の year を取得
+          $maxYear = Course_list::max('year');
 
-        // course_listのデータを取得
-        // 年度指定と前期後期のwhereはお好みで
-        $course_list = Course_list::where('year', '>', Carbon::now()->year)
-        ->where('session_flg', 0)
-        ->get();
+          // ② その year における最大の session_flg を取得
+          $maxSessionFlg = Course_list::where('year', $maxYear)->max('session_flg');
 
-        $timeTables = Time_Table::with(['Course_list'])->get();
+        // 現在生徒が履修している情報を取得
+        $studentCourseList = Course_list::where('year', $maxYear)
+        ->where('session_flg', $maxSessionFlg)
+        ->whereHas('C_Subjects', function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        })
+        ->with(['C_Subjects' => function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        }])
+        ->get()->pluck('id')->toArray();
+ 
+        //生徒が履修している科目の時間割を取得 
+        $timeTables = Time_Table::whereIn('course_list_id',$studentCourseList)->with(['Course_list'])->get();
 
         // 連想配列を用意
         $timeTableGrid = [];
@@ -55,8 +67,27 @@ class StudentController extends Controller
     
     // 個別時間割作成ページ表示
     public function addTimeTable(Request $request){
-        $CourseLists = Course_list::with('Time_Tables')->get();
-        return view('student/personal_timetable_register', ['CourseLists' => $CourseLists]);
+        // 現在管理者時間割に登録されている最新のデータを取得
+        // ① 最大の year を取得
+        $maxYear = Course_list::max('year');
+
+        // ② その year における最大の session_flg を取得
+        $maxSessionFlg = Course_list::where('year', $maxYear)->max('session_flg');
+
+        // ③ 条件に合致する Course_list と関連する Time_Table を取得
+        $courseLists = Course_list::where('year', $maxYear)
+            ->where('session_flg', $maxSessionFlg)
+            ->with(['Time_Tables' => function($query) use ($maxYear, $maxSessionFlg) {
+                // Time_Table に対して追加条件を設定
+                $query->whereHas('course_list', function($query) use ($maxYear, $maxSessionFlg) {
+                    $query->where('year', $maxYear)
+                        ->where('session_flg', $maxSessionFlg);
+                });
+            }])->get();
+            $days = ['月', '火', '水', '木', '金'];
+
+
+        return view('student/personal_timetable_register', ['courseLists' => $courseLists,'days' => $days]);
     }
 
     public function createTimeTable(Request $request) {
@@ -68,9 +99,93 @@ class StudentController extends Controller
         return view('student/student_top');
     }
     
+    // 個人時間割登録処理
+    public function insertTimeTable(Request $request){
+        // ログイン中の生徒idを取得する
+        $student_id = Auth::guard('student')->id();
+        $items = $request->input('items');
+        if ($items) {
+            foreach ($items as $item) {
+                $cSubject = new C_Subject;
+                $cSubject->student_id = $student_id;
+                $cSubject->course_list_id = $item;
+                $cSubject->save();
+            }
+        }
+
+        // 生徒トップにリダイレクト
+        return redirect()->route('student.top');  
+        
+    }
     // 個別時間割編集ページ表示
     public function editTimeTable(Request $request){
-        return view('student/personal_timetable_edit');
+        $student_id = Auth::guard('student')->id();
+
+        // 現在管理者時間割に登録されている最新のデータを取得
+        // ① 最大の year を取得
+        $maxYear = Course_list::max('year');
+
+        // ② その year における最大の session_flg を取得
+        $maxSessionFlg = Course_list::where('year', $maxYear)->max('session_flg');
+
+        // ③ 条件に合致する Course_list と関連する Time_Table を取得
+        $courseLists = Course_list::where('year', $maxYear)
+            ->where('session_flg', $maxSessionFlg)
+            ->with(['Time_Tables' => function($query) use ($maxYear, $maxSessionFlg) {
+                // Time_Table に対して追加条件を設定
+                $query->whereHas('course_list', function($query) use ($maxYear, $maxSessionFlg) {
+                    $query->where('year', $maxYear)
+                        ->where('session_flg', $maxSessionFlg);
+                });
+            }
+            ])->get();
+
+        // 現在生徒が履修している情報を取得
+        DB::enableQueryLog();
+        $studentCourseList = Course_list::where('year', $maxYear)
+        ->where('session_flg', $maxSessionFlg)
+        ->whereHas('C_Subjects', function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        })
+        ->with(['C_Subjects' => function($query) use ($student_id) {
+            $query->where('student_id', $student_id);
+        }])
+        ->get()->pluck('id');;
+
+            $days = ['月', '火', '水', '木', '金'];
+
+
+        return view('student/personal_timetable_edit', ['courseLists' => $courseLists,'days' => $days,'studentCourseList' => $studentCourseList]);
+
+    }
+
+    // 個別時間割編集処理
+    public function updateTimeTable(Request $request){
+         // ログイン中の生徒idを取得する
+         $studentId = Auth::guard('student')->id();
+        //  元々の時間割データを取得
+         $studentCourseList = json_decode($request->input('studentCourseList'));
+        //  dd($studentCourseList);
+        // 元々の時間割データを削除
+        foreach($studentCourseList as $courseListId){
+            C_Subject::where('student_id', $studentId)->where('course_list_id', $courseListId)->delete();
+        }
+        // 新たにデータを登録
+         $items = $request->input('items');
+         if ($items) {
+             foreach ($items as $item) {
+                 $cSubject = new C_Subject;
+                 $cSubject->student_id = $studentId;
+                 $cSubject->course_list_id = $item;
+                 $cSubject->save();
+             }
+         }
+ 
+         // 生徒トップにリダイレクト
+         return redirect()->route('student.top');  
+         
     }
     
 }
+
+

@@ -242,7 +242,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 #student-top-container,
 #teacher-top-container,
 #admin-top-container,
-#students-list-container {
+#students-list-container,
+#subjects-master-list-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -253,7 +254,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 #student-top-container div,
 #teacher-top-container div,
 #admin-top-container div,
-#students-list-container div {
+#students-list-container div,
+#subjects-master-list-container div {
     width: 100%;
 }
 
@@ -264,7 +266,8 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .subject-table,
 .favorite-table,
-.students-list-table {
+.students-list-table,
+.subject-master-table {
     width: 100%;
 }
 
@@ -334,11 +337,13 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     color: var(--red);
 }
 
-.students-list-table {
+.students-list-table,
+.subject-master-table {
     margin-top: 20px;
 }
 
-.students-list-table td {
+.students-list-table td,
+.subject-master-table td {
     text-align: center;
     border: 1px solid var(--gray);
 }
@@ -351,6 +356,14 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .students-list-table .material-symbols-outlined {
     font-size: 30px;
+}
+
+.width-4pct {
+    width: 4%;
+}
+
+.width-32pct {
+    width: 32%;
 }
 
 

@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('student_id')->references('id')->on('students');
 
+            $table->string('title');
+            $table->string('detail');
+            $table->boolean('del_flg')->default(false);
+
             $table->timestamps();
         });
     }

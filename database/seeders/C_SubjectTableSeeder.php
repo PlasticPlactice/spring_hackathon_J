@@ -13,10 +13,10 @@ class C_SubjectTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $param = [
-            'student_id' => '1',
-            'course_list_id' => '1'
-        ];
-        DB::table('c_subjects')->insert($param);
+        // $param = [
+        //     'student_id' => '1',
+        //     'course_list_id' => '1'
+        // ];
+        // DB::table('c_subjects')->insert($param);
     }
 }
