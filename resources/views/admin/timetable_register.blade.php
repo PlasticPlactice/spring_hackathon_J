@@ -1,13 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.base')
+@section('title','今季履修可能科目登録')
+@section('external_css')
+<link rel="stylesheet" href="/css/kowada-style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu" />
+
+@endsection
+@section('side_bar_content')
+    <li class="side-bar-item" id="content-1" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+@endsection
+@section('content')
+<div class="temp-content">
     <h1>時間割作成画面</h1>
     <!-- 検索フォーム -->
+    @component('components.subject-side-menu')
+        @slot('subject_list_content')
+            <li>Python基礎</li>
+            <li>Python応用<br>(tkinter)</li>
+            <li>html,css<br>基礎</li>
+            <li>JavaScript<br>基礎</li>
+            <li>Java基礎</li>
+            <li>C#基礎基礎</li>
+        @endslot
+    @endcomponent
     <form action="timetable_register" method="get">
         <select name="year">
         @foreach($years as $year)
@@ -18,7 +34,7 @@
             <option value="0" @if(isset($jsonData) && $jsonData['session_flg'] === 0) selected @endif>前期</option>
             <option value="1" @if(isset($jsonData) && $jsonData['session_flg'] === 1) selected @endif>後期</option>
         </select>
-        <input type="submit" value="検索">
+        <input type="submit" value="検索" class="button">
     </form>
 
 
@@ -32,17 +48,17 @@
     @endif
 
     <!-- 時間割に追加ボタン -->
-    <button type="button" id="add-button">追加</button>
+    <button type="button" id="add-button" class="button">追加</button>
 
     <!-- 登録フォーム -->
     <form action="timetable_add" method="post" id="add-form">
         @csrf
-        <input type="submit" value="登録">
+        <input type="submit" value="登録" id="register-button" class="button">
     </form>
 
     <!-- 時間割の表示処理(バックエンド) -->
-    <table id="table">
-        <tr>
+    <table id="table" class="timetable">
+        <tr class="timetable-item">
             <th></th>
             <th>月</th>
             <th>火</th>
@@ -53,7 +69,7 @@
         @if(isset($jsonData))
         <!-- jsonがある場合の処理 -->
         @for($i = 1; $i < 5; $i++)
-        <tr>
+        <tr class="timetable-item">
             <th>{{$i}}</th>
             @for($j = 1; $j < 6; $j++)
             <td id="{{$i}}-{{$j}}" style="width:150px; height:150px">
@@ -71,7 +87,7 @@
         @else
         <!-- jsonがない場合の処理 -->
         @for($i = 1; $i < 5; $i++)
-        <tr>
+        <tr class="timetable-item">
             <th>{{$i}}</th>
             <td>a</td>
             <td>a</td>
@@ -277,6 +293,8 @@ document.getElementById('add-form').addEventListener('submit', function(event) {
 
 @endif
 </script>
-
-</body>
-</html>
+</div>
+@endsection
+@section('js')
+    <script src="/js/subject-side-menu.js"></script>
+@endsection
