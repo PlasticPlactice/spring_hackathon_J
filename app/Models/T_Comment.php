@@ -41,6 +41,13 @@ class T_Comment extends Model
         ]);
     }
 
+    public static function deleteTComment($id) {
+        return self::where('id', $id)
+            ->update([
+                'del_flg' => true,
+            ]);
+    }
+
     // リレーション
     public function Teacher(){  
         return $this->belongsTo(Teacher::class);

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Course_list;
 use App\Models\T_Comment;
 use App\Models\Subject;
+use App\Models\Subject_Favorite;
 use App\Models\Y_Subject_Favorite;
 
 
@@ -53,7 +54,10 @@ class Y_Subject extends Model
     public function Subject(){
         return $this->belongsTo(Subject::class);
     }
-    public function Y_Subject_Favorites(){
+    public function Subject_Favorite(){
+        return $this->hasMany(Subject_Favorite::class);
+    }
+    public function Y_Subject_Favorite(){
         return $this->hasMany(Y_Subject_Favorite::class);
     }
 

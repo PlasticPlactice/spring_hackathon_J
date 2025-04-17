@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Course_list;
 use App\Models\C_Subject;
 use App\Models\Time_Table;
+use App\Models\Subject_Favorite;
 use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
@@ -50,7 +51,20 @@ class StudentController extends Controller
         }
         $days = ['月', '火', '水', '木', '金'];
 
-        return view('student/student_top', ['timeTables' => $timeTableGrid, 'days' => $days]);
+        // お気に入りに登録しているデータ取得
+        $subjectFavorite = Subject_Favorite::where('student_id', $student_id)->get();
+        // Course_listsを取得する
+        $courseLists = [];
+        foreach ($subjectFavorite as $favorite) {
+            $course = Course_list::where('id', $favorite->y_subject_id)->first();
+            if ($course) {
+                $courseLists[] = $course;
+            }
+        }
+
+
+
+        return view('student/student_top', ['timeTables' => $timeTableGrid, 'days' => $days, 'courseLists' => $courseLists]);
     }
     
     // 個別時間割作成ページ表示
@@ -72,5 +86,15 @@ class StudentController extends Controller
     public function editTimeTable(Request $request){
         return view('student/personal_timetable_edit');
     }
-    
+
+    // お気に入り登録
+    public function createFavorite(Request $request) {
+
+    }
+
+    // お気に入り削除
+    // 余裕があったら
+    public function deleteFavorite(Request $request) {
+
+    }
 }
