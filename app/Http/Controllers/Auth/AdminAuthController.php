@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -48,9 +49,9 @@ class AdminAuthController extends Controller
          
         // Authによる認証を行う
         if (Auth::guard('admin')->attempt($userData)) {
+            Session::put('guard', 'admin');
             return redirect()->route('admin.top');  // 認証成功時のリダイレクト先
         }
-
         return back()->withErrors(['id' => 'idとパスワードが一致しません'])->withInput();
     }
 }

@@ -16,6 +16,7 @@ class Y_Subject extends Model
     use HasFactory;
 
     protected $table = 'y_subjects';
+    protected $primaryKey = 'course_list_id';
 
     protected $fillable = [
         'course_list_id',

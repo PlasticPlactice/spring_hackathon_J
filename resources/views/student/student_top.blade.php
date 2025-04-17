@@ -68,9 +68,9 @@
                     </td>
                     <td class="favorite-td-name">
                         @if($courseList->session_flg === 0)
-                        <a href="#">{{$courseList->title}} : {{$courseList->year}}前期</a>
+                        <a href="subject_sub/{{$courseList->id}}">{{$courseList->title}} : {{$courseList->year}}前期</a>
                         @else
-                        <a href="#">{{$courseList->title}} : {{$courseList->year}}後期</a>
+                        <a href="subject_sub/{{$courseList->id}}">{{$courseList->title}} : {{$courseList->year}}後期</a>
                         @endif
                     </td>
                     <td class="favorite-td-category">サブページカテゴリ</td>

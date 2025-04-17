@@ -18,18 +18,21 @@ class TeacherOrAdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         // teacher または admin でログインしていない場合、ログイン画面にリダイレクト
-        if (!Auth::guard('teacher')->check() && !Auth::guard('admin')->check()) {
+        // dd(Auth::guard('teacher')->check() , Auth::guard('admin')->check());
+        if (Auth::guard('teacher')->check() || Auth::guard('admin')->check()) {
+            // teacher または admin としてログイン
+            if (Auth::guard('teacher')->check()) {
+                Auth::shouldUse('teacher');
+            } else {
+                Auth::shouldUse('admin');
+            }
+            
+            return $next($request);
+        }else{
             return redirect()->route('login');
         }
-
-        // teacher または admin としてログイン
-        if (Auth::guard('teacher')->check()) {
-            Auth::shouldUse('teacher');
-        } else {
-            Auth::shouldUse('admin');
-        }
-
         
-        return $next($request);
+       
+        
     }
 }

@@ -45,8 +45,8 @@ class MainSubjectController extends Controller
             $request->tech
         );
 
-        return redirect('/admin_top');
-    }
+        return view('/subject/subject_master_register');
+        }
 
     // 科目マスターページ編集・削除表示
     public function edit(Request $request){
@@ -68,7 +68,7 @@ class MainSubjectController extends Controller
         ];
         Subject::updateSubject($request->id, $data);
 
-        return redirect('/admin_top');
+        return redirect()->route('student.top');  
     }
 
     public function createComment(Request $request) {

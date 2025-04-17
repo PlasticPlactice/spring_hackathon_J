@@ -25,6 +25,11 @@ Route::get('/',[LoginController::class,'index'])->name('login');
 // ログアウト処理
 Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 
+// 画像専用のルート
+// Route::get('images/{filename}', [ImageController::class, 'show'])
+//     ->name('images.show')
+//     ->withoutMiddleware('auth'); // 認証ミドルウェアを無効化
+
 
 // 管理者のログイン処理
 Route::post('/admin_login',[AdminAuthController::class,'login']);
@@ -44,7 +49,7 @@ Route::get('/teacher_edit/{id}',[TeacherAuthController::class,'edit'])->middlewa
 // 教師データ編集処理
 Route::post('/teacher_update/{id}',[TeacherAuthController::class,'update'])->middleware('admin');;
 // 教師データ削除処理
-Route::post('/teacher_delete/{id}',[TeacherAuthController::class,'delete'])->middleware('admin');;
+Route::get('/teacher_delete/{id}',[TeacherAuthController::class,'delete'])->middleware('admin');;
 // 教師のパスワード変更画面の表示
 Route::get('/teacher_password_change',[TeacherAuthController::class,'passwordChangeShow'])->middleware('teacher');;
 // 教師パスワード変更処理
@@ -53,7 +58,7 @@ Route::post('/teacher_password_change',[TeacherAuthController::class,'passwordCh
 // ユーザのログイン処理を実行
 Route::post('/student_login',[StudentAuthController::class,'login']);
 // 生徒データ編集・削除ページを表示
-Route::get('/student_edit/{id}',[StudentAuthController::class,'edit'])->name('student.edit')->middleware('teacher_or_admin');;
+Route::get('/student_edit/{id}',[StudentAuthController::class,'edit'])->middleware('teacher_or_admin')->name('student.edit');
 // 生徒データ編集処理
 Route::post('/student_update/{id}',[StudentAuthController::class,'update'])->middleware('teacher_or_admin');
 // 生徒情報削除処理
@@ -67,7 +72,7 @@ Route::post('/student_password_change',[StudentAuthController::class,'passwordCh
 // 管理者トップページを表示
 Route::get('/admin_top',[AdminController::class,'index'])->name('admin.top')->middleware('admin');
 // 教師データ一覧ページを表示
-Route::get('/teachers_list',[AdminController::class,'teachersList'])->middleware('admin');
+Route::get('/teachers_list',[AdminController::class,'teachersList'])->middleware('admin')->name('teacher-list');
 
 // 教師トップページを表示
 Route::get('/teacher_top',[TeacherController::class,'index'])->name('teacher.top')->middleware('teacher');
@@ -101,7 +106,7 @@ Route::post('/subject_master',[MainSubjectController::class, 'createComment'])->
 Route::get('/subject_master_register',[MainSubjectController::class,'add'])->middleware('admin');
 Route::post('/subject_master_register',[MainSubjectController::class,'create'])->middleware('admin');
 // 科目マスタページ編集・削除ページを表示
-Route::get('/subject_master_edit',[MainSubjectController::class,'edit'])->middleware('admin');
+Route::get('/subject_master_edit/{id}',[MainSubjectController::class,'edit'])->middleware('admin')->name('sbuject_masatar_edit_view');
 Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete'])->middleware('admin');
 
 // 科目サブページを表示
@@ -120,7 +125,7 @@ Route::post('/timetable_add',[AdminTimeTableController::class,'insert'])->middle
 Route::get('/available_subject_register',[AdminTimeTableController::class,'addTimeTable'])->middleware('admin');
 Route::post('/available_subject_register',[AdminTimeTableController::class,'createTimeTable'])->middleware('admin');
 // 今季履修科の科目編集・削除ページを表示
-Route::get('/available_subject_edit',[AdminTimeTableController::class,'editTimeTable'])->middleware('admin');
+Route::get('/available_subject_edit/{id}',[AdminTimeTableController::class,'editTimeTable'])->middleware('admin');
 Route::post('/available_subject_edit',[AdminTimeTableController::class,'updateOrdeleteTimeTable'])->middleware('admin');
 
 

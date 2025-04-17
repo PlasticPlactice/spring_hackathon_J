@@ -110,10 +110,10 @@
                 <td>{{$teacher->email}}</td>
                 <td>{{$teacher->name}}</td>
                 <td>
-                    <a href="#" class="text-gray">
+                    <a href="/teacher_edit/{{$teacher->id}}" class="text-gray">
                         <span class="material-symbols-outlined">edit</span>
                     </a>
-                    <a href="#" class="text-red">
+                    <a href="/teacher_delete/{{$teacher->id}}" class="text-red">
                         <span class="material-symbols-outlined">delete</span>
                     </a>
                 </td>

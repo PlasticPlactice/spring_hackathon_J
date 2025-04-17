@@ -19,17 +19,20 @@ class StudentOrTeacherAuth
     public function handle(Request $request, Closure $next): Response
     {
         // 生徒又は教師でログインしていないならログイン画面へ遷移
-        if (!Auth::guard('student')->check() && !Auth::guard('teacher')->check()) {
+        if (Auth::guard('student')->check() || Auth::guard('teacher')->check()) {
+            if (Auth::guard('student')->check()) {
+                Auth::shouldUse('student');
+            } else {
+                Auth::shouldUse('teacher');
+            }
+            return $next($request);
+        }else{
+
             return redirect()->route('login');
         }
-
-       
-        if (Auth::guard('student')->check()) {
-            Auth::shouldUse('student');
-        } else {
-            Auth::shouldUse('teacher');
-        }
         
-        return $next($request);
+       
+       
+        
     }
 }

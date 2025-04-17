@@ -38,6 +38,7 @@
                         科目名を入力　例:Python
                     @endslot
                     @slot('input_value')
+                    @endslot
                 @endcomponent
                 <button style="position:absolute; top:0px; right:200px;" type="submit" class="button">検索</button>
             </form>

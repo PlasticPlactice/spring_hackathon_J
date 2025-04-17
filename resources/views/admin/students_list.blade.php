@@ -77,6 +77,7 @@
                     検索したいIDを入力
                 @endslot
                 @slot('input_value')
+                @endslot
             @endcomponent
             @component('components.input_with_label')
                 @slot('label')
@@ -92,6 +93,7 @@
                     検索したい名前を入力
                 @endslot
                 @slot('input_value')
+                @endslot
             @endcomponent
             <select name="course" id="" class="select-with-label">
                 <option value="" selected disabled>--- 学科 ---</option>
@@ -118,17 +120,16 @@
 
             @foreach ($students as $student)
             <tr>
-                <!-- <td><img src="{{ asset($student->img_path) }}" alt="アイコン画像" style="width: 20px; height: 20px;"></td> -->
-                <td><img src="https://picsum.photos/400/400" alt="アイコン画像"></td>
+                <td><img src="{{ $student->img_path !== '' ? '/' : ''  }}{{$student->img_path}}" alt="アイコン画像" style="width: 20px; height: 20px;"></td>
                 <td>{{$student->email}}</td>
                 <td>{{$student->name}}</td>
                 <td>{{$student->entrance_year}}</td>
                 <td>{{$student->Department->name}}</td>
                 <td>
-                    <a href="#" class="text-gray">
+                    <a href="/student_edit/{{$student->id}}" class="text-gray">
                         <span class="material-symbols-outlined">edit</span>
                     </a>
-                    <a href="#" class="text-red">
+                    <a href="/student_delete/{{$student->id}}" class="text-red">
                         <span class="material-symbols-outlined">delete</span>
                     </a>
                 </td>

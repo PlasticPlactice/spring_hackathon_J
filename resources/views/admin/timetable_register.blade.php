@@ -68,11 +68,11 @@
         <table id="table" class="table">
             <tr>
                 <td></td>
-                <th class="th-horizontal">月</th>
-                <th class="th-horizontal">火</th>
-                <th class="th-horizontal">水</th>
-                <th class="th-horizontal">木</th>
-                <th class="th-horizontal">金</th>
+                <th style="min-width:100px;" class="th-horizontal">月</th>
+                <th style="min-width:100px;" class="th-horizontal">火</th>
+                <th style="min-width:100px;" class="th-horizontal">水</th>
+                <th style="min-width:100px;" class="th-horizontal">木</th>
+                <th style="min-width:100px;" class="th-horizontal">金</th>
             </tr>
             @if(isset($jsonData))
                 <!-- jsonがある場合の処理 -->
@@ -80,8 +80,8 @@
                 <tr>
                     <th class="th-vertical">{{$i}}</th>
                     @for($j = 1; $j < 6; $j++)
-                    <td id="{{$i}}-{{$j}} not-active" class="subject-td">
-                        <label style="display:block;" for="register-subject{{$i}}-{{$j}}">
+                    <td id="{{$i}}-{{$j}}" class="subject-td">
+                        <label style="display:block; height:100px" for="register-subject{{$i}}-{{$j}}">
                             <input type="checkbox" class="add-check" value="{{$i}}-{{$j}}" name="" id="register-subject{{$i}}-{{$j}}">
                             
                             @foreach($jsonData['table'][$i][$j] as $item)
@@ -159,6 +159,15 @@ function attachSubjectItemClickEvents() {
             const frames = parts[0]; // コマ
             const dayOfWeek = parts[1]; // 曜日(1=5) 
             const id = parts[2]; // 科目ID
+            // console.log(`${frames}-${dayOfWeek}`);
+
+            const td = document.getElementById(`${frames}-${dayOfWeek}`);
+            setTimeout(() => {
+            console.log("0.5秒後に実行されました");
+            td.style.backgroundColor = '';
+            }, 10); // 500ミリ秒 = 0.5秒
+            
+            
 
             // 同じSubjectIdがすでにあるかどうかをチェック
             const isDuplicate = jsonData['table'][frames][dayOfWeek].some(item => {
@@ -311,7 +320,9 @@ document.getElementById('add-form').addEventListener('submit', function(event) {
 @endif
 document.addEventListener('DOMContentLoaded', function () {
     const checkboxes = document.querySelectorAll('.add-check');
-
+    console.log(this.value);
+    
+    
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
             const td = checkbox.closest('td');

@@ -14,6 +14,7 @@ use App\Models\department;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 
 class StudentAuthController extends Controller
@@ -119,23 +120,29 @@ class StudentAuthController extends Controller
 
 
     // ログイン処理
-    public function login(LoginRequest $request){
+    
+public function login(LoginRequest $request)
+{
+    // id(email)とパスワードを取得
+    $credentials = $request->only('id', 'pw');
+    $email = $credentials['id'];
+    $plainPassword = $credentials['pw'];
 
-        // id(email)とパスワードを取得
-        $userData = $request->only('id', 'pw');
-        $userData['password'] = $userData['pw'];
-        $userData['email'] = $userData['id'];
-        unset($userData['pw']);
-        unset($userData['id']);
+    // del_flg != 1 の条件を追加してユーザーを取得
+    $user = Student::where('email', $email)
+                   ->where('del_flg', '!=', 1)
+                   ->first();
 
-         
-        // Authによる認証を行う
-        if (Auth::guard('student')->attempt($userData)) {
-            return redirect()->route('student.top');  // 認証成功時のリダイレクト先
-        }
-
-        return back()->withErrors(['id' => 'idとパスワードが一致しません'])->withInput();
+    // ユーザーが存在し、パスワードが一致する場合
+    if ($user && Hash::check($plainPassword, $user->pw)) {
+        Auth::guard('student')->login($user);
+        Session::put('guard', 'student');
+        return redirect()->route('student.top'); // 認証成功時のリダイレクト先
     }
+
+    // 認証失敗時
+    return back()->withErrors(['id' => 'IDとパスワードが一致しないか、削除されたアカウントです'])->withInput();
+}
 
 
     // 生徒情報削除処理

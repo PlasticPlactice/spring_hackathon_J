@@ -61,7 +61,7 @@
 
             <div>
                 画像 : <input type="file" name="img_data">
-                <img src="{{ asset($student->img_path) !== url('/').'/' ? asset($student->img_path) : '' }}" alt="アイコン画像">
+                <img src="{{ $student->img_path !== '' ? '/' : ''  }}{{$student->img_path}}" alt="アイコン画像" style="width: 20px; height: 20px;" >
             </div>
 
             <div>

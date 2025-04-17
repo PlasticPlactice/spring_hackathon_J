@@ -25,52 +25,10 @@
 @section('content')
 <div id="page-container">
     <div>
-        <h1>〇〇さん、お疲れ様です。</h1>
-        <div class="favorite-page-section">
-            <h2>お気に入りページ</h2>
-            <table class="table favorite-page-table">
-                <tr>
-                    <th class="th-horizontal"></th>
-                    <th class="th-horizontal">ページ名</th>
-                    <th class="th-horizontal">カテゴリ</th>
-                </tr>
-                
-                <tr>
-                    <td class="favorite-td-star">
-                        <a href="#">
-                            <span class="material-symbols-outlined favorite-star-icon">star</span>
-                        </a>
-                    </td>
-                    <td class="favorite-td-name">
-                        <a href="#">サブページ名</a>
-                    </td>
-                    <td class="favorite-td-category">サブページカテゴリ</td>
-                </tr>
-                
-                <tr>
-                    <td class="favorite-td-star">
-                    <a href="#">
-                        <span class="material-symbols-outlined favorite-star-icon">star</span>
-                    </a>
-                </td>
-                <td class="favorite-td-name">
-                    <a href="#">サブページ名</a>
-                </td>
-                <td class="favorite-td-category">サブページカテゴリ</td>
-            </tr>
-            <tr>
-                <td class="favorite-td-star">
-                    <a href="#">
-                        <span class="material-symbols-outlined favorite-star-icon">star</span>
-                    </a>
-                </td>
-                <td class="favorite-td-name">
-                    <a href="#">サブページ名</a>
-                </td>
-                <td class="favorite-td-category">サブページカテゴリ</td>
-            </tr>
-        </table>
-        </div>
+
+        <h1>お疲れ様です。</h1>
+       <!-- adminはなにも表示しない -->
+
     </div>
 </div>
 @endsection
