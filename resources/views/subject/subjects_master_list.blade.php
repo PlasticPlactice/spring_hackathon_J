@@ -23,7 +23,7 @@
 <div id="subjects-master-list-container">
     <div>
         <h1 class="page-title-h1">科目一覧</h1>
-            <form action="/subjects_master_list_search" method="get" class="search-section">
+            <form style="position:relative;" action="/subjects_master_list_search" method="get" class="search-section">
                 @component('components.input_with_label')
                     @slot('label')
                         科目検索 :
@@ -39,7 +39,7 @@
                     @endslot
                     @slot('input_value')
                 @endcomponent
-                <button type="submit" class="button">検索</button>
+                <button style="position:absolute; top:0px; right:200px;" type="submit" class="button">検索</button>
             </form>
         
 

@@ -69,25 +69,45 @@
                         <h3 class="comment-title">{{ $comment->title }}</h3>
                         <p class="comment-text">
                             @if($comment->link_flg === 0)
+                                <!-- link_flg = 0 なら通常のテキスト -->
                                 {{ $comment->detail }}
                             @else
+                                <!-- link_flg = 1 ならaタグ -->
                                 <a href="{{ $comment->detail }}">{{ $comment->detail }}</a>
                             @endif
                         </p>
                     </div>
                 </div>
+                <!-- 教師なら削除ボタンを表示 -->
+                @if($teacher_id)
+                <tr>
+                    <td>
+                        <form action="{{ route('comment.delete', ['id' => $comment->id]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <!-- 必要なデータの受け渡し -->
+                        <input type="hidden" value="{{$y_subject_id}}" name="y_subject_id">
+                        <input type="hidden" value="{{$comment->id}}" name="comment_id">
+                        <!-- 削除ボタン -->
+                        <input type="submit" value="削除">
+                        </form>
+                    </td>
+                </tr>
+                @endif
             @endforeach
 
-            <!-- コメント登録フォーム -->
+        <!-- コメント登録フォーム -->
         <form action="/subject_sub" method="post">
             <table>
             @csrf
+            <!-- ほかの処理に必要なidを渡してます -->
             <tr>
                 <td><input type="hidden" name="teacher_id" value="{{$teacher_id}}"></td>
                 <td><input type="hidden" name="y_subject_id" value="{{$y_subject_id}}"></td>
             </tr>
+            <!-- 投稿フォーム -->
             <tr>
-                <td><p>タイトル</p></td>
+                <td>タイトル</td>
                 <td><input type="text" name="title"></td>
             </tr>
             <tr>
@@ -103,12 +123,11 @@
                 <td><label for="link_flg">リンクにする</label></td>
             </tr>
             <tr>
-                <td>
-                    <input type="submit" value="送信">
-                </td>
+                <td><input type="submit" value="送信"></td>
             </tr>
             </table>
         </form>
-    </div>
-</div>
-@endsection
+        <!-- ここまで -->
+    </table>
+</body>
+</html>

@@ -63,4 +63,7 @@ class Subject extends Model
     public function Subject_Favorites(){
         return $this->hasMany(Subject_Favorite::class);
     }
+    public function Y_Subject_Favorites(){
+        return $this->hasMany(Subject_Favorite::class);
+    }
 }

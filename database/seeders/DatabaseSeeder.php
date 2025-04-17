@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(C_SubjectTableSeeder::class);
         $this->call(S_CommentsTableSeeder::class);
         $this->call(T_CommentsTableSeeder::class);
+        $this->call(SubjectFavoritesTableSeeder::class);
+        $this->call(Y_Subjects_FavoritesTableSeeder::class);
     }
 }
