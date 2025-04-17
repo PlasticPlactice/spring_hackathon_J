@@ -4,59 +4,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 @endsection
 
-@section('side_bar_content')
-    @component('components.side_bar_menu')
-        @slot('content_id')
-            1
-        @endslot
-        @slot('side_bar_menu')
-            マスタ科目
-        @endslot
-        @slot('sub_menu')
-            <li><a href="https://www.google.co.jp/">登録</a></li>
-            <li><a href="https://www.yahoo.co.jp/">編集・削除</a></li>
-        @endslot
-    @endcomponent
-    @component('components.side_bar_menu')
-        @slot('content_id')
-            2
-        @endslot
-        @slot('side_bar_menu')
-            今季履修可能科目
-        @endslot
-        @slot('sub_menu')
-            <li><a href="https://www.google.co.jp/">登録</a></li>
-            <li><a href="https://www.yahoo.co.jp/">編集・削除</a></li>
-        @endslot
-    @endcomponent
-    <li class="side-bar-item" id="content-3" tabindex="0">
-        <a href="#">時間割管理</a>
-    </li>
-    @component('components.side_bar_menu')
-        @slot('content_id')
-            4
-        @endslot
-        @slot('side_bar_menu')
-            教師データ
-        @endslot
-        @slot('sub_menu')
-            <li><a href="https://www.google.co.jp/">登録</a></li>
-            <li><a href="https://www.yahoo.co.jp/">一覧</a></li>
-        @endslot
-    @endcomponent
-    @component('components.side_bar_menu')
-        @slot('content_id')
-            5
-        @endslot
-        @slot('side_bar_menu')
-            生徒データ
-        @endslot
-        @slot('sub_menu')
-            <li><a href="https://www.google.co.jp/">登録</a></li>
-            <li><a href="https://www.yahoo.co.jp/">一覧</a></li>
-        @endslot
-    @endcomponent
-@endsection
+@component('components.side_bar')
+@endcomponent
 
 @section('content')
 <div id="page-container">

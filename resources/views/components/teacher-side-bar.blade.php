@@ -13,6 +13,6 @@
     @endslot
     @slot('sub_menu')
         <li><a href="students_list">一覧</a></li>
-        <li><a href="students_register">登録</a></li>
+        <li><a href="/students_register?from_page=teacher">登録</a></li>
     @endslot
 @endcomponent

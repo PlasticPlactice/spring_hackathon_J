@@ -1,23 +1,8 @@
 @extends('layouts.base')
 @section('title','科目マスター編集・削除')
 
-@section('side_bar_content')
-    <li class="side-bar-item" id="content-1" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-    <li class="side-bar-item" id="content-2" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-    <li class="side-bar-item" id="content-3" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-    <li class="side-bar-item" id="content-4" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-    <li class="side-bar-item" id="content-5" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-@endsection
+@component('components.side_bar')
+@endcomponent
 
 @section('content')
     <div id="subject-master-register-container">

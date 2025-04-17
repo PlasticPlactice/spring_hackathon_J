@@ -5,18 +5,8 @@
     <link rel="stylesheet" href="{{asset('css/shibaya_style.css')}}">
 @endsection
 
-@section('side_bar_content')
-    <li class="side-bar-item" id="content-1" tabindex="0">
-        <a href="#">科目ページ一覧</a>
-    </li>
-    <li class="side-bar-item" id="content-2" tabindex="0">
-        <a href="#">科目ページ</a>
-    </li>
-    <li class="side-bar-item" id="content-3" tabindex="0">
-        <a href="#">サブページ</a>
-    </li>
-@endsection
-
+@component('components.side_bar')
+@endcomponent
 @section('content')
     <div id="subject-sub-container">
         <div>
