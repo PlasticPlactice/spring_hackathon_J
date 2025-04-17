@@ -59,7 +59,7 @@
 @endsection
 
 @section('content')
-<div id="students-list-container">
+<div id="page-container">
     <div>
         <h1 class="page-title-h1">教師一覧</h1>
         <div class="search-section">
