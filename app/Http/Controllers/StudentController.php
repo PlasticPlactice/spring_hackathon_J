@@ -202,39 +202,33 @@ class StudentController extends Controller
     }
 
     // お気に入り登録
-    public function createFavorite(Request $request) {
+    public function createFavorite(Request $request,$id) {
         // 科目のidを取得
-        $subjectId = $request->input('id');
+        $subjectId = $id;
         if (Auth::guard('student')->check()) {
             $studentId = Auth::guard('student')->id();
             $subjectFavorite = new Subject_Favorite;
             $subjectFavorite->student_id = $studentId;
             $subjectFavorite->y_subject_id = $subjectId;
             $subjectFavorite->save();        
-        } elseif (Auth::guard('teacher')->check()) {
-            $teacherId = Auth::guard('teacher')->id();
-            $subjectFavorite = new Y_Subject_Favorite;
-            $subjectFavorite->teacher_id = $teacherId;
-            $subjectFavorite->y_subject_id = $subjectId;
-            $subjectFavorite->save();        
-        } else {
-        }
+        } 
         return redirect()->back();
         
     }
 
     // お気に入り削除
     // 余裕があったら
-    public function deleteFavorite(Request $request) {
-        $subjectId = $request->input('id');
+    public function deleteFavorite(Request $request,$id) {
+        $subjectId = $id;
+        // dd($subjectId);
         if (Auth::guard('student')->check()) {
+            DB::enableQueryLog();
+
             $studentId = Auth::guard('student')->id();
-            Subject_Favorite::where('student_id',$studentId)->where('subject_id',$subjectId)->delete();     
-        } elseif (Auth::guard('teacher')->check()) {
-            $teacherId = Auth::guard('teacher')->id();
-            Subject_Favorite::where('teacher_id',$teacherId)->where('subject_id',$subjectId)->delete();     
-        } else {
-        }
+            Subject_Favorite::where('student_id',$studentId)->where('y_subject_id',$subjectId)->delete();     
+            $queries = DB::getQueryLog();
+
+        } 
         return redirect()->back();
     }
 }

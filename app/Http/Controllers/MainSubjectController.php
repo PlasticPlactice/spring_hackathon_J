@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Subject;
 use App\Models\S_Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Y_Subject;
+use App\Models\Course_list;
+
+
 
 class MainSubjectController extends Controller
 {
@@ -26,8 +30,20 @@ class MainSubjectController extends Controller
         $subject_id = $request->id;
 
         $Comments = S_Comment::with('Student')->where('subject_id', $item->id)->get();
+        // dd($Comments[0]);
+        // サブ科目ページのidを取得
+        $subjectIdList = Y_Subject::where('subject_id',$subject_id)->pluck('course_list_id')->toArray();; 
 
-        return view('subject/subject_master' , ['item' => $item, 'comments' => $Comments, 'subject_id' => $subject_id]);
+        // その中で最新サブ科目テーブルのidを取得
+        $subSubjectId = Course_list::whereIn('id', $subjectIdList)->orderByDesc('year')
+        ->orderByDesc('session_flg')
+        ->value('id'); // ← 1件だけidを取得;
+        // ->first(); // ← 1件だけidを取得;
+        // dd($subSubjectId);
+
+
+
+        return view('subject/subject_master' , ['item' => $item, 'comments' => $Comments, 'subject_id' => $subject_id, 'latestSubSubjectId'=>$subSubjectId]);
     }
     
     // 科目マスターページ登録表示
@@ -50,6 +66,7 @@ class MainSubjectController extends Controller
 
     // 科目マスターページ編集・削除表示
     public function edit(Request $request){
+        dd($request->id);
         $item = DB::table('subjects')
         ->where('id', $request->id)
         ->first();
@@ -72,10 +89,10 @@ class MainSubjectController extends Controller
     }
 
     public function createComment(Request $request) {
-        $subject_id = $request->subject_id;
+        $subject_id = $request->y_subject_id;
         $student_id = Auth::guard('student')->id();
-        $title = $request->title;
-        $detail = $request->detail;
+        $title = "";
+        $detail = $request->text;
         S_Comment::CreateSComment($subject_id, $student_id, $title, $detail);
 
         return redirect('/subject_master/'.$subject_id);

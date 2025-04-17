@@ -46,7 +46,7 @@
                 @foreach($courseLists as $courseList)
                 <tr>
                     <td class="favorite-td-star">
-                        <a href="#">
+                        <a href="/student_del_favorite/{{$courseList->id}}">
                             <span class="material-symbols-outlined favorite-star-icon">star</span>
                         </a>
                     </td>

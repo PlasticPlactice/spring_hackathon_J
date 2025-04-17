@@ -1,8 +1,23 @@
 @extends('layouts.base')
 @section('title','生徒データ編集・削除')
 
-@component('components.side_bar')
-@endcomponent
+@section('side_bar_content')
+    <li class="side-bar-item" id="content-1" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+    <li class="side-bar-item" id="content-2" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+    <li class="side-bar-item" id="content-3" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+    <li class="side-bar-item" id="content-4" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+    <li class="side-bar-item" id="content-5" tabindex="0">
+        <a href="#">ページ名</a>
+    </li>
+@endsection
 
 @section('content')
 <div id="students-edit-container">
