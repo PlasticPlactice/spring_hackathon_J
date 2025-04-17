@@ -157,7 +157,7 @@ td {
 /* コメント欄 */
 .comments {
     width: 757px;
-    height: 686px;
+    /* height: 686px; */
     /* margin-left: 17%; */
     display: block;
     justify-content: center;

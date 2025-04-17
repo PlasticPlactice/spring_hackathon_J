@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Y_Subject;
 use App\Models\T_Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Subject_Favorite;
+use App\Models\Y_Subject_Favorite;
 
 
 class SubSubjectController extends Controller
@@ -33,8 +35,28 @@ class SubSubjectController extends Controller
 
         // Authのteacher_idをとる
         $teacher_id = Auth::guard('teacher')->id();
+        // dd($tComments[0]);
+        // 誰でログインしているか
+        if (Auth::guard('student')->check()) {
+            $userId = Auth::guard('student')->id();
+            $FavoriteId = Subject_Favorite::where('student_id', $userId)->where('y_subject_id',$request->course_list_id)
+            ->first(); 
+        } elseif (Auth::guard('teacher')->check()) {
+            $userId = Auth::guard('teacher')->id();
+            $FavoriteId = Y_Subject_Favorite::where('teacher_id', $userId)->where('y_subject_id',$request->course_list_id)
+            ->first(); 
+           
+        } else{
+            $FavoriteId = null;
+        }
 
-        return view('subject/subject_sub', ['subjectName' => $subjectName, 'teacherName' => $teacherName,'tComment' => $tComments, 'teacher_id' => $teacher_id, 'y_subject_id' => $ySubjectId]);
+        // dd($FavoriteId);
+
+
+
+ 
+
+        return view('subject/subject_sub', ['FavoriteId' => $FavoriteId, 'subjectName' => $subjectName, 'teacherName' => $teacherName,'tComment' => $tComments, 'teacher_id' => $teacher_id, 'y_subject_id' => $ySubjectId]);
     }
 
     // 教師がサブページにコメントする
@@ -47,18 +69,19 @@ class SubSubjectController extends Controller
 
         // y_subject_idを取得
         $ySubjectId = $ySubject->Course_list->id;
+        $link_flg = $request->link_flg && $request->link_flg === '1' ? '1' : '0';
 
         $data = [
             'y_subject_id' => $ySubjectId,
             'teacher_id' => $request->teacher_id,
-            'title' => $request->title,
-            'detail' => $request->detail,
-            'link_flg' => $request->link_flg,
+            'title' => "",
+            'detail' => $request->text,
+            'link_flg' => $link_flg,
             'del_flg' => false
         ];
         T_Comment::createTComment($data);
 
-        return redirect('/subject_sub?course_list_id='.$ySubjectId);
+        return redirect('/subject_sub/'.$request->y_subject_id);
     }
 
     // コメント削除
@@ -74,6 +97,6 @@ class SubSubjectController extends Controller
         // コメントを論理削除
         T_Comment::deleteTComment($request->comment_id);
 
-        return redirect('/subject_sub?course_list_id='.$ySubjectId);
+        return redirect('/subject_sub/'.$request->y_subject_id);
     }
 }

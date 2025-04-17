@@ -3,11 +3,8 @@
 @section('external_css')
 <link rel="stylesheet" href="/css/kowada-style.css">
 @endsection
-@section('side_bar_content')
-    <li class="side-bar-item" id="content-1" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-@endsection
+@component('components.side_bar')
+@endcomponent
 @section('content')
 <div class="temp-content">
     <h2 class="register-content-p">生徒データ登録</h2>

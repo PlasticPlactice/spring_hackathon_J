@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav id="side-bar">
-        <h1 id="app-name">ABCDE</h1>
+        <h1 style="margin-bottom:10px!important;" id="app-name">ABCDE</h1>
 
         @yield('side_bar_content')
 
@@ -20,8 +20,17 @@
                 <input type="file" id="user-icon-input" accept="image/*" style="display:none">
 
                 <li><a href="#" id="user-icon-change">アイコン変更</a></li>
-                <li><a href="#">パスワード変更</a></li>
-                <li><a href="#" class="text-red">ログアウト</a></li>
+                @auth('admin')
+              
+                @endauth
+                
+                @auth('teacher')
+                <li><a href="/teacher_password_change">パスワード変更</a></li>
+                @endauth
+                @auth('student')
+                <li><a href="/student_password_change">パスワード変更</a></li>
+                @endauth
+                <li><a href="/logout" class="text-red">ログアウト</a></li>
             </div>
         </div>
     </nav>

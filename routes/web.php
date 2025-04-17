@@ -76,6 +76,11 @@ Route::get('/teachers_list',[AdminController::class,'teachersList'])->middleware
 
 // 教師トップページを表示
 Route::get('/teacher_top',[TeacherController::class,'index'])->name('teacher.top')->middleware('teacher');
+// 教師お気に入り登録
+Route::get('/teacher_add_favorite/{id}',[TeacherController::class,'createFavorite'])->middleware('teacher');
+// 教師お気に入り解除
+Route::get('/teacher_del_favorite/{id}',[TeacherController::class,'deleteFavorite'])->middleware('teacher');
+
 
 // 生徒トップページを表示
 Route::get('/student_top',[StudentController::class,'index'])->name('student.top')->middleware('student');
@@ -87,6 +92,10 @@ Route::post('/personal_timetable_register',[StudentController::class,'insertTime
 Route::get('/personal_timetable_edit',[StudentController::class,'editTimeTable'])->middleware('student');
 // 個別時間割編集処理
 Route::post('/personal_timetable_edit',[StudentController::class,'updateTimeTable'])->middleware('student');
+// 生徒お気に入り登録
+Route::get('/student_add_favorite/{id}',[StudentController::class,'createFavorite'])->middleware('student');
+// 生徒お気に入り解除
+Route::get('/student_del_favorite/{id}',[StudentController::class,'deleteFavorite'])->middleware('student');
 
 // 生徒データ一覧ページを表示
 Route::get('/students_list',[StudentDataController::class,'index'])->middleware('teacher_or_admin');

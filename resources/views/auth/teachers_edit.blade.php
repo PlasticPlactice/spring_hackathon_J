@@ -1,31 +1,69 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>教師データ編集・削除</h2>
-    <form action="/teacher_update/{{$teacher->id}}" method="post">
-        @csrf
-        id: <sapn>{{$teacher->email}}</sapn>
-        パスワードリセット:<input type="checkbox" name="password_reset" value="1">
-        名前 <input type="text" name="name" value="{{$teacher->name}}">
+@extends('layouts.base')
+@section('title','教師データ編集・削除')
 
-        <input type="submit" value="更新">
-    </form>
+@component('components.side_bar')
+@endcomponent
 
-    <!-- バリデーションエラーの一覧表示 -->
-    @if ($errors->any())
-        <div>
-            <h4>入力エラーがあります:</h4>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-</body>
-</html>
+@section('content')
+<div style="margin-left:100px;">
+    <div>
+        <h1 class="page-title-h1">教師データ編集・削除</h1>
+        <form action="/teacher_update/{{$teacher->id}}" method="post" enctype="multipart/form-data">
+            @csrf
+
+            <div>
+                ID : {{$teacher->email}} 
+            </div>
+
+            @component('components.checkbox-with-label')
+                @slot('label')
+                    パスワード
+                @endslot
+                @slot('checkbox_name')
+                    password-reset
+                @endslot
+                @slot('message')
+                    リセットする
+                @endslot
+            @endcomponent
+
+
+            @component('components.input_with_label')
+                @slot('label')
+                    名前 : 
+                @endslot
+                @slot('input_type')
+                    text
+                @endslot
+                @slot('input_name')
+                    name
+                @endslot
+                @slot('input_value')
+                    {{$teacher->name}}
+                @endslot
+                @slot('input_placeholder')
+                @endslot
+            @endcomponent
+
+          
+
+         
+
+            <input type="submit" value="更新" class="button">
+        </form>
+
+            <!-- バリデーションエラーの一覧表示 -->
+            @if ($errors->any())
+            <div>
+                <h4>入力エラーがあります:</h4>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+    </div>
+</div>
+@endsection
+

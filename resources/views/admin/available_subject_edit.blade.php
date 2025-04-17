@@ -3,14 +3,11 @@
 @section('external_css')
 <link rel="stylesheet" href="/css/kowada-style.css">
 @endsection
-@section('side_bar_content')
-    <li class="side-bar-item" id="content-1" tabindex="0">
-        <a href="#">ページ名</a>
-    </li>
-@endsection
+@component('components.side_bar')
+@endcomponent
 @section('content')
 <div class="temp-content">
-    <h1>今季履修可能科目編集・削除画面</h1>
+    <h1 id="title">今季履修可能科目編集・削除画面</h1>
     <form action='/available_subject_edit' method='post'>
         @csrf
     <input type="hidden" name="id" value="{{$form->id}}">
@@ -85,7 +82,7 @@
         padding-right:10px!important;
         font-weight: normal;
     }
-    h1{
+    #title{
         text-align:left;
         padding-left:100px!important;
         margin-top:20px!important;
