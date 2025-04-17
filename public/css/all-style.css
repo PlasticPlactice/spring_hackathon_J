@@ -52,7 +52,22 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-color: var(--main-color);
     border-radius: 10px;
 }
-.delete-button{
+.subject-list{
+    overflow-y: auto;
+}
+.subject-list li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9rem;
+    height: 4rem;
+    font-size: 1.2rem;
+    border: solid 1px var(--black);
+    background-color: var(--white);
+}
+.subject-list #subject-search{
+    width: 9rem;
+    height: 4rem;
     font-size: 1rem;
     width: 6rem;
     height: 3rem;
@@ -109,6 +124,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     width: 410px;
     height: 54px;
     border-radius: 10px;
+    font-size: 24px;
 }
 /* ---password_change--- */
 #pw-change-content{
@@ -124,6 +140,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     padding-left: 180px;
 }
 /* ---kowada--- */
+/* ---kudou--- */
 
 #side-bar {
     height: 100%;
@@ -265,7 +282,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 }
 
 .subject-table,
-.favorite-table,
+.favorite-page-table,
 .students-list-table,
 .subject-master-table {
     width: 100%;
@@ -318,6 +335,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .favorite-star-icon {
     font-variation-settings: 'FILL' 1; /* 0:線のみ 1:中塗りつぶし */
+    text-decoration: none;
     color: var(--yellow);
     font-size: 2rem;
 }
@@ -493,7 +511,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     text-align: center;
     margin-top: 10px;
 }
-
+/* コメント */
 .comment-container {
     display: flex;
     margin-top: 72%;
@@ -505,21 +523,13 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     border-radius: 10px;
 }
 
-.comments {
+/* .comments {
     width: 757px;
     height: 622.71px;
     border: 1px solid var(--gray);
-}
+} */
 
 /* コメント */
-.comment-item {
-    /* margin-left: 30%; */
-    /* width: 713px; */
-    /* height: 86.61px; */
-    /* padding: 10px; */
-    /* text-align: left; */
-}
-
 .comment-info {
     display: flex;
     justify-content: space-between;

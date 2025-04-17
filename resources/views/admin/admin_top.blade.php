@@ -28,7 +28,7 @@
         <h1>〇〇さん、お疲れ様です。</h1>
         <div class="favorite-page-section">
             <h2>お気に入りページ</h2>
-            <table class="table favorite-table">
+            <table class="table favorite-page-table">
                 <tr>
                     <th class="th-horizontal"></th>
                     <th class="th-horizontal">ページ名</th>
