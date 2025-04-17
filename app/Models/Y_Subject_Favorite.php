@@ -10,11 +10,20 @@ use App\Models\Y_Subject;
 class Y_Subject_Favorite extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        'teacher_id',
+        'y_subject_id'
+    ];
+
+    protected $table = 'y_subject_favorites';
+
     public function Teacher(){
         return $this->belongsTo(Teacher::class);
     }
-    public function Y_Subject(){
-        return $this->belongsTo(Y_Subject::class);
+    public function Subject(){
+        return $this->belongsTo(Subject::class);
     }
 
 }

@@ -11,47 +11,28 @@
     </li>
 @endsection
 @section('content')
-<!-- 
-<div class="temp-content">
-    個別時間割の作成(履修登録)画面
-    <form action="/personal_timetable_register" method="post">
-        @csrf
-        <table>
-            <tr class="personal-timetable">
-                <th>科目</th>
-                <td>
-                    <select name="course_list_id" class="select-subject">
-                        @foreach ($courseLists as $CourseList)
-                            <option value="{{$courseList->id}}">
-                                {{$courseList->title}}
-                            </option>
-                        @endforeach
-                    </select>
-                </td>
-            </tr>
-            <tr><td><input type="submit" value="作成" class="button" id="personal-button"></td></tr>
-        </table>
-    </form>
-</div> -->
-
 
 
     <h1>個別時間割の作成(履修登録)画面</h1>
     <form action="/personal_timetable_register" method="post">
         @csrf 
-        <input type="submit" value="送信">
-    @foreach ($courseLists as $courseList)
-        <label><input type="checkbox" name="items[]" class="course-lists" value="{{$courseList->id}}">{{$courseList->title}}</label>
-    @endforeach
-    <table class="table subject-table">
-            <tr>
+        
+        @component('components.subject-side-menu')
+        @slot('subject_list_content')
+    @foreach ($courseLists as $key =>  $courseList)
+            <li><label for="{{$key}}"><input id="{{$key}}" type="checkbox" name="items[]" class="course-lists" value="{{$courseList->id}}">{{$courseList->title}}</label></li>
+            @endforeach
+            @endslot
+        @endcomponent
+    <table id="personal-timetable-register" class="table subject-table">
+            <tr class="subject-schedule">
                 <td></td>
                 @foreach($days as $day)
                     <th class="th-horizontal">{{ $day }}</th>
                 @endforeach
             </tr>
             @for ($frames = 1; $frames < 5; $frames++)
-                <tr>
+                <tr class="subject-schedule">
                 <th class="th-vertical">{{ $frames + 1 }}限</th>
                     @for ($day = 1; $day < 6; $day++)
                         <td id="{{$frames.'-'.$day}}"  class="subject-td">-</td>
@@ -59,6 +40,7 @@
                 </tr>
             @endfor
         </table>
+        <input type="submit" value="送信" class="button" id="register-time-button">
     </form>
 
     
@@ -71,8 +53,13 @@
             // チェックボックスの状態を取得
             if (this.checked) {
                 // 画面に追加
-                const id = this.value - 1;
+
+                
+                const id = this.id;
                 const data = courseLists[id];
+                console.log(data);
+                
+                
                 const title = data.title;
                 data.time__tables.forEach(datum => {
                     const td = document.getElementById(`${datum.frames}-${datum.day_of_week}`);
@@ -110,4 +97,6 @@
 
 </script>    
 @endsection
-
+@section('js')
+    <script src="/js/subject-side-menu.js"></script>
+@endsection

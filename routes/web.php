@@ -107,7 +107,9 @@ Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete
 // 科目サブページを表示
 Route::get('/subject_sub/{course_list_id}',[SubSubjectController::class,'index'])->middleware('all');
 // 教師のコメントを投稿
+
 Route::post('/subject_sub',[SubSubjectController::class,'createTComment'])->middleware('teacher');
+Route::delete('subject_sub/{id}', [SubSubjectController::class, 'deleteTComment'])->name('comment.delete')->middleware('teacher');
 
 // 管理者時間割ページを表示
 Route::get('/timetable_register',[AdminTimeTableController::class,'index'])->middleware('admin');

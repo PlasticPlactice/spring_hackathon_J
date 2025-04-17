@@ -28,7 +28,8 @@
                     <th class="th-horizontal">ページ名</th>
                     <th class="th-horizontal">カテゴリ</th>
                 </tr>
-                
+                <!-- お気に入りの表示 -->
+                @foreach($courseLists as $courseList)
                 <tr>
                     <td class="favorite-td-star">
                         <a href="#">
@@ -36,34 +37,16 @@
                         </a>
                     </td>
                     <td class="favorite-td-name">
-                        <a href="#">サブページ名</a>
+                        @if($courseList->session_flg === 0)
+                        <a href="#">{{$courseList->title}} : {{$courseList->year}}前期</a>
+                        @else
+                        <a href="#">{{$courseList->title}} : {{$courseList->year}}後期</a>
+                        @endif
                     </td>
                     <td class="favorite-td-category">サブページカテゴリ</td>
                 </tr>
-                
-                <tr>
-                    <td class="favorite-td-star">
-                    <a href="#">
-                        <span class="material-symbols-outlined favorite-star-icon">star</span>
-                    </a>
-                </td>
-                <td class="favorite-td-name">
-                    <a href="#">サブページ名</a>
-                </td>
-                <td class="favorite-td-category">サブページカテゴリ</td>
-            </tr>
-            <tr>
-                <td class="favorite-td-star">
-                    <a href="#">
-                        <span class="material-symbols-outlined favorite-star-icon">star</span>
-                    </a>
-                </td>
-                <td class="favorite-td-name">
-                    <a href="#">サブページ名</a>
-                </td>
-                <td class="favorite-td-category">サブページカテゴリ</td>
-            </tr>
-        </table>
+                @endforeach
+            </table>
         </div>
     </div>
 </div>

@@ -20,19 +20,27 @@
     <h1>個別時間割の編集(履修編集)画面</h1>
     <form action="/personal_timetable_edit" method="post" id="add-form">
         @csrf 
-        <input type="submit" value="送信">
-    @foreach ($courseLists as $courseList)
-        <label><input type="checkbox" name="items[]" class="course-lists" value="{{$courseList->id}}" @if(in_array($courseList->id,$studentCourseList->toArray())) checked @endif>{{$courseList->title}}</label>
-    @endforeach
-    <table class="table subject-table">
-            <tr>
+
+
+    @component('components.subject-side-menu')
+        @slot('subject_list_content')
+    @foreach ($courseLists as $key =>  $courseList)
+            <li><label for="{{$key}}"><input id="{{$key}}" type="checkbox" name="items[]" class="course-lists" value="{{$courseList->id}}"   @if(in_array($courseList->id,$studentCourseList->toArray())) checked @endif  >{{$courseList->title}}</label></li>
+            @endforeach
+            @endslot
+        @endcomponent
+
+
+
+    <table id="personal-timetable-register" class="table subject-table">
+            <tr class="subject-schedule">
                 <td></td>
                 @foreach($days as $day)
                     <th class="th-horizontal">{{ $day }}</th>
                 @endforeach
             </tr>
             @for ($frames = 1; $frames < 5; $frames++)
-                <tr>
+                <tr class="subject-schedule">
                 <th class="th-vertical">{{ $frames + 1 }}限</th>
                     @for ($day = 1; $day < 6; $day++)
                         <td id="{{$frames.'-'.$day}}"  class="subject-td">-</td>
@@ -40,6 +48,8 @@
                 </tr>
             @endfor
         </table>
+        <input type="submit" value="送信" class="button" id="register-time-button">
+
     </form>
 
     
@@ -51,7 +61,8 @@
         // 初回の処理（ページロード時）
         if (checkbox.checked) {
             // チェックされている場合、処理を実行
-            const id = checkbox.value - 1;
+            // const id = checkbox.value - 1;
+            const id = checkbox.id;
             const data = courseLists[id];
             const title = data.title;
             data.time__tables.forEach(datum => {
@@ -127,5 +138,10 @@ this.appendChild(hiddenInput);
 });
 
     </script>    
+@endsection
+
+
+@section('js')
+    <script src="/js/subject-side-menu.js"></script>
 @endsection
 
