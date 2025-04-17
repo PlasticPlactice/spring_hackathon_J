@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-<div id="admin-top-container">
+<div id="page-container">
     <div>
 
         <h1>お疲れ様です。</h1>

@@ -20,17 +20,6 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     --yellow: #FFDE5B;
 }
 
-/* header {
-    background-color: var(--main-color);
-} */
-*,  *::before, *::after {
-    box-sizing: border-box;
-}
-
-html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
-    margin: 0;
-    padding: 0;
-}
 /* ---kowada--- */
 .input-with-label{
     width: 15rem;
@@ -125,6 +114,9 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     height: 54px;
     border-radius: 10px;
     font-size: 24px;
+}
+.input-with-label-div {
+    width: auto;
 }
 /* ---password_change--- */
 #pw-change-content{
@@ -256,11 +248,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     margin-left: 250px;
 }
 
-#student-top-container,
-#teacher-top-container,
-#admin-top-container,
-#students-list-container,
-#subjects-master-list-container {
+#page-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,11 +256,7 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
     width: 80%;
 }
 
-#student-top-container div,
-#teacher-top-container div,
-#admin-top-container div,
-#students-list-container div,
-#subjects-master-list-container div {
+#page-container > div {
     width: 100%;
 }
 
@@ -304,8 +288,13 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 }
 
 .subject-td {
+    width:15%;
     height: 100px;
     border: 1px solid var(--gray);
+    text-align: center;
+}
+
+.subject-td label {
     text-align: center;
 }
 
@@ -342,9 +331,10 @@ html, body, main, div, span, h1, h2, h3, p, ol, ul, li {
 
 .search-section {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     gap: 20px;
     margin-top: 20px;
+    align-items: flex-end;
 }
 
 .text-gray {

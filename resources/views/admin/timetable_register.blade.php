@@ -11,96 +11,105 @@
     </li>
 @endsection
 @section('content')
-<div class="temp-content">
-    <h1>時間割作成画面</h1>
-    <!-- 検索フォーム -->
-    @component('components.subject-side-menu')
-        @slot('subject_list_content')
-            <li>Python基礎</li>
-            <li>Python応用<br>(tkinter)</li>
-            <li>html,css<br>基礎</li>
-            <li>JavaScript<br>基礎</li>
-            <li>Java基礎</li>
-            <li>C#基礎基礎</li>
-        @endslot
-    @endcomponent
-    <form action="timetable_register" method="get">
-        <select name="year" class="timetable-select">
-        @foreach($years as $year)
-            <option value="{{$year}}" @if(isset($jsonData) && $jsonData['year'] === $year) selected @endif >{{$year}}</option>
-        @endforeach
-        </select>
-        <select name="session_flg" class="timetable-select">
-            <option value="0" @if(isset($jsonData) && $jsonData['session_flg'] === 0) selected @endif>前期</option>
-            <option value="1" @if(isset($jsonData) && $jsonData['session_flg'] === 1) selected @endif>後期</option>
-        </select>
-        <input type="submit" value="検索" class="button">
-    </form>
+<div id="page-container">
+    <div>
+        <h1>時間割作成画面</h1>
+
+        <div id="timetable-register-filter">
+            <div>
+                <!-- 科目サイドメニュー(右側) -->
+                @component('components.subject-side-menu')
+                    @slot('subject_list_content')
+                        <li>Python基礎</li>
+                        <li>Python応用<br>(tkinter)</li>
+                        <li>html,css<br>基礎</li>
+                        <li>JavaScript<br>基礎</li>
+                        <li>Java基礎</li>
+                        <li>C#基礎基礎</li>
+                    @endslot
+                @endcomponent
+
+                <!-- 検索フォーム -->
+                <form action="timetable_register" method="get">
+                    <select name="year" class="timetable-select select">
+                        @foreach($years as $year)
+                            <option value="{{$year}}" @if(isset($jsonData) && $jsonData['year'] === $year) selected @endif >{{$year}}</option>
+                        @endforeach
+                    </select>
+                    <select name="session_flg" class="timetable-select select">
+                        <option value="0" @if(isset($jsonData) && $jsonData['session_flg'] === 0) selected @endif>前期</option>
+                        <option value="1" @if(isset($jsonData) && $jsonData['session_flg'] === 1) selected @endif>後期</option>
+                    </select>
+                    <input type="submit" value="検索" class="button">
+                </form>
+
+                @if(isset($courseList))
+                <!-- 科目一覧 -->
+                <select id="select-subject" name="" class="timetable-select select">
+                @foreach($courseList as $item)
+                    <option value="{{$item->id}}">{{$item->title}}</option>
+                @endforeach
+                </select>
+                @endif
+
+                <!-- 時間割に追加ボタン -->
+                <button type="button" id="add-button" class="button">②追加</button>
+            </div>
+
+            <!-- 登録フォーム -->
+            <form action="timetable_add" method="post" id="add-form">
+                @csrf
+                <input type="submit" value="③登録" id="register-button" class="button">
+            </form>
+        </div>
 
 
-    @if(isset($courseList))
-    <!-- 科目一覧 -->
-    <select id="select-subject" name="" class="timetable-select">
-    @foreach($courseList as $item)
-        <option value="{{$item->id}}">{{$item->title}}</option>
-    @endforeach
-    </select>
-    @endif
+        <!-- 時間割の表示処理(バックエンド) -->
+        <table id="table" class="table">
+            <tr>
+                <td></td>
+                <th class="th-horizontal">月</th>
+                <th class="th-horizontal">火</th>
+                <th class="th-horizontal">水</th>
+                <th class="th-horizontal">木</th>
+                <th class="th-horizontal">金</th>
+            </tr>
+            @if(isset($jsonData))
+                <!-- jsonがある場合の処理 -->
+                @for($i = 1; $i < 5; $i++)
+                <tr>
+                    <th class="th-vertical">{{$i}}</th>
+                    @for($j = 1; $j < 6; $j++)
+                    <td id="{{$i}}-{{$j}} not-active" class="subject-td">
+                        <label style="display:block;" for="register-subject{{$i}}-{{$j}}">
+                            <input type="checkbox" class="add-check" value="{{$i}}-{{$j}}" name="" id="register-subject{{$i}}-{{$j}}">
+                            
+                            @foreach($jsonData['table'][$i][$j] as $item)
+                            <button type="button" value="{{$i}}-{{$j}}-{{$item['id']}}" class="subject-items">
+                                <span>{{$item['title']}}</span>
+                            </button>
+                            @endforeach
+                        </label>
+                    </td>
+                    @endfor    
+                </tr>
+                @endfor
+            @else
+                <!-- jsonがない場合の処理 -->
+                @for($i = 1; $i < 5; $i++)
+                    <tr>
+                        <th class="th-vertical">{{$i}}</th>
+                        <td class="subject-td">jsonがありません</td>
+                        <td class="subject-td">jsonがありません</td>
+                        <td class="subject-td">jsonがありません</td>
+                        <td class="subject-td">jsonがありません</td>
+                        <td class="subject-td">jsonがありません</td>
+                    </tr>
+                @endfor
+            @endif
+        </table>
 
-    <!-- 時間割に追加ボタン -->
-    <button type="button" id="add-button" class="button">追加</button>
-
-    <!-- 登録フォーム -->
-    <form action="timetable_add" method="post" id="add-form">
-        @csrf
-        <input type="submit" value="登録" id="register-button" class="button">
-    </form>
-
-    <!-- 時間割の表示処理(バックエンド) -->
-    <table id="table" class="timetable">
-        <tr class="timetable-item">
-            <th></th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-        </tr>
-        @if(isset($jsonData))
-        <!-- jsonがある場合の処理 -->
-        @for($i = 1; $i < 5; $i++)
-        <tr class="timetable-item">
-            <th>{{$i}}</th>
-            @for($j = 1; $j < 6; $j++)
-            <td id="{{$i}}-{{$j}}"  id="not-active">
-                <label style="display:block;" for="register-subject{{$i}}-{{$j}}">
-                    <input type="checkbox" class="add-check" value="{{$i}}-{{$j}}" name="" id="register-subject{{$i}}-{{$j}}">
-                    
-                    @foreach($jsonData['table'][$i][$j] as $item)
-                    <button type="button" value="{{$i}}-{{$j}}-{{$item['id']}}" class="subject-items">
-                        <span>{{$item['title']}}</span>
-                    </button>
-                    @endforeach
-                </label>
-            </td>
-            @endfor    
-        </tr>
-        @endfor
-        @else
-        <!-- jsonがない場合の処理 -->
-        @for($i = 1; $i < 5; $i++)
-        <tr class="timetable-item">
-            <th>{{$i}}</th>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-        </tr>
-        @endfor
-        @endif
-
-    </table>
+    </div>
 
 <script>// PHPの変数をJSON文字列にしてJavaScriptで使える形にする
 @if(isset($jsonData))
@@ -163,7 +172,7 @@ function attachSubjectItemClickEvents() {
             const isDuplicatedel = addData[frames][dayOfWeek].some(item => {
                 return item === Number(id);
             });
-      
+
             
             if((!isDuplicate || isDuplicatedel) && (isDuplicate && isDuplicateAdd)){
                 this.remove(); // クリックされた要素を削除
@@ -172,7 +181,7 @@ function attachSubjectItemClickEvents() {
             if(isDuplicateAdd){
                 // add配列からデータを削除
                 const index = addData[frames][dayOfWeek].indexOf(Number(id)); 
-  
+
                 if (index !== -1) {
                     addData[frames][dayOfWeek].splice(index, 1); 
 
@@ -247,7 +256,7 @@ addButton.addEventListener('click', function() {
             
             createTd(frames,dayOfWeek,SubjectId);
 
-           
+
             // チェックを外す
             checkbox.checked = false;
             td.style.backgroundColor = 'var(--white)';  

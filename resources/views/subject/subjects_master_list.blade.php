@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-<div id="subjects-master-list-container">
+<div id="page-container">
     <div>
         <h1 class="page-title-h1">科目一覧</h1>
             <form style="position:relative;" action="/subjects_master_list_search" method="get" class="search-section">

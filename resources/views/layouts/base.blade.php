@@ -11,9 +11,7 @@
     <nav id="side-bar">
         <h1 id="app-name">ABCDE</h1>
 
-        <ul>
-            @yield('side_bar_content')
-        </ul>
+        @yield('side_bar_content')
 
         <div id="user-section">
             <img src="https://picsum.photos/400/400" id="user-icon" title="ユーザーメニューを開く" tabindex="0">

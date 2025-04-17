@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-<div id="teacher-top-container">
+<div id="page-container">
     <div>
         <h1>{{ Auth::guard('teacher')->user()->name }}先生、お疲れ様です。</h1>
         <div class="favorite-page-section">

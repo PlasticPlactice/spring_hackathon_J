@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-<div id="student-top-container">
+<div id="page-container">
     <div>
         <table class="table subject-table">
             <tr>
@@ -35,15 +35,15 @@
 
             @for ($frames = 0; $frames < 4; $frames++)
                 <tr>
-                <th class="th-vertical">{{ $frames + 1 }}限</th>
+                    <th class="th-vertical">{{ $frames + 1 }}限</th>
                     @for ($day = 0; $day < 5; $day++)
-                        <td class="subject-td">
-                            @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
-                                <a href="http://127.0.0.1:8000/subject_sub/{{$timeTables[$day + 1][$frames + 1]['id']}}">{{ $timeTables[$day + 1][$frames + 1]['title'] }}</a><br>
-                            @else
-                                &mdash;
-                            @endif
-                        </td>
+                    <td class="subject-td">
+                        @if(!empty($timeTables[$day + 1][$frames + 1]['title']))
+                            <a href="http://127.0.0.1:8000/subject_sub/{{$timeTables[$day + 1][$frames + 1]['id']}}">{{ $timeTables[$day + 1][$frames + 1]['title'] }}</a><br>
+                        @else
+                            &mdash;
+                        @endif
+                    </td>
                     @endfor
                 </tr>
             @endfor
