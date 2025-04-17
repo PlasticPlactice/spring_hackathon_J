@@ -20,46 +20,64 @@
 @endsection
 
 @section('content')
-    <div id="subject-master-edit-container">
+    <div id="subject-master-register-container">
         <div>
-            <h1 class="page-title-h1">科目マスター編集・削除</h1>
+            <h1 class="page-title-h1">科目マスター登録</h1>
             <form action='/subject_master_edit' method='post'>
-            @csrf
+                @csrf
                 <input type="hidden" name="id" value="{{$form->id}}">
-
-                @component('components.input_with_label')
-                    @slot('label')
-                        科目名 : 
-                    @endslot
-                    @slot('input_type')
-                        text
-                    @endslot
-                    @slot('input_name')
-                        name
-                    @endslot
-                    @slot('input_placeholder')
-                        アルゴリズム
-                    @endslot
-                    @slot('input_value')
+                <div id="content-div">
+                    @component('components.input_with_label')
+                        @slot('label')
+                        <label style="width:130px; display:block;" >科目名:</label>
+                        @endslot
+                        @slot('input_type')
+                            text
+                        @endslot
+                        @slot('input_name')
+                            name
+                        @endslot
+                        @slot('input_placeholder')
+                            アルゴリズム
+                        @endslot
+                        @slot('input_value')
                         {{$form->name}}
-                    @endslot
-                @endcomponent
-
-                <div>
-                    科目詳細情報 : 
-                    <textarea name="detail" placeholder="IT業界への入門の位置づけである国家資格「基本情報技術者試験」「ITパスポート」の合格を目指し、アルゴリズム分野の基礎知識を習得する。" value="{{$form->detail}}">
+                        @endslot
+                    @endcomponent
+                </div>
+                <div style="display:flex; justify-content: start;">
+                    <label style="width:130px;" >科目詳細情報 :</label> 
+                    <textarea style="width: 60%; height: 100px;border-radius: 10px;font-size: 16px;" name="detail" placeholder="" >{{$form->detail}}</textarea>
                 </div>
 
-                <div>
-                    使用言語・技術 : 
-                    <textarea name="tech" placeholder="疑似言語" value="{{$form->tech}}">
+                <div  style="display:flex; justify-content: start;">
+                    <label style="width:130px;">使用言語・技術 : </label>
+                    <textarea  style="width: 60%; height: 100px;border-radius: 10px;font-size: 16px;" name="tech" placeholder="疑似言語" >{{$form->tech}}</textarea>
                 </div>
 
-                <div class="button-group-right">
+                <div class="button-group-right" style="width:75%; text-align:right;">
                     <input type="submit" name="submit" value="登録" class="button">
-                    <input type="submit" name="delete" value="削除" class="button">
                 </div>
             </form>
         </div>
     <div>
+<style>
+    #subject-master-register-container{
+        padding-left:80px;
+        padding-top:20px;
+    }
+    form{
+        display: flex;
+        flex-direction: column; 
+        gap:20px;
+    }
+    #content-div div{
+        display: flex;
+        margin-top:20px
+    }
+    form label{
+        text-align: right;
+        margin-right: 10px;
+    }
+</style>
 @endsection

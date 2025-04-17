@@ -120,7 +120,7 @@
 
             @foreach ($students as $student)
             <tr>
-                <td><img src="/{{ $student->img_path}}" alt="アイコン画像" style="width: 20px; height: 20px;"></td>
+                <td><img src="{{ $student->img_path !== '' ? '/' : ''  }}{{$student->img_path}}" alt="アイコン画像" style="width: 20px; height: 20px;"></td>
                 <td>{{$student->email}}</td>
                 <td>{{$student->name}}</td>
                 <td>{{$student->entrance_year}}</td>
@@ -137,6 +137,5 @@
             @endforeach
         </table>
     </div>
-
 </div>
 @endsection

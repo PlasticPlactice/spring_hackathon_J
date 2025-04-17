@@ -106,7 +106,7 @@ Route::post('/subject_master',[MainSubjectController::class, 'createComment'])->
 Route::get('/subject_master_register',[MainSubjectController::class,'add'])->middleware('admin');
 Route::post('/subject_master_register',[MainSubjectController::class,'create'])->middleware('admin');
 // 科目マスタページ編集・削除ページを表示
-Route::get('/subject_master_edit',[MainSubjectController::class,'edit'])->middleware('admin');
+Route::get('/subject_master_edit/{id}',[MainSubjectController::class,'edit'])->middleware('admin');
 Route::post('/subject_master_edit',[MainSubjectController::class,'updateOrDelete'])->middleware('admin');
 
 // 科目サブページを表示
