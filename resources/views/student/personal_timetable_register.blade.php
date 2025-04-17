@@ -11,29 +11,6 @@
     </li>
 @endsection
 @section('content')
-<!-- 
-<div class="temp-content">
-    個別時間割の作成(履修登録)画面
-    <form action="/personal_timetable_register" method="post">
-        @csrf
-        <table>
-            <tr class="personal-timetable">
-                <th>科目</th>
-                <td>
-                    <select name="course_list_id" class="select-subject">
-                       
-                    
-                            <option >
-                               aa
-                            </option>
-                    </select>
-                </td>
-            </tr>
-            <tr><td><input type="submit" value="作成" class="button" id="personal-button"></td></tr>
-        </table>
-    </form>
-</div> -->
-
 
 
     <h1>個別時間割の作成(履修登録)画面</h1>
