@@ -180,3 +180,20 @@
 .select-subject{
     margin-left: -490px;
 }
+#register-time-button{
+    margin-top: 20px;
+    margin-left: 700px;
+}
+.course-lists{
+    visibility: hidden;
+}
+#personal-timetable-register{
+    transform:scale(.9);
+}
+#personal-timetable-register th,td{
+    margin-top: 50px;
+    margin-left: 100px;
+}
+.subject-schedule th,td{
+    padding: -200px;
+}
