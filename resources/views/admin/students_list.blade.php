@@ -137,19 +137,6 @@
             @endforeach
         </table>
     </div>
-    {{-- 現在のガードが 'teacher' かどうかを確認 --}}
-@if (Auth::guard('teacher')->check())
-    <p>現在、Teacherとしてログインしています。</p>
-@endif
 
-{{-- 現在のガードが 'admin' かどうかを確認 --}}
-@if (Auth::guard('admin')->check())
-    <p>現在、Adminとしてログインしています。</p>
-@endif
-
-{{-- 現在のガードが 'student' かどうかを確認 --}}
-@if (Auth::guard('student')->check())
-    <p>現在、Studentとしてログインしています。</p>
-@endif
 </div>
 @endsection

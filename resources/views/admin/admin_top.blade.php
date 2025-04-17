@@ -25,8 +25,10 @@
 @section('content')
 <div id="admin-top-container">
     <div>
+
         <h1>お疲れ様です。</h1>
        <!-- adminはなにも表示しない -->
+
     </div>
 </div>
 @endsection
