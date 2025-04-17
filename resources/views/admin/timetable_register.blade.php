@@ -25,12 +25,12 @@
         @endslot
     @endcomponent
     <form action="timetable_register" method="get">
-        <select name="year">
+        <select name="year" class="timetable-select">
         @foreach($years as $year)
             <option value="{{$year}}" @if(isset($jsonData) && $jsonData['year'] === $year) selected @endif >{{$year}}</option>
         @endforeach
         </select>
-        <select name="session_flg">
+        <select name="session_flg" class="timetable-select">
             <option value="0" @if(isset($jsonData) && $jsonData['session_flg'] === 0) selected @endif>前期</option>
             <option value="1" @if(isset($jsonData) && $jsonData['session_flg'] === 1) selected @endif>後期</option>
         </select>
@@ -40,7 +40,7 @@
 
     @if(isset($courseList))
     <!-- 科目一覧 -->
-    <select id="select-subject" name="">
+    <select id="select-subject" name="" class="timetable-select">
     @foreach($courseList as $item)
         <option value="{{$item->id}}">{{$item->title}}</option>
     @endforeach
@@ -72,16 +72,18 @@
         <tr class="timetable-item">
             <th>{{$i}}</th>
             @for($j = 1; $j < 6; $j++)
-            <td id="{{$i}}-{{$j}}" style="width:150px; height:150px">
-                <input type="checkbox" class="add-check" value="{{$i}}-{{$j}}" name="" id="">
-            @foreach($jsonData['table'][$i][$j] as $item)
-                <button type="button" value="{{$i}}-{{$j}}-{{$item['id']}}" class="subject-items">
-                    <span>{{$item['title']}}</span>
-                </button>
-            @endforeach
+            <td id="{{$i}}-{{$j}}"  id="not-active">
+                <label style="display:block;" for="register-subject{{$i}}-{{$j}}">
+                    <input type="checkbox" class="add-check" value="{{$i}}-{{$j}}" name="" id="register-subject{{$i}}-{{$j}}">
+                    
+                    @foreach($jsonData['table'][$i][$j] as $item)
+                    <button type="button" value="{{$i}}-{{$j}}-{{$item['id']}}" class="subject-items">
+                        <span>{{$item['title']}}</span>
+                    </button>
+                    @endforeach
+                </label>
             </td>
-            @endfor
-            
+            @endfor    
         </tr>
         @endfor
         @else
@@ -198,6 +200,8 @@ addButton.addEventListener('click', function() {
     Array.from(checkBoxs).forEach(checkbox => {
         
         if (checkbox.checked) {
+            const td = checkbox.closest('td');
+
             
             // valueをそれぞれ必要な情報に分割
             const parts = checkbox.value.split("-"); 
@@ -221,6 +225,7 @@ addButton.addEventListener('click', function() {
             });
             if (isDuplicateAdd || (isDuplicate && !isDuplicatedel && !isDuplicateAdd)  ) {
                 checkbox.checked = false;  
+                td.style.backgroundColor = 'var(--white)';  
                 return; // 重複してるのでスキップ
             }
 
@@ -244,7 +249,9 @@ addButton.addEventListener('click', function() {
 
            
             // チェックを外す
-            checkbox.checked = false;  
+            checkbox.checked = false;
+            td.style.backgroundColor = 'var(--white)';  
+
         }
     });
 
@@ -256,6 +263,7 @@ addButton.addEventListener('click', function() {
 function createTd(frames,dayOfWeek,SubjectId){
     // 画面の時間割に表示
     const td = document.getElementById(`${frames}-${dayOfWeek}`);
+    const label = td.querySelector('label');
                 
     // タグの中に要素を追加
     // button要素作成
@@ -271,7 +279,7 @@ function createTd(frames,dayOfWeek,SubjectId){
     span.textContent = selectedText;
 
     button.appendChild(span);
-    td.appendChild(button); // tdの末尾に追加
+    label.appendChild(button); // tdの末尾に追加
 
 }
 
@@ -292,6 +300,23 @@ document.getElementById('add-form').addEventListener('submit', function(event) {
 
 
 @endif
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('.add-check');
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const td = checkbox.closest('td');
+
+            if (checkbox.checked) {
+                td.style.backgroundColor = 'var(--gray)';
+            } 
+            else {
+                td.style.backgroundColor = '';
+            }
+        });
+    });
+});
+
 </script>
 </div>
 @endsection
