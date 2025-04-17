@@ -14,6 +14,7 @@ use League\Csv\Reader;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class TeacherAuthController extends Controller
 {
@@ -111,7 +112,7 @@ class TeacherAuthController extends Controller
              // 教師データを保存
              $teacher->save();
          }
-             return redirect()->route('admin.top')->with('success', '生徒データが正常に登録されました。');
+             return redirect()->route('teacher-list')->with('success', '生徒データが正常に登録されました。');
     }
 
     // 教師データ編集・削除ページ表示
@@ -176,23 +177,29 @@ class TeacherAuthController extends Controller
     
 
     // ログイン処理
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+{
+    // id（メールアドレス）とパスワードを取得
+    $credentials = $request->only('id', 'pw');
+    $email = $credentials['id'];
+    $password = $credentials['pw'];  // パスワード（平文）
 
-        // id(メールアドレス)とパスワードを取得
-        $userData = $request->only('id', 'pw');
-        $userData['password'] = $userData['pw'];
-        $userData['email'] = $userData['id'];
-        unset($userData['pw']);
-        unset($userData['id']);
+    // del_flg != 1 の教師を取得
+    $user = Teacher::where('email', $email)
+                   ->where('del_flg', '!=', 1)
+                   ->first();
 
-         
-        // Authによる認証を行う
-        if (Auth::guard('teacher')->attempt($userData)) {
-            return redirect()->route('teacher.top');  // 認証成功時のリダイレクト先
-        }
-
-        return back()->withErrors(['id' => 'idとパスワードが一致しません'])->withInput();
+    // パスワード確認
+    if ($user && Hash::check($password, $user->pw)) {
+        // 認証成功時
+        Auth::guard('teacher')->login($user);
+        Session::put('guard', 'teacher');
+        return redirect()->route('teacher.top');  // 認証成功時のリダイレクト先
     }
+
+    // 認証失敗時
+    return back()->withErrors(['id' => 'IDとパスワードが一致しないか、削除されたアカウントです'])->withInput();
+}
     
     // 教師情報削除処理
     public function delete(Request $request,$id){
@@ -204,7 +211,7 @@ class TeacherAuthController extends Controller
             $teacher->del_flg = true; // または 1; // 論理削除を示す値
             $teacher->save(); // 変更を保存
 
-            return redirect()->route('admin.top');
+            return redirect()->route('teacher-list');
         } else {
             // 教師が見つからない場合の処理（例: エラーメッセージを表示）
             abort(Response::HTTP_NOT_FOUND, '存在しない生徒情報です');      

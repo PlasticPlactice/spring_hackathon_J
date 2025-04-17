@@ -14,7 +14,7 @@ class AdminController extends Controller
 
     // 教師データ一覧ページ表示
     public function teachersList(Request $request){
-        $teachers = Teacher::all();
+        $teachers = Teacher::where('del_flg','0')->get();
 
         return view('/admin/teachers_list', ['teachers' => $teachers]);
     }

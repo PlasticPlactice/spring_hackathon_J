@@ -19,7 +19,7 @@
 @section('content')
 <div id="teacher-top-container">
     <div>
-        <h1>〇〇先生、お疲れ様です。</h1>
+        <h1>{{ Auth::guard('teacher')->user()->name }}先生、お疲れ様です。</h1>
         <div class="favorite-page-section">
             <h2>お気に入りページ</h2>
             <table class="table favorite-table">
@@ -38,9 +38,9 @@
                     </td>
                     <td class="favorite-td-name">
                         @if($courseList->session_flg === 0)
-                        <a href="#">{{$courseList->title}} : {{$courseList->year}}前期</a>
+                        <a href="/subject_sub/{{$courseList->id}}">{{$courseList->title}} : {{$courseList->year}}前期</a>
                         @else
-                        <a href="#">{{$courseList->title}} : {{$courseList->year}}後期</a>
+                        <a href="{{$courseList->id}}">{{$courseList->title}} : {{$courseList->year}}後期</a>
                         @endif
                     </td>
                     <td class="favorite-td-category">サブページカテゴリ</td>
